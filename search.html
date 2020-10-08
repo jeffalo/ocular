@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ocular search</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/pace.js"></script>
+    <script src="assets/scratchblocks.js"></script>
+    <style>
+        .pace {
+            -webkit-pointer-events: none;
+            pointer-events: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            opacity: 1;
+            transition: opacity 250ms linear;
+        }
+
+        .pace-inactive {
+            opacity: 0;
+        }
+
+        .pace .pace-progress {
+            background: #ffffff;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 100%;
+            width: 100%;
+            height: 2px;
+        }
+
+        .pace .pace-progress-inner {
+            display: block;
+            position: absolute;
+            right: 0px;
+            width: 100px;
+            height: 100%;
+            box-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff;
+            opacity: 1.0;
+            -webkit-transform: rotate(3deg) translate(0px, -4px);
+            -moz-transform: rotate(3deg) translate(0px, -4px);
+            -ms-transform: rotate(3deg) translate(0px, -4px);
+            -o-transform: rotate(3deg) translate(0px, -4px);
+            transform: rotate(3deg) translate(0px, -4px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigheader">
+        <div class="box-head">
+            <h1 class='margined'><a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class='icon'><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"/></svg> ocular</a> <span class="bread">/</span> <a href='/search.html'>search</a></h1>
+            <p class='margined'><a href='https://github.com/JeffaloBob/ocular' class="header-link">feedback</a> | <a
+                    href='https://scratchdb.lefty.one' class="header-link">api and data from datonelefty</a></p>
+        </div>
+    </div>
+
+    
+    <div class="margined">
+        <div id="post-list" class="posts">
+            <h1 v-if="splash == false">{{ text }}</h1>
+            <div v-for="post of items" class="post">
+                <div class="header"><a v-bind:href="'?post='+post.id" class="date">{{ post.date }}</a><a
+                        v-bind:href="'?topic='+post.topic.id" class="topic-link">{{ post.topic.title }}</a><a
+                        v-bind:href="'https://scratch.mit.edu/discuss/post/'+post.id" class="view-scratch">view on
+                        scratch</a>
+                </div>
+                <div class="post-wrap">
+                    <section class="main-content" v-html='post.message'></section>
+                    <nav class="main-nav"><a v-bind:href="'?user='+post.author" class="username">{{ post.author }}</a>
+                        <a v-bind:href="'?user='+post.author"><img
+                                v-bind:src="'https://fluffyscratch.hampton.pw/user/' + post.author + '/profile/picture'"
+                                id="profile-picture" width="90" height="90"></a>
+                        <span class="rank">Scratcher</span>
+                        <span title="very accuate, huh." class="post-count">0+ posts</span></nav>
+                </div>
+            </div>
+
+            <button v-on:click="loadMore" v-show="canLoadMore">load more</button>
+            <div v-if="splash">
+                <h1 id="searchtitle">search</h1>
+                <form method="get">
+                    <input required="" name="q" type="text" placeholder="search query" id="searchbox" class="sb">
+                    <select name="sort" id="sorting">
+                        <option selected="" value="relevance">relevance</option>
+                        <option value="newest">newest</option>
+                        <option value="oldest">oldest</option>
+                    </select>
+                    <button type="submit" class="sbb">go</button>
+                </form>
+                <h1>how to use</h1>
+                <h2>searching</h2>
+                <p>searches from scratchdb use a pretty neat format.</p>
+                <p>each requirement is in the format <code>+requirement:"value"</code>, if you don't include a
+                    requirement it's assumed you mean content</code></p>
+
+                <p>prefix a requirement with <code>+</code> to require it to be true, <code>-</code> to require it to be
+                    false and <code>~</code> if it should be true, but is not required</p>
+
+                <table class='info'>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>What it does</th>
+                    </tr>
+                    <tr>
+                        <td>username</td>
+                        <td>requires that the resulting posts be by a certain user</td>
+                    </tr>
+                    <tr>
+                        <td>category</td>
+                        <td>requires that the resulting posts be in a category (this does not have to be complete,
+                            +category:"Advanced" will match Advanced Topics)</td>
+                    </tr>
+                    <tr>
+                        <td>topic</td>
+                        <td>requires that the resulting posts be from a topic with the id</td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>requires that the resulting posts be from a topic with a topic title (this does not have to
+                            be complete, +title:"help" will match anything with help in the title.)</td>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>requires that the resulting post has an id</td>
+                    </tr>
+                    <tr>
+                        <td>content</td>
+                        <td>requres that the resulting posts have this in their content</td>
+                    </tr>
+                </table>
+                <br>
+                <h2>query parameters</h2>
+                <p>the most simple way of using this, is to use some query parameters. these cannot be mixed and
+                    matched, you can only use one at a time</p>
+                <p><code>?user=</code> will show posts by the user</p>
+                <p><code>?topic=</code> will show posts in a topic by id</p>
+                <p><code>?post=</code> will show a single post by id</p>
+
+
+            </div>
+        </div>
+
+        <footer>
+            this front end is an open source project, with styling aspects inspired by <a
+                href="https://scratch.mit.edu/users/maximouse" class="footer-link">@Maximouse</a> and Scratch by MIT<br>
+            API and data from <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a> | profile
+            picture api from <a class="footer-link" href="https://hamptonmoore.com">@herohamp</a>
+            <br><br>this forum viewer tool falls under Creative Commons Attribution-ShareAlike 2.0 license
+        </footer>
+    </div>
+
+
+</body>
+
+<script>
+    var page = 0
+
+    //handle url queries
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const username = urlParams.get('user');
+
+    const topic = urlParams.get('topic')
+
+    const post = urlParams.get('post')
+
+    const search = urlParams.get('q')
+    const sort = urlParams.get('sort')
+
+    var posts = []
+
+    var vue = new Vue({
+        el: '#post-list',
+        data: {
+            items: posts,
+            canLoadMore: false,
+            splash: false,
+            text: ''
+        },
+        methods: {
+            loadMore: function (event) {
+                page++
+                if (username) fetchUser(username, page)
+                if (topic) fetchTopic(topic, page)
+                if (post) fetchPost(post)
+                if (search && sort) fetchSearch(search, sort, page) //TODO
+                else if (search) fetchSearch(search, 'relevance', page) //TODO
+            },
+            blocks: function (event) {
+                console.log('yes')
+                scratchBlocksify()
+            }
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                this.blocks()
+            })
+        }
+    })
+
+
+    if (Array.from(urlParams).length == 1) {
+        if (username) fetchUser(username, page)
+        if (topic) fetchTopic(topic, page)
+        if (post) fetchPost(post)
+        if (search) fetchSearch(search, 'relevance', page) //TODO
+    } else {
+        if (search && sort) fetchSearch(search, sort, page) //TODO
+        else {
+            vue.splash = true
+        }
+    }
+
+    //todo error handling please
+    //todo https://jeffalo.net/projects/forums/vue/?post=4332123 i should fix. no clue what this is or why this is but i will find out
+
+    function fetchUser(username, offset) {
+        vue.canLoadMore = false
+        vue.text = 'loading posts from user: ' + username
+        fetch('https://scratchdb.lefty.one/v2/forum/user/posts/' + username + '/' + offset)
+            .then(res => res.json())
+            .then(data => {
+                data.posts.forEach(post => {
+                    post.content.html = clean(post.content.html)
+                    posts.push({
+                        message: post.content.html,
+                        author: post.username,
+                        date: post.time.posted,
+                        id: post.id,
+                        topic: {
+                            title: post.topic.title,
+                            id: post.topic.id
+                        }
+                    })
+                })
+
+                if (data.posts.length == 50) vue.canLoadMore = true
+                else vue.canLoadMore = false
+
+                vue.text = 'posts from: ' + data.posts[0].username
+            })
+    }
+
+    function fetchTopic(topic, offset) {
+        vue.canLoadMore = false
+        vue.text = 'loading posts from topic: ' + topic
+        fetch('https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A' + topic + '&page=' + offset + '&o=oldest')
+            .then(res => res.json())
+            .then(data => {
+                data.posts.forEach(post => {
+                    post.content.html = clean(post.content.html)
+                    posts.push({
+                        message: post.content.html,
+                        author: post.username,
+                        date: post.time.posted,
+                        id: post.id,
+                        topic: {
+                            title: post.topic.title,
+                            id: post.topic.id
+                        }
+                    })
+                })
+
+                if (data.posts.length == 50) vue.canLoadMore = true
+                else vue.canLoadMore = false
+                vue.text = 'posts from: ' + data.posts[0].topic.title
+            })
+    }
+
+    function fetchPost(post) {
+        vue.canLoadMore = false
+        vue.text = 'loading post: ' + post
+        fetch('https://scratchdb.lefty.one/v2/forum/post/' + post)
+            .then(res => res.json())
+            .then(data => {
+                data.content.html = clean(data.content.html)
+                posts.push({
+                    message: data.content.html,
+                    author: data.username,
+                    date: data.time.posted,
+                    id: data.id,
+                    topic: {
+                        title: data.topic.title,
+                        id: data.topic.id
+                    }
+                })
+                vue.canLoadMore = false
+                vue.text = 'post: ' + post
+            })
+    }
+
+    function fetchSearch(search, sort, offset) {
+        vue.canLoadMore = false
+        vue.text = 'loading search: ' + decodeURI(search)
+
+        fetch('https://scratchdb.lefty.one/v2/forum/search/?q=' + encodeURIComponent(search) + '&page=' + offset + '&o=' + sort)
+            .then(res => res.json())
+            .then(data => {
+                data.posts.forEach(post => {
+                    post.content.html = clean(post.content.html)
+                    posts.push({
+                        message: post.content.html,
+                        author: post.username,
+                        date: post.time.posted,
+                        id: post.id,
+                        topic: {
+                            title: post.topic.title,
+                            id: post.topic.id
+                        }
+                    })
+                })
+
+                if (data.posts.length == 50) vue.canLoadMore = true
+                else vue.canLoadMore = false
+                vue.text = 'posts from search: ' + decodeURI(search)
+            })
+    }
+
+    const clean = (post) => {
+        const dom = new DOMParser()
+        const readableDom = dom.parseFromString(post, "text/html")
+
+        const codeSegments = readableDom.querySelectorAll("pre")
+
+        for (const segment of codeSegments) {
+            segment.innerHTML = segment.innerHTML.replace(/<br>/g, "\n")
+            segment.innerHTML = segment.innerHTML.replace(/</g, "&lt;")
+        }
+
+        return readableDom.documentElement.innerHTML
+    }
+
+    function scratchBlocksify() {
+        scratchblocks.renderMatching('pre.blocks:not(.scratchblockrendered)', {
+            style: 'scratch2',   // Optional
+        });
+        document.querySelectorAll('pre.blocks:not(.scratchblockrendered)').forEach(i => {
+            i.classList.add('scratchblockrendered')
+        })
+    }
+</script>
+
+</html>
