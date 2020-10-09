@@ -353,3 +353,8 @@ select{
     height: 50px;
   }
 }
+
+/*mobile*/
+@media screen and (max-width: 600px) {
+    
+}
