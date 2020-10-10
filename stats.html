@@ -127,8 +127,8 @@
                     .then(res1 => res1.json())
                     .then(userdata => { //callback heck moment
                         console.log(forumdata, userdata)
-                        vue.user.name = userdata.username // why
-                        vue.user.id = userdata.id // why
+                        vue.user.name = userdata.username
+                        vue.user.id = userdata.id
 
                         vue.user.stats.posts = forumdata.counts.total.count
                         vue.user.stats.rank = ordinalSuffix(forumdata.counts.total.rank)
