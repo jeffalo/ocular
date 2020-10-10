@@ -43,8 +43,10 @@
                 <!-- todo: add some kind of way to go to these posts -->
 
                 <br>
+                <canvas id="chart1" width="600" height="250"></canvas><br>
 
-                <canvas id="chart1" width="400" height="100"></canvas>
+
+
             </div>
             <div v-if="splash && !loading">
                 this is forum stats, its based off of <a href='http://shefwerld.github.io/post/'>shefwerld stats</a> and
@@ -178,7 +180,7 @@
                     data: {
                         labels: this.user.stats.counts.categories,
                         datasets: [{
-                            label: '# of Votes',
+                            label: '# of Posts',
                             data: this.user.stats.counts.counts,
                             backgroundColor: backColours,
                             borderColor: borderColours,
@@ -186,9 +188,29 @@
                         }]
                     },
                     options: {
+                        responsive: true,
                         title: {
                             display: true,
                             text: 'Post Distribution'
+                        },
+                        tooltips: {
+                            callbacks: {
+                                title: function (tooltipItem, data) {
+                                    return data['labels'][tooltipItem[0]['index']];
+                                },
+                                label: function (tooltipItem, data) {
+                                    var hasS = ' posts'
+                                    if(data['datasets'][0]['data'][tooltipItem['index']] == 0) hasS = ' post'
+                                    return data['datasets'][0]['data'][tooltipItem['index']]+hasS;
+                                },
+                                afterLabel: function (tooltipItem, data) {
+                                    var dataset = data['datasets'][0];
+                                    var rank = vue.user.stats.counts.ranks[tooltipItem['index']]
+                                    //console.log(rank)
+                                    var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                                    return `${percent}% of their posts\n${ordinalSuffix(rank)}`
+                                }
+                            }
                         }
                     }
                 });
@@ -222,12 +244,14 @@
 
                         //counts
                         var counts = []
+                        var pos = []
                         var cats = []
                         var colours = []
                         Object.entries(forumdata.counts).forEach(i => {
                             if (i[0] == 'total') return
 
                             counts.push(i[1].count)
+                            pos.push(i[1].rank)
                             cats.push(i[0])
 
                             var find = categories.find(obj => obj.name == i[0])
@@ -239,6 +263,7 @@
                             }
                         })
                         vue.user.stats.counts.counts = counts
+                        vue.user.stats.counts.ranks = pos
                         vue.user.stats.counts.categories = cats
                         vue.user.stats.counts.colours = colours
 
