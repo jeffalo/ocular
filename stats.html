@@ -66,6 +66,7 @@
             user: {
                 name: 'Jeffalo',
                 id: 420,
+                status: '',
                 stats: {
                     posts: 1005,
                     rank: ordinalSuffix(565),
@@ -155,6 +156,7 @@
                         .then(res2=>res2.json())
                         .then(statusdata=>{
                             console.log(statusdata)
+                            vue.user.status=statusdata.status
                         })
                     })
 
