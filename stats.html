@@ -30,7 +30,7 @@
             <button type="submit" class="sbb">go</button>
         </form>
         <br>
-        <div id='vue'>
+        <div id='vue' v-cloak>
             <div v-if="loading">loading...</div> <!-- for some reason if i uncomment this line there suddenly are a bunch of errors and it litteraly makes no sense edit maybe not -->
             <div id="data" v-if="!splash">
                 <img class='pfp' height='30px'
@@ -152,12 +152,12 @@
                         vue.splash = false
                         vue.loading = false
 
-                        fetch('https://games.jeffalo.net/status/'+userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
+/*                         fetch('https://games.jeffalo.net/status/'+userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
                         .then(res2=>res2.json())
                         .then(statusdata=>{
                             console.log(statusdata)
                             vue.user.status=statusdata.status
-                        })
+                        }) */
                     })
 
             })
