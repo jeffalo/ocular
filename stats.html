@@ -70,6 +70,10 @@
                 stats: {
                     posts: 1005,
                     rank: ordinalSuffix(565),
+                    counts: {
+                        categories: [],
+                        counts: []
+                    },
                     first: {
                         raw: 'iso date or something',
                         formatted: 'June 19, 2018'
@@ -92,10 +96,10 @@
                 var chart = new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: this.user.stats.counts.categories,
                         datasets: [{
                             label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            data: this.user.stats.counts.counts,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -148,6 +152,19 @@
 
                         vue.user.stats.latest.raw = forumdata.lastPost.time.posted
                         vue.user.stats.latest.formatted = formatDate(forumdata.lastPost.time.posted)
+
+
+                        //counts
+                        var counts = []
+                        var cats = []
+                        Object.entries(forumdata.counts).forEach(i=>{
+                            if(i[0] == 'total') return
+                            counts.push(i[1].count)
+                            cats.push(i[0])
+                        })
+                        console.log(counts)
+                        vue.user.stats.counts.counts = counts
+                        vue.user.stats.counts.categories = cats
 
                         vue.splash = false
                         vue.loading = false
