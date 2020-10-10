@@ -31,7 +31,8 @@
         </form>
         <br>
         <div id='vue'>
-            <div id="data" v-if="splash == false">
+            <div v-if="loading">loading...</div> <!-- for some reason if i uncomment this line there suddenly are a bunch of errors and it litteraly makes no sense edit maybe not -->
+            <div id="data" v-if="!splash">
                 <img class='pfp' height='40px'
                     v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
                 <h1 style="display: inline-block;">{{ user.name }}</h1>
@@ -39,11 +40,14 @@
                 <div>first post: <b v-bind:title='user.stats.first.raw'>{{ user.stats.first.formatted }} </b> | latest
                     post: <b v-bind:title='user.stats.latest.raw'>{{ user.stats.latest.formatted }}</b></div>
                 <!-- todo: add some kind of way to go to these posts -->
-                <!-- this needs to be a lot less bold except for the actual data -->
 
                 <br>
 
                 <canvas id="chart1" width="400" height="100"></canvas>
+            </div>
+            <div v-if="splash && !loading">
+                this is forum stats, its based off of <a href='http://shefwerld.github.io/post/'>shefwerld stats</a> and currently can't do as much. <br>
+                <br>soon it's going to be super cool hopefully
             </div>
 
         </div>
@@ -75,11 +79,15 @@
                     }
                 }
             },
-            splash: true
+            splash: true,
+            loading: false
         },
         methods: {
             chart: function () {
-                var ctx = document.getElementById('chart1').getContext('2d');
+                var canvas= document.getElementById('chart1')
+                if(!canvas) return
+                var ctx = canvas.getContext('2d');
+                
                 var chart = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -116,10 +124,11 @@
             }
         },
         updated: function () {
-            this.chart()
+            this.chart() //is this the best way to do this?
         }
     })
     if (username) {
+        vue.loading = true
         fetch('https://scratchdb.lefty.one/v2/forum/user/info/'+username)
             .then(res => res.json())
             .then(forumdata => {
@@ -140,6 +149,7 @@
                         vue.user.stats.latest.formatted = formatDate(forumdata.lastPost.time.posted)
 
                         vue.splash = false
+                        vue.loading = false
                     })
 
             })
