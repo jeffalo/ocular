@@ -31,7 +31,8 @@
         </form>
         <br>
         <div id='vue' v-cloak>
-            <div v-if="loading">loading...</div> <!-- for some reason if i uncomment this line there suddenly are a bunch of errors and it litteraly makes no sense edit maybe not -->
+            <div v-if="loading">loading...</div>
+            <!-- for some reason if i uncomment this line there suddenly are a bunch of errors and it litteraly makes no sense edit maybe not -->
             <div id="data" v-if="!splash">
                 <img class='pfp' height='30px'
                     v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
@@ -46,7 +47,8 @@
                 <canvas id="chart1" width="400" height="100"></canvas>
             </div>
             <div v-if="splash && !loading">
-                this is forum stats, its based off of <a href='http://shefwerld.github.io/post/'>shefwerld stats</a> and currently can't do as much. <br>
+                this is forum stats, its based off of <a href='http://shefwerld.github.io/post/'>shefwerld stats</a> and
+                currently can't do as much. <br>
                 <br>soon it's going to be super cool hopefully
             </div>
 
@@ -60,6 +62,73 @@
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('user');
 
+    var categories = [ //name is the name of the category, colour must be the colour in rgba with a being 1
+        {
+            name: 'Announcements',
+            colour: 'rgb(255, 0, 0, 1)'
+        },
+        {
+            name: 'New Scratchers',
+            colour: 'rgb(255, 106, 0, 1)'
+        },
+        {
+            name: 'Help With Scripts',
+            colour: 'rgb(108, 204, 197, 1)'
+        },
+        {
+            name: 'Show and Tell',
+            colour: 'rgb(255, 0, 255, 1)'
+        },
+        {
+            name: 'Project Ideas',
+            colour: 'rgb(255, 255, 0, 1)'
+        },
+        {
+            name: 'Collaboration',
+            colour: 'rgb(0, 255, 213, 1)'
+        },
+        {
+            name: 'Requests',
+            colour: 'rgb(0, 186, 109, 1)'
+        },
+        {
+            name: 'Questions about Scratch',
+            colour: 'rgb(153, 102, 255, 1)'
+        },
+        {
+            name: 'Suggestions',
+            colour: 'rgb(76, 151, 255, 1)'
+        },
+        {
+            name: 'Bugs and Glitches',
+            colour: 'rgb(0, 200, 255, 1)'
+        },
+        {
+            name: 'Advanced Topics',
+            colour: 'rgb(255, 0, 140, 1)'
+        },
+        {
+            name: 'Connecting to the Physical World',
+            colour: 'rgb(155, 181, 222, 1)'
+        },
+        {
+            name: 'Developing Scratch Extensions',
+            colour: 'rgb(255, 85, 0, 1)'
+        },
+        {
+            name: 'Open Source Projects',
+            colour: 'rgb(27, 31, 35, 1)'
+        },
+        {
+            name: 'Things I\'m Making and Creating',
+            colour: 'rgb(64, 0, 255, 1)'
+        },
+        {
+            name: 'Things I\'m Reading and Playing',
+            colour: 'rgb(245, 66, 96, 1)'
+        },
+    ]
+
     var vue = new Vue({
         el: '#vue',
         data: {
@@ -72,7 +141,8 @@
                     rank: ordinalSuffix(565),
                     counts: {
                         categories: [],
-                        counts: []
+                        counts: [],
+                        colours: []
                     },
                     first: {
                         raw: 'iso date or something',
@@ -89,10 +159,20 @@
         },
         methods: {
             chart: function () {
-                var canvas= document.getElementById('chart1')
-                if(!canvas) return
+                var canvas = document.getElementById('chart1')
+                if (!canvas) return
                 var ctx = canvas.getContext('2d');
-                
+
+                //parse colours
+
+                var backColours = []
+                var borderColours = []
+
+                this.user.stats.counts.colours.forEach(i => {
+                    backColours.push(i.replace(/[^,]+(?=\))/, '0.2'))
+                    borderColours.push(i.replace(/[^,]+(?=\))/, '1'))
+                })
+
                 var chart = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -100,22 +180,8 @@
                         datasets: [{
                             label: '# of Votes',
                             data: this.user.stats.counts.counts,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: backColours,
+                            borderColor: borderColours,
                             borderWidth: 1
                         }]
                     },
@@ -134,10 +200,10 @@
     })
     if (username) {
         vue.loading = true
-        fetch('https://scratchdb.lefty.one/v2/forum/user/info/'+username)
+        fetch('https://scratchdb.lefty.one/v2/forum/user/info/' + username)
             .then(res => res.json())
             .then(forumdata => {
-                fetch('https://scratchdb.lefty.one/v2/user/info/'+username)
+                fetch('https://scratchdb.lefty.one/v2/user/info/' + username)
                     .then(res1 => res1.json())
                     .then(userdata => { //callback heck moment
                         console.log(forumdata, userdata)
@@ -157,24 +223,39 @@
                         //counts
                         var counts = []
                         var cats = []
-                        Object.entries(forumdata.counts).forEach(i=>{
-                            if(i[0] == 'total') return
+                        var colours = []
+                        Object.entries(forumdata.counts).forEach(i => {
+                            if (i[0] == 'total') return
+
                             counts.push(i[1].count)
                             cats.push(i[0])
+
+                            var find = categories.find(obj => obj.name == i[0])
+                            if (!find) {
+                                console.warn('unknown category: ' + i[0])
+                                colours.push('rgb(48, 48, 48, 1)')
+                            } else {
+                                colours.push(find.colour)
+                            }
                         })
-                        console.log(counts)
                         vue.user.stats.counts.counts = counts
                         vue.user.stats.counts.categories = cats
+                        vue.user.stats.counts.colours = colours
+
 
                         vue.splash = false
                         vue.loading = false
 
-/*                         fetch('https://games.jeffalo.net/status/'+userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
-                        .then(res2=>res2.json())
-                        .then(statusdata=>{
-                            console.log(statusdata)
-                            vue.user.status=statusdata.status
-                        }) */
+                        /*
+                        
+                        fetch('https://games.jeffalo.net/status/' + userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
+                            .then(res2 => res2.json())
+                            .then(statusdata => {
+                                console.log(statusdata)
+                                vue.user.status = statusdata.status
+                            })
+
+                        */
                     })
 
             })
