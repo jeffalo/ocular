@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ocular</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="icon" href="assets/icon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
     <div class="bigheader">
         <div class="box-head">
-            <h1 class='margined'><a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class='icon'><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"/></svg> ocular</a> <span class="bread">/</span> <a href='/search.html'>stats</a></h1>
+            <h1 class='margined'><a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" class='icon'>
+                        <path
+                            d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z" />
+                    </svg> ocular</a> <span class="bread">/</span> <a href='/stats.html'>stats</a></h1>
             <p class='margined'><a href='https://github.com/JeffaloBob/ocular' class="header-link">feedback</a> | <a
                     href='https://scratchdb.lefty.one' class="header-link">api and data from datonelefty</a></p>
         </div>
@@ -23,58 +30,143 @@
             <button type="submit" class="sbb">go</button>
         </form>
         <br>
-        current step: mimicking shefwerld layout <br>
-        <div>
-            <h1>Jeffalo</h1>
-            <div><b>1234</b> posts | <b>1234th</b> worldwide</div>
-            <div>first post: <b>June 19, 2018</b> | latest post: <b>October 7, 2020</b></div> <!-- this needs to be a lot less bold except for the actual data -->
-            <br>
-            <h2>post distribution</h2>
+        <div id='vue'>
+            <div id="data" v-if="splash == false">
+                <img class='pfp' height='40px'
+                    v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
+                <h1 style="display: inline-block;">{{ user.name }}</h1>
+                <div><b>{{ user.stats.posts }}</b> posts | <b>{{ user.stats.rank }}</b> worldwide</div>
+                <div>first post: <b v-bind:title='user.stats.first.raw'>{{ user.stats.first.formatted }} </b> | latest
+                    post: <b v-bind:title='user.stats.latest.raw'>{{ user.stats.latest.formatted }}</b></div>
+                <!-- todo: add some kind of way to go to these posts -->
+                <!-- this needs to be a lot less bold except for the actual data -->
+
+                <br>
+
+                <canvas id="chart1" width="400" height="100"></canvas>
+            </div>
+
         </div>
-        
-        <canvas id="chart1" width="400" height="100"></canvas>
+
     </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById('chart1').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('user');
+
+    var vue = new Vue({
+        el: '#vue',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+            user: {
+                name: 'Jeffalo',
+                id: 420,
+                stats: {
+                    posts: 1005,
+                    rank: ordinalSuffix(565),
+                    first: {
+                        raw: 'iso date or something',
+                        formatted: 'June 19, 2018'
+                    },
+                    latest: {
+                        raw: 'iso date or something',
+                        formatted: 'June 19, 2018'
                     }
-                }]
+                }
+            },
+            splash: true
+        },
+        methods: {
+            chart: function () {
+                var ctx = document.getElementById('chart1').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Post Distribution'
+                        }
+                    }
+                });
             }
+        },
+        updated: function () {
+            this.chart()
         }
-    });
-    </script>
+    })
+    if (username) {
+        fetch('https://scratchdb.lefty.one/v2/forum/user/info/'+username)
+            .then(res => res.json())
+            .then(forumdata => {
+                fetch('https://scratchdb.lefty.one/v2/user/info/'+username)
+                    .then(res1 => res1.json())
+                    .then(userdata => { //callback heck moment
+                        console.log(forumdata, userdata)
+                        vue.user.name = userdata.username // why
+                        vue.user.id = userdata.id // why
+
+                        vue.user.stats.posts = forumdata.counts.total.count
+                        vue.user.stats.rank = ordinalSuffix(forumdata.counts.total.rank)
+
+                        vue.user.stats.first.raw = forumdata.firstPost.time.posted
+                        vue.user.stats.first.formatted = formatDate(forumdata.firstPost.time.posted)
+
+                        vue.user.stats.latest.raw = forumdata.lastPost.time.posted
+                        vue.user.stats.latest.formatted = formatDate(forumdata.lastPost.time.posted)
+
+                        vue.splash = false
+                    })
+
+            })
+    }
+
+
+    //useful functions
+    function ordinalSuffix(i) {
+        var j = i % 10,
+            k = i % 100;
+        if (j == 1 && k != 11) {
+            return i + "st";
+        }
+        if (j == 2 && k != 12) {
+            return i + "nd";
+        }
+        if (j == 3 && k != 13) {
+            return i + "rd";
+        }
+        return i + "th";
+    }
+
+    function formatDate(input) {
+        const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+
+        return new Date(input).toLocaleDateString('en-GB', options);
+    }
+</script>
 
 </html>
