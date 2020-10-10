@@ -33,9 +33,9 @@
         <div id='vue'>
             <div v-if="loading">loading...</div> <!-- for some reason if i uncomment this line there suddenly are a bunch of errors and it litteraly makes no sense edit maybe not -->
             <div id="data" v-if="!splash">
-                <img class='pfp' height='40px'
+                <img class='pfp' height='30px'
                     v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
-                <h1 style="display: inline-block;">{{ user.name }}</h1>
+                <h1 style="display: inline-block;">{{ user.name }}</h1> <i>{{ user.status }}</i>
                 <div><b>{{ user.stats.posts }}</b> posts | <b>{{ user.stats.rank }}</b> worldwide</div>
                 <div>first post: <b v-bind:title='user.stats.first.raw'>{{ user.stats.first.formatted }} </b> | latest
                     post: <b v-bind:title='user.stats.latest.raw'>{{ user.stats.latest.formatted }}</b></div>
@@ -150,6 +150,12 @@
 
                         vue.splash = false
                         vue.loading = false
+
+                        fetch('https://games.jeffalo.net/status/'+userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
+                        .then(res2=>res2.json())
+                        .then(statusdata=>{
+                            console.log(statusdata)
+                        })
                     })
 
             })
