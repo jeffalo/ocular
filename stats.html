@@ -43,7 +43,6 @@
                 <!-- todo: add some kind of way to go to these posts -->
 
                 <br>
-                <canvas id="chart1" width="600" height="250"></canvas><br>
 
 
 
@@ -52,6 +51,9 @@
                 this is forum stats, its based off of <a href='http://shefwerld.github.io/post/'>shefwerld stats</a> and
                 currently can't do as much. <br>
                 <br>soon it's going to be super cool hopefully
+            </div>
+            <div v-if="shouldChart" class="chart-container">
+                <canvas id="chart1"></canvas>
             </div>
 
         </div>
@@ -134,6 +136,7 @@
     var vue = new Vue({
         el: '#vue',
         data: {
+            shouldChart: false,
             user: {
                 name: 'Jeffalo',
                 id: 420,
@@ -175,7 +178,7 @@
                     borderColours.push(i.replace(/[^,]+(?=\))/, '1'))
                 })
 
-                var chart = new Chart(ctx, {
+                var achart = new Chart(ctx, {
                     type: 'pie',
                     data: {
                         labels: this.user.stats.counts.categories,
@@ -189,6 +192,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         title: {
                             display: true,
                             text: 'Post Distribution'
@@ -200,8 +204,8 @@
                                 },
                                 label: function (tooltipItem, data) {
                                     var hasS = ' posts'
-                                    if(data['datasets'][0]['data'][tooltipItem['index']] == 0) hasS = ' post'
-                                    return data['datasets'][0]['data'][tooltipItem['index']]+hasS;
+                                    if (data['datasets'][0]['data'][tooltipItem['index']] == 0) hasS = ' post'
+                                    return data['datasets'][0]['data'][tooltipItem['index']] + hasS;
                                 },
                                 afterLabel: function (tooltipItem, data) {
                                     var dataset = data['datasets'][0];
@@ -267,6 +271,7 @@
                         vue.user.stats.counts.categories = cats
                         vue.user.stats.counts.colours = colours
 
+                        vue.shouldChart = true
 
                         vue.splash = false
                         vue.loading = false
@@ -285,6 +290,7 @@
 
             })
     }
+
 
 
     //useful functions
