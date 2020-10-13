@@ -221,7 +221,11 @@
             }
         },
         updated: function () {
-            this.chart() //is this the best way to do this?
+            if(vue.hasChart == false){
+                this.chart() //is this the best way to do this?
+                vue.hasChart = true
+            }
+
         }
     })
     if (username) {
@@ -272,20 +276,18 @@
                         vue.user.stats.counts.colours = colours
 
                         vue.shouldChart = true
+                        vue.hasChart = false
 
                         vue.splash = false
                         vue.loading = false
 
-                        /*
-                        
-                        fetch('https://games.jeffalo.net/status/' + userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
+                                                
+                        fetch('https://myocular.jeffalo.net/api/user/' + userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
                             .then(res2 => res2.json())
                             .then(statusdata => {
                                 console.log(statusdata)
                                 vue.user.status = statusdata.status
                             })
-
-                        */
                     })
 
             })
