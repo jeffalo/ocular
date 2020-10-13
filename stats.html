@@ -36,7 +36,7 @@
             <div id="data" v-if="!splash">
                 <img class='pfp' height='30px'
                     v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
-                <h1 style="display: inline-block;">{{ user.name }}</h1> <i>{{ user.status }}</i>
+                <h1 style="display: inline-block;">{{ user.name }}</h1> <i title='you can change this text at myocular.jeffalo.net'>{{ user.status }}</i> <span title='favourite colour'class="dot" v-bind:style='"background-color: "+user.color'></span>
                 <div><b>{{ user.stats.posts }}</b> posts | <b>{{ user.stats.rank }}</b> worldwide</div>
                 <div>first post: <b v-bind:title='user.stats.first.raw'>{{ user.stats.first.formatted }} </b> | latest
                     post: <b v-bind:title='user.stats.latest.raw'>{{ user.stats.latest.formatted }}</b></div>
@@ -287,6 +287,7 @@
                             .then(statusdata => {
                                 console.log(statusdata)
                                 vue.user.status = statusdata.status
+                                vue.user.color = statusdata.color
                             })
                     })
 
