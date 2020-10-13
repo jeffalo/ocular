@@ -370,11 +370,11 @@ select {
   border-radius: 50%;
 }
 
-.chart-container{
+.chart-container {
   margin: auto;
-  position: relative; 
-  height:40vh; 
-  width:50vw;
+  position: relative;
+  height: 40vh;
+  width: 50vw;
 }
 
 .dot {
@@ -382,11 +382,18 @@ select {
   width: 10px;
   background-color: #bbb;
   border-radius: 50%;
-
   display: inline-block;
 }
 
-[v-cloak] {display: none}
+.external {
+  width: 10px;
+  height: 10px;
+  fill: #575e75;
+}
+
+[v-cloak] {
+  display: none
+}
 
 @media only screen and (max-width: 1100px) {
   .margined {
@@ -401,7 +408,7 @@ select {
   .sb {
     width: 200px;
   }
-  .chart-container{
+  .chart-container {
     height: 70vh;
   }
 }
