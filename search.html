@@ -66,6 +66,7 @@
     <div class="margined">
         <div id="post-list" class="posts">
             <h1 v-if="splash == false">{{ text }}</h1>
+            <p v-if="splash == false && searchtype == 'user'"><a v-bind:href='"/stats.html?user="+items[0].author'>view {{ items[0].author }}'s stats with ocular stats</a></p> <!-- todo, don't do this hacky thing to find username, also handle if there are no posts and add the other search types. if its a topic, show category and stuff -->
             <div v-for="post of items" class="post">
                 <div class="header"><a v-bind:href="'?post='+post.id" class="date">{{ post.date }}</a><a
                         v-bind:href="'?topic='+post.topic.id" class="topic-link">{{ post.topic.title }}</a><a
@@ -183,7 +184,8 @@
             items: posts,
             canLoadMore: false,
             splash: false,
-            text: ''
+            text: '',
+            searchtype: ''
         },
         methods: {
             loadMore: function (event) {
@@ -246,6 +248,7 @@
                 else vue.canLoadMore = false
 
                 vue.text = 'posts from: ' + data.posts[0].username
+                vue.searchtype = 'user'
             })
     }
 
@@ -272,6 +275,7 @@
                 if (data.posts.length == 50) vue.canLoadMore = true
                 else vue.canLoadMore = false
                 vue.text = 'posts from: ' + data.posts[0].topic.title
+                vue.searchtype = 'topic'
             })
     }
 
@@ -294,6 +298,7 @@
                 })
                 vue.canLoadMore = false
                 vue.text = 'post: ' + post
+                vue.searchtype = 'post'
             })
     }
 
@@ -321,6 +326,7 @@
                 if (data.posts.length == 50) vue.canLoadMore = true
                 else vue.canLoadMore = false
                 vue.text = 'posts from search: ' + decodeURI(search)
+                vue.searchtype = 'search'
             })
     }
 
