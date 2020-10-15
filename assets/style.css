@@ -391,6 +391,29 @@ select {
   fill: #575e75;
 }
 
+.message {
+  padding: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  opacity: 0.83;
+  margin-bottom: 15px;
+}
+
+.message.error{
+  background-color: #f44336;
+  color: white
+}
+
+.message.info{
+  background-color: #2196F3;
+  color: white
+}
+
+.message.success{
+  background-color: #4CAF50;
+  color: white
+}
+
 [v-cloak] {
   display: none
 }
