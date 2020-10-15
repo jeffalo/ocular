@@ -67,6 +67,7 @@
         <div id="post-list" class="posts">
             <h1 v-if="splash == false">{{ text }}</h1>
             <p v-if="splash == false && searchtype == 'user'"><a v-bind:href='"/stats.html?user="+items[0].author'>view {{ items[0].author }}'s stats with ocular stats</a></p> <!-- todo, don't do this hacky thing to find username, also handle if there are no posts and add the other search types. if its a topic, show category and stuff -->
+            <p v-if="splash == false && searchtype == 'topic'"><b>category</b>: {{ items[0].topic.category }}</p>
             <div v-for="post of items" class="post">
                 <div class="header"><a v-bind:href="'?post='+post.id" class="date">{{ post.date }}</a><a
                         v-bind:href="'?topic='+post.topic.id" class="topic-link">{{ post.topic.title }}</a><a
@@ -239,7 +240,8 @@
                         id: post.id,
                         topic: {
                             title: post.topic.title,
-                            id: post.topic.id
+                            id: post.topic.id,
+                            category: post.topic.category
                         }
                     })
                 })
@@ -267,7 +269,9 @@
                         id: post.id,
                         topic: {
                             title: post.topic.title,
-                            id: post.topic.id
+                            id: post.topic.id,
+                            category: post.topic.category
+
                         }
                     })
                 })
@@ -293,7 +297,8 @@
                     id: data.id,
                     topic: {
                         title: data.topic.title,
-                        id: data.topic.id
+                        id: data.topic.id,
+                        category: post.topic.category
                     }
                 })
                 vue.canLoadMore = false
@@ -318,7 +323,8 @@
                         id: post.id,
                         topic: {
                             title: post.topic.title,
-                            id: post.topic.id
+                            id: post.topic.id,
+                            category: post.topic.category
                         }
                     })
                 })
