@@ -347,7 +347,10 @@
             segment.innerHTML = segment.innerHTML.replace(/</g, "&lt;")
         }
 
-        return readableDom.documentElement.innerHTML
+        const els = document.getElementsByTagName('*')
+
+
+        return readableDom.documentElement.innerHTML.replace('<a>', '&lt;a>')//remove links with no href
     }
 
     function scratchBlocksify() {
