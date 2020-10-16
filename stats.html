@@ -36,7 +36,7 @@
             <div id="data" v-if="!splash">
                 <img class='pfp' height='30px'
                     v-bind:src="'https://cdn2.scratch.mit.edu/get_image/user/'+user.id+'_60x60.png'">
-                <h1 style="display: inline-block;">{{ user.name }}</h1> <i title='you can change this text at myocular.jeffalo.net'>{{ user.status }}</i> <span title='favourite colour'class="dot" v-bind:style='"background-color: "+user.color'></span>
+                <h1 style="display: inline-block;">{{ user.name }}</h1> <i title='you can change this text at my-ocular.jeffalo.net'>{{ user.status }}</i> <span title='favourite colour'class="dot" v-bind:style='"background-color: "+user.color'></span>
                 <div><b>{{ user.stats.posts }}</b> posts | <b>{{ user.stats.rank }}</b> worldwide</div>
                 <div>first post: <b v-bind:title='user.stats.first.raw'>{{ user.stats.first.formatted }} <a v-bind:href='"/search.html?post="+user.stats.first.id'><svg class='external'xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></svg></a></b> | latest
                     post: <b v-bind:title='user.stats.latest.raw'>{{ user.stats.latest.formatted }} <a v-bind:href='"/search.html?post="+user.stats.latest.id'><svg class='external'xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></svg></a></b></div>
@@ -283,7 +283,7 @@
                         vue.loading = false
 
                                                 
-                        fetch('https://myocular.jeffalo.net/api/user/' + userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
+                        fetch('https://my-ocular.jeffalo.net/api/user/' + userdata.username) //this is a WIP api but when it's done it will let people set custom statuses and fun
                             .then(res2 => res2.json())
                             .then(statusdata => {
                                 console.log(statusdata)
