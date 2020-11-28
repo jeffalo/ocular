@@ -282,10 +282,16 @@ select {
 
 .info tr:nth-child(even) {
   background-color: #f2f2f2;
+  transition: 250ms;
+}
+
+.info tr:nth-child(odd) {
+  background-color: #ffffff;
+  transition: 250ms;
 }
 
 .info tr:hover {
-  background-color: #ddd;
+  background-color: #e6e6e6;
 }
 
 .info th {
