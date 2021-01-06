@@ -1,16 +1,29 @@
-# 😎 ocular
-ocular (formerly jeffalo post viewer) is an open source collection of tools for the scratch forums.
+# 🔍 ocular
+ocular is the search tool for the scratch forums.
 
-## tools
-- forum search
-- stats
-- cool data stuff
+it's up at [ocular.jeffalo.net](ocular.jeffalo.net)
 
-## how is such a cool thing even possible?
-i'm glad you asked. 
-- data from [DatOneLefty's ScratchDB](https://scratchdb.lefty.one/) (it's not possible without it)
-- styling inspired from [Maximouse](https://scratch.mit.edu/users/Maximouse)
-- big inspiration from [forums.scratchstats.com](https://forums.scratchstats.com) and [shefwerld stats](https://shefwerld.github.io/post)
-- vercel is used for deployment because of the super neat features (it currently should be acting just like github pages though)
-- vue is used because it's super cool and basically does all the dom manipulation
+## behind the scenes
+- data from [DatOneLefty's ScratchDB](https://scratchdb.lefty.one/)
+- styling taken from [Maximouse](https://scratch.mit.edu/users/Maximouse)'s userstyle
+- big inspiration from [forums.scratchstats.com](https://forums.scratchstats.com)
+- nuxt because SSR
+- hosted at home
 - and obviously scratch!
+
+## run
+
+```bash
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
