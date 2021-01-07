@@ -167,7 +167,7 @@ select {
 }
 </style>
 <script>
-var fetchSSR = true;
+var fetchSSR = false;
 export default {
   ssr: true,
   watch: {
