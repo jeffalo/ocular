@@ -9,12 +9,14 @@
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
         </nuxt-link>
+        <!-- 
         <a href="stats.html">
           <div class="content"><span>📊 stats</span></div>
         </a>
         <a href="live.html">
           <div class="content"><span>🔴 live</span></div>
         </a>
+        -->   
         <a href="https://my-ocular.jeffalo.net">
           <div class="content my-ocular">
             <span>🙋&zwj;♂️ my-ocular</span>
