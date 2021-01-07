@@ -14,6 +14,6 @@
         <a class="footer-link" href="https://hamptonmoore.com">@herohamp</a>
         <br /><br />this forum viewer tool falls under Creative Commons
         Attribution-ShareAlike 2.0 license <br /><br />
-        <NuxtLink class="footer-link" to="/privacy">privacy</NuxtLink>
+        <nuxt-link class="footer-link" to="/privacy">privacy</nuxt-link>
     </footer>  
 </template>

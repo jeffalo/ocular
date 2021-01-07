@@ -6,9 +6,9 @@
       <p>ocular is the all in one forum tool for scratch</p>
 
       <div class="grid"> <!-- todo why is this grid smaller? -->
-        <NuxtLink to="/search">
+        <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
-        </NuxtLink>
+        </nuxt-link>
         <a href="stats.html">
           <div class="content"><span>📊 stats</span></div>
         </a>

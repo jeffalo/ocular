@@ -40,44 +40,50 @@
         </p>
 
         <table class="info">
-          <tr>
-            <th>Requirement</th>
-            <th>What it does</th>
-          </tr>
-          <tr>
-            <td>username</td>
-            <td>requires that the resulting posts be by a certain user</td>
-          </tr>
-          <tr>
-            <td>category</td>
-            <td>
-              requires that the resulting posts be in a category (this does not
-              have to be complete, +category:"Advanced" will match Advanced
-              Topics)
-            </td>
-          </tr>
-          <tr>
-            <td>topic</td>
-            <td>
-              requires that the resulting posts be from a topic with the id
-            </td>
-          </tr>
-          <tr>
-            <td>title</td>
-            <td>
-              requires that the resulting posts be from a topic with a topic
-              title (this does not have to be complete, +title:"help" will match
-              anything with help in the title.)
-            </td>
-          </tr>
-          <tr>
-            <td>id</td>
-            <td>requires that the resulting post has an id</td>
-          </tr>
-          <tr>
-            <td>content</td>
-            <td>requres that the resulting posts have this in their content</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>What it does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>username</td>
+              <td>requires that the resulting posts be by a certain user</td>
+            </tr>
+            <tr>
+              <td>category</td>
+              <td>
+                requires that the resulting posts be in a category (this does
+                not have to be complete, +category:"Advanced" will match
+                Advanced Topics)
+              </td>
+            </tr>
+            <tr>
+              <td>topic</td>
+              <td>
+                requires that the resulting posts be from a topic with the id
+              </td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                requires that the resulting posts be from a topic with a topic
+                title (this does not have to be complete, +title:"help" will
+                match anything with help in the title.)
+              </td>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>requires that the resulting post has an id</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td>
+                requres that the resulting posts have this in their content
+              </td>
+            </tr>
+          </tbody>
         </table>
         <br />
         <h2>query parameters</h2>
@@ -161,7 +167,7 @@ select {
 }
 </style>
 <script>
-var fetchSSR = true
+var fetchSSR = true;
 export default {
   ssr: true,
   watch: {
@@ -179,7 +185,7 @@ export default {
       page: 0,
       posts: [],
       splash: false,
-      ssr: true
+      ssr: true,
     };
   },
   methods: {
@@ -195,8 +201,10 @@ export default {
           `https://scratchdb.lefty.one/v2/forum/user/posts/${this.user}/${this.page}`
         );
       }
-      if(this.type == "topic") {
-        var res = await fetch(`https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`)
+      if (this.type == "topic") {
+        var res = await fetch(
+          `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
+        );
       }
       var data = await res.json();
       this.posts.posts.push(...data.posts);
@@ -246,22 +254,26 @@ export default {
       return;
     }
 
-    if(this.topic !== "undefined") {
+    if (this.topic !== "undefined") {
       this.type = "topic";
       this.showLoadMore = true;
-      this.posts = await fetch(`https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`).then((res) => res.json());
+      this.posts = await fetch(
+        `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
+      ).then((res) => res.json());
       this.splash = false;
       return;
     }
 
-    if(this.post !== "undefined") {
+    if (this.post !== "undefined") {
       this.type = "post";
       this.showLoadMore = true;
       this.posts = {
         hits: 1,
-        posts: []
-      }
-      this.posts.posts[0] = await fetch(`https://scratchdb.lefty.one/v2/forum/post/${this.post}`).then((res) => res.json());
+        posts: [],
+      };
+      this.posts.posts[0] = await fetch(
+        `https://scratchdb.lefty.one/v2/forum/post/${this.post}`
+      ).then((res) => res.json());
       this.splash = false;
       return;
     } // this isn't working???

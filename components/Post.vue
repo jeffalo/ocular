@@ -1,28 +1,47 @@
 <template>
   <div class="post">
     <div class="header">
-      <PostTime :time="post.time.posted" :linkid="post.id"/>
-      <a :href="`?topic=${post.topic.id}`" class="topic-link">{{ post.topic.title }}</a>
-      <a :href="`https://scratch.mit.edu/discuss/post/${post.id}`" class="view-scratch">view on scratch</a>
+      <PostTime :time="post.time.posted" :linkid="post.id" />
+      <a :href="`?topic=${post.topic.id}`" class="topic-link">{{
+        post.topic.title
+      }}</a>
+      <a
+        :href="`https://scratch.mit.edu/discuss/post/${post.id}`"
+        class="view-scratch"
+        >view on scratch</a
+      >
     </div>
     <div class="post-wrap">
-      <section class="main-content" v-if="post.parser.version > 0" v-html="post.content.html">
-      </section>
-      <section class="main-content" v-else>
-      {{ post.content.bb }}
-      <span class='xss-info'>this post is displayed as raw bbcode for your saftey <NuxtLink to="/xss-info">(more info)</NuxtLink> <a href="javascript:void(0)" @click="post.parser.version = 1">(render anyway)</a></span>
+      <section
+        class="main-content"
+        v-if="post.parser.version > 0"
+        v-html="post.content.html"
+      ></section>
+      <section class="main-content" v-if="post.parser.version == 0">
+        {{ post.content.bb }}
+        <span class="xss-info">
+          this post is displayed as raw bbcode for your saftey
+          <nuxt-link to="/xss-info">(more info)</nuxt-link>
+          <a href="javascript:void(0)" @click="post.parser.version = 1">
+            (render anyway)
+          </a>
+        </span>
       </section>
       <nav class="main-nav">
-        <a :href="`?user=${post.username}`" class="username">{{ post.username }}</a>
+        <a :href="`?user=${post.username}`" class="username">{{
+          post.username
+        }}</a>
         <a :href="`?user=${post.username}`">
-            <img :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
+          <img
+            :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
             id="profile-picture"
             width="90"
-            height="90"/>
+            height="90"
+          />
         </a>
         <span class="rank">Scratcher</span>
-        <PostCount :user="post.username"/>
-        <Status :user="post.username"/>
+        <PostCount :user="post.username" />
+        <Status :user="post.username" />
       </nav>
     </div>
   </div>
@@ -59,7 +78,9 @@ export default {
   background: #f2f2f2;
 }
 
-.main-content, .main-sidebar, .main-nav {
+.main-content,
+.main-sidebar,
+.main-nav {
   padding: 1em;
   padding-top: 0.5em;
   padding-bottom: 2em;
@@ -79,7 +100,7 @@ export default {
 }
 
 .rank {
-  display: block
+  display: block;
 }
 
 .view-scratch {
