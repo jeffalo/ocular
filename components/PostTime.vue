@@ -1,5 +1,5 @@
 <template>
-    <a :href="`?post=${linkid}`" class="date">{{ new Date(time) }}</a>
+    <a :href="`/post/${linkid}`" class="date">{{ new Date(time) }}</a>
 </template>
 
 <script>

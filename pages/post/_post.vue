@@ -1,0 +1,54 @@
+<template>
+  <div class="container">
+    <Header pageName="post" :pageLink="`/post/${id}`" />
+    <div class="margined">
+      <Post v-bind:post="post"/>
+      <Footer />
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      id: this.$route.params.post,
+      post: {},
+    };
+  },
+  methods: {
+    scratchBlocksify() {
+      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
+        style: "scratch2", // Optional
+      });
+      document
+        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
+        .forEach((i) => {
+          i.classList.add("scratchblockrendered");
+        });
+    },
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      this.scratchBlocksify();
+    });
+  },
+  mounted: function () {
+    const blocksPlugin = document.createElement("script");
+    blocksPlugin.setAttribute("src", "/lib/scratchblocks.js");
+    blocksPlugin.addEventListener("load", (e) => {
+      this.scratchBlocksify();
+    });
+    document.head.appendChild(blocksPlugin);
+  },
+  async fetch() {
+    var postRes = await fetch(
+      `https://scratchdb.lefty.one/v2/forum/post/${this.id}`
+    );
+    var postData = await postRes.json();
+
+    this.post = postData;
+  },
+  fetchOnServer: true,
+};
+</script>

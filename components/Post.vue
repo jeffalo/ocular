@@ -2,9 +2,9 @@
   <div class="post">
     <div class="header">
       <PostTime :time="post.time.posted" :linkid="post.id" />
-      <a :href="`?topic=${post.topic.id}`" class="topic-link">{{
+      <nuxt-link :to="`/topic/${post.topic.id}`" class="topic-link">{{
         post.topic.title
-      }}</a>
+      }}</nuxt-link>
       <a
         :href="`https://scratch.mit.edu/discuss/post/${post.id}`"
         class="view-scratch"
@@ -28,20 +28,20 @@
         </span>
       </section>
       <nav class="main-nav">
-        <a :href="`?user=${post.username}`" class="username">{{
+        <nuxt-link :to="`/user/${post.username}`" class="username">{{
           post.username
-        }}</a>
-        <a :href="`?user=${post.username}`">
+        }}</nuxt-link>
+        <nuxt-link :to="`/user/${post.username}`">
           <img
             :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
             id="profile-picture"
             width="90"
             height="90"
           />
-        </a>
+        </nuxt-link>
         <span class="rank">Scratcher</span>
         <PostCount :user="post.username" />
-        <Status :user="post.username" />
+        <Status :user="post.username" style="display: block;" />
       </nav>
     </div>
   </div>

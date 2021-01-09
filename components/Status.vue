@@ -27,9 +27,6 @@ export default {
 </script>
 
 <style scoped>
-.container{
-    display: block;
-}
 .status-color{
     height: 10px;
     width: 10px;

@@ -96,6 +96,7 @@
         <p><code>?post=</code> will show a single post by id</p>
       </div>
       <div v-if="!splash">
+        {{ posts.query }}
         <Post
           v-for="post of posts.posts"
           v-bind:key="post.id"
@@ -177,13 +178,11 @@ export default {
     return {
       search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
       sort: encodeURIComponent(decodeURIComponent(this.$route.query.sort)),
-      user: encodeURIComponent(decodeURIComponent(this.$route.query.user)),
       topic: encodeURIComponent(decodeURIComponent(this.$route.query.topic)),
       post: encodeURIComponent(decodeURIComponent(this.$route.query.post)),
       showLoadMore: false,
-      type: "",
       page: 0,
-      posts: [],
+      posts: {},
       splash: false,
       ssr: true,
     };
@@ -191,21 +190,10 @@ export default {
   methods: {
     async loadMore() {
       this.page++;
-      if (this.type == "search") {
-        var res = await fetch(
-          `https://scratchdb.lefty.one/v2/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
-        );
-      }
-      if (this.type == "user") {
-        var res = await fetch(
-          `https://scratchdb.lefty.one/v2/forum/user/posts/${this.user}/${this.page}`
-        );
-      }
-      if (this.type == "topic") {
-        var res = await fetch(
-          `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
-        );
-      }
+      var res = await fetch(
+        `https://scratchdb.lefty.one/v2/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
+      );
+
       var data = await res.json();
       this.posts.posts.push(...data.posts);
     },
@@ -235,7 +223,6 @@ export default {
   },
   async fetch() {
     if (this.search !== "undefined") {
-      this.type = "search";
       this.showLoadMore = true;
       this.posts = await fetch(
         `https://scratchdb.lefty.one/v2/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
@@ -244,39 +231,6 @@ export default {
       return;
     }
 
-    if (this.user !== "undefined") {
-      this.type = "user";
-      this.showLoadMore = true;
-      this.posts = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/user/posts/${this.user}/${this.page}`
-      ).then((res) => res.json());
-      this.splash = false;
-      return;
-    }
-
-    if (this.topic !== "undefined") {
-      this.type = "topic";
-      this.showLoadMore = true;
-      this.posts = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
-      ).then((res) => res.json());
-      this.splash = false;
-      return;
-    }
-
-    if (this.post !== "undefined") {
-      this.type = "post";
-      this.showLoadMore = true;
-      this.posts = {
-        hits: 1,
-        posts: [],
-      };
-      this.posts.posts[0] = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/post/${this.post}`
-      ).then((res) => res.json());
-      this.splash = false;
-      return;
-    } // this isn't working???
     this.splash = true;
   },
   fetchOnServer: fetchSSR,
