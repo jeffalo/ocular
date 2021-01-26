@@ -91,9 +91,9 @@
           the most simple way of using this, is to use some query parameters.
           these cannot be mixed and matched, you can only use one at a time
         </p>
-        <p><code>?user=</code> will show posts by the user</p>
-        <p><code>?topic=</code> will show posts in a topic by id</p>
-        <p><code>?post=</code> will show a single post by id</p>
+        <p><code>/user/:username</code> will show posts by the user</p>
+        <p><code>/topic/:topic</code> will show posts in a topic by id</p>
+        <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-if="!splash">
         {{ posts.query }}
