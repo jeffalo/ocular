@@ -96,7 +96,9 @@
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-if="!splash">
+        <code>
         {{ posts.query }}
+        </code>
         <Post
           v-for="post of posts.posts"
           v-bind:key="post.id"
@@ -165,6 +167,12 @@ select {
   text-align: left;
   background-color: #0fbd8c;
   color: white;
+}
+
+@media only screen and (max-width: 1100px) {
+  .sb {
+		width: 200px;
+	}
 }
 </style>
 <script>
