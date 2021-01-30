@@ -2,21 +2,24 @@
   <div class="container">
     <Header pageName="topic" :pageLink="`/topic/${topic}`" />
     <div class="margined">
-      <div v-if="data.posts && data.posts[0]">
-        <h1 style="display: inline-block">{{ data.posts[0].topic.title }}</h1>
-        <p>
-          id: <b>{{ data.posts[0].topic.id }}</b>
-        </p>
-        <p>
-          category: <b>{{ data.posts[0].topic.category }}</b>
-        </p>
+      <Loading v-if="$fetchState.pending" />
+      <div v-else>
+        <div v-if="data.posts && data.posts[0]">
+          <h1 style="display: inline-block">{{ data.posts[0].topic.title }}</h1>
+          <p>
+            id: <b>{{ data.posts[0].topic.id }}</b>
+          </p>
+          <p>
+            category: <b>{{ data.posts[0].topic.category }}</b>
+          </p>
+        </div>
+        <Post
+          v-for="post of data.posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        />
+        <button @click="loadMore()">Load More</button>
       </div>
-      <Post
-        v-for="post of data.posts"
-        v-bind:key="post.id"
-        v-bind:post="post"
-      />
-      <button @click="loadMore()">Load More</button>
       <Footer />
     </div>
   </div>
@@ -73,6 +76,6 @@ export default {
 
     this.data = userPosts;
   },
-  fetchOnServer: true,
+  fetchOnServer: false,
 };
 </script>

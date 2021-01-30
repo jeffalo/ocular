@@ -2,7 +2,8 @@
   <div class="container">
     <Header pageName="post" :pageLink="`/post/${id}`" />
     <div class="margined">
-      <Post v-bind:post="post"/>
+      <Loading v-if="$fetchState.pending" />
+      <Post v-else v-bind:post="post"/>
       <Footer />
     </div>
   </div>
@@ -13,7 +14,12 @@ export default {
   data() {
     return {
       id: this.$route.params.post,
-      post: {},
+      post: {
+        time: {},
+        content: {},
+        parser: {},
+        topic: {}
+      },
     };
   },
   methods: {
@@ -49,6 +55,6 @@ export default {
 
     this.post = postData;
   },
-  fetchOnServer: true,
+  fetchOnServer: false,
 };
 </script>

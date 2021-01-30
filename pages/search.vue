@@ -86,25 +86,24 @@
           </tbody>
         </table>
         <br />
-        <h2>query parameters</h2>
-        <p>
-          the most simple way of using this, is to use some query parameters.
-          these cannot be mixed and matched, you can only use one at a time
-        </p>
+        <h2>other</h2>
         <p><code>/user/:username</code> will show posts by the user</p>
         <p><code>/topic/:topic</code> will show posts in a topic by id</p>
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-if="!splash">
-        <code>
-        {{ posts.query }}
-        </code>
-        <Post
-          v-for="post of posts.posts"
-          v-bind:key="post.id"
-          v-bind:post="post"
-        />
-        <button @click="loadMore()">Load More</button>
+        <Loading v-if="$fetchState.pending" />
+        <div v-else>
+          <code>
+          <!-- {{ posts.query }} -->
+          </code>
+          <Post
+            v-for="post of posts.posts"
+            v-bind:key="post.id"
+            v-bind:post="post"
+          />
+          <button @click="loadMore()">Load More</button>
+        </div>
       </div>
       <Footer />
     </div>
@@ -176,7 +175,6 @@ select {
 }
 </style>
 <script>
-var fetchSSR = true;
 export default {
   ssr: true,
   watch: {
@@ -241,6 +239,6 @@ export default {
 
     this.splash = true;
   },
-  fetchOnServer: fetchSSR,
+  fetchOnServer: false,
 };
 </script>

@@ -2,16 +2,19 @@
   <div class="container">
     <Header pageName="user" :pageLink="`/user/${user}`" />
     <div class="margined">
-      <h1 style="display: inline-block">{{ user }}</h1>
-      <!-- todo: use classes instead of inline css -->
-      <Status :user="user" style="display: inline" />
-      <h2>{{ user }}'s posts</h2>
-      <Post
-        v-for="post of data.posts"
-        v-bind:key="post.id"
-        v-bind:post="post"
-      />
-      <button @click="loadMore()">Load More</button>
+      <Loading v-if="$fetchState.pending" />
+      <div v-else>
+        <h1 style="display: inline-block">{{ user }}</h1>
+        <!-- todo: use classes instead of inline css -->
+        <Status :user="user" style="display: inline" />
+        <h2>{{ user }}'s posts</h2>
+        <Post
+          v-for="post of data.posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        />
+        <button @click="loadMore()">Load More</button>
+      </div>
       <Footer />
     </div>
   </div>
@@ -75,6 +78,6 @@ export default {
     this.info = userInfo;
     this.data = userPosts;
   },
-  fetchOnServer: true,
+  fetchOnServer: false,
 };
 </script>
