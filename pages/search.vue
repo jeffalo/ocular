@@ -24,7 +24,7 @@
         </select>
         <button type="submit" class="sbb">go</button>
       </form>
-      <div v-if="splash">
+      <div v-show="splash">
         <h1>how to use</h1>
         <h2>searching</h2>
         <p>searches from scratchdb use a pretty neat format.</p>
@@ -91,7 +91,7 @@
         <p><code>/topic/:topic</code> will show posts in a topic by id</p>
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
-      <div v-if="!splash">
+      <div v-show="!splash">
         <Loading v-if="$fetchState.pending" />
         <div v-if="!$fetchState.pending">
           <Post
@@ -167,8 +167,8 @@ select {
 
 @media only screen and (max-width: 1100px) {
   .sb {
-		width: 200px;
-	}
+    width: 200px;
+  }
 }
 </style>
 <script>
