@@ -94,9 +94,6 @@
       <div v-if="!splash">
         <Loading v-if="$fetchState.pending" />
         <div v-if="!$fetchState.pending">
-          <code>
-          <!-- {{ posts.query }} -->
-          </code>
           <Post
             v-for="post of posts.posts"
             v-bind:key="post.id"
