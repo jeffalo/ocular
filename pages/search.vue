@@ -93,7 +93,7 @@
       </div>
       <div v-if="!splash">
         <Loading v-show="$fetchState.pending" />
-        <div v-if="!$fetchState.pending">
+        <div v-show="!$fetchState.pending">
           <code>
           <!-- {{ posts.query }} -->
           </code>
