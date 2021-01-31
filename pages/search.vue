@@ -92,7 +92,7 @@
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-if="!splash">
-        <Loading v-if="$fetchState.pending" />
+        <Loading v-show="$fetchState.pending" />
         <div v-if="!$fetchState.pending">
           <code>
           <!-- {{ posts.query }} -->
