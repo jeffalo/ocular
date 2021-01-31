@@ -3,7 +3,7 @@
     <Header pageName="user" :pageLink="`/user/${user}`" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
-      <div v-else>
+      <div v-if="!$fetchState.pending">
         <h1 style="display: inline-block">{{ user }}</h1>
         <!-- todo: use classes instead of inline css -->
         <Status :user="user" style="display: inline" />

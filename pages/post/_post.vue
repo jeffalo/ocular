@@ -3,7 +3,7 @@
     <Header pageName="post" :pageLink="`/post/${id}`" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
-      <Post v-else v-bind:post="post"/>
+      <Post v-if="!$fetchState.pending" v-bind:post="post"/>
       <Footer />
     </div>
   </div>

@@ -3,7 +3,7 @@
     <Header pageName="topic" :pageLink="`/topic/${topic}`" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
-      <div v-else>
+      <div v-if="!$fetchState.pending">
         <div v-if="data.posts && data.posts[0]">
           <h1 style="display: inline-block">{{ data.posts[0].topic.title }}</h1>
           <p>
