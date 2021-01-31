@@ -11,9 +11,9 @@ export default {
     const facts= [
         "gobo might have been the mascot for scratch",
         "the scratch team owns the domain scratch.team",
-        "this is the third did you know message i have written",
+        'this is the third "did you know" message i have written',
         "there was a small window of time where you could backpack scratchblocks from the forums",
-        'ocular was called "Jeffalo Post Viewer"',
+        'ocular was originally called "Jeffalo Post Viewer"',
         "according to all known laws of aviation there is no way there is no way a bee should be able to fly",
         "only cool people have an ocular statuses?",
         'the word "notch" was originally "oche" but people misheard it when others said "an oche"',
@@ -32,7 +32,9 @@ export default {
         "projects.scratch.mit.edu has an easter egg in the HTTP response headers",
         "during scratch 2's development there was a built in scrolling system for projects",
         "scratch has a discussion forum",
-        "archbtw uses arch btw"
+        "archbtw uses arch btw",
+        'scratch has some code for an unused "disable studio notifications" button',
+        "each of gobo's friends names come from the metric prefix for powers of 10"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
