@@ -160,6 +160,22 @@ export default {
   font-weight: bold;
 }
 
+.main-content >>> .bb-small {
+  font-size: 10px;
+}
+
+.main-content >>> .bb-big {
+  font-size: 17px;
+}
+
+.main-content >>> .bb-strikethrough {
+  text-decoration: line-through;
+}
+
+.main-content >>> .bb-underline {
+  text-decoration: underline;
+}
+
 .xss-info {
   margin-top: 20px;
   display: block;
