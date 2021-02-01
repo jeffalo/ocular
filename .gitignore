@@ -91,3 +91,6 @@ sw.*
 
 # update.sh file
 update.sh
+
+# Serviceworker files
+sw.*
