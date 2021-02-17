@@ -34,7 +34,17 @@ export default {
         "scratch has a discussion forum",
         "archbtw uses arch btw",
         'scratch has some code for an unused "disable studio notifications" button',
-        "each of gobo's friends names come from the metric prefix for powers of 10"
+        "each of gobo's friends names come from the metric prefix for powers of 10",
+        "today is probably someone's birthday on scratch",
+        "ocular",
+        "ocular is currently loading",
+        "the first scratch project was id 104, everything with a lower id was added later",
+        "jeffalo's real name is not actually jeff or anything similar",
+        "this isnt a did you know message",
+        "i am running out of trivia",
+        "i want you to see za-chary's 5000 Followers Podcast",
+        "the scratch wiki has a wacky domain name",
+        "the scratch team's admin panel may have at some point had a template specifically for fnaf project alerts"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
