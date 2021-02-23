@@ -44,7 +44,20 @@ export default {
         "i am running out of trivia",
         "i want you to see za-chary's 5000 Followers Podcast",
         "the scratch wiki has a wacky domain name",
-        "the scratch team's admin panel may have at some point had a template specifically for fnaf project alerts"
+        "the scratch team's admin panel may have at some point had a template specifically for fnaf project alerts",
+        "the old default user icon was a silhouette of a human, weird",
+        "x__0",
+        "not a fact but can you name all of scratch's mascots",
+        "pet the cat. petpet",
+        "scratch started development in 2003 and released to the public in 2007",
+        "the word scratch came from scratching like what a dj would do",
+        "scratch on!",
+        "i am not a buffalo, i am jeffalo",
+        "scratch 2.0 backend was written with a certain blue and yellow python. oh wait",
+        "404 Fact Not Found",
+        "theres a thing called busy waiting that repeatedly checks to see if a condition is true",
+        "ubuntu and debian arent the only linux distributions",
+        "you can change your signature at the bottom of the discussion page of scratch"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
