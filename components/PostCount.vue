@@ -11,7 +11,7 @@ export default {
     };
   },
   async fetch() {
-    this.count = await fetch("https://scratchdb.lefty.one/v2/forum/user/info/"+this.user)
+    this.count = await fetch("https://scratchdb.lefty.one/v3/forum/user/info/"+this.user)
     .then((res) => res.json())
     .then(data=>{
         return data.counts.total.count

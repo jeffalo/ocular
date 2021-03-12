@@ -39,7 +39,7 @@ export default {
       this.page++;
 
       var postsRes = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
+        `https://scratchdb.lefty.one/v3/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
       );
       var postData = await postsRes.json();
       this.data.posts.push(...postData.posts);
@@ -70,7 +70,7 @@ export default {
   },
   async fetch() {
     var userPostsRes = await fetch(
-      `https://scratchdb.lefty.one/v2/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
+      `https://scratchdb.lefty.one/v3/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
     );
     var userPosts = await userPostsRes.json();
 

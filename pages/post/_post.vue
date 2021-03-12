@@ -49,7 +49,7 @@ export default {
   },
   async fetch() {
     var postRes = await fetch(
-      `https://scratchdb.lefty.one/v2/forum/post/${this.id}`
+      `https://scratchdb.lefty.one/v3/forum/post/${this.id}`
     );
     var postData = await postRes.json();
 

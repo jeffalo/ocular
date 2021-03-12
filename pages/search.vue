@@ -194,7 +194,7 @@ export default {
     async loadMore() {
       this.page++;
       var res = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
+        `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       );
 
       var data = await res.json();
@@ -228,7 +228,7 @@ export default {
     if (this.search !== "undefined") {
       this.showLoadMore = true;
       this.posts = await fetch(
-        `https://scratchdb.lefty.one/v2/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
+        `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       ).then((res) => res.json());
       this.splash = false;
       return;
