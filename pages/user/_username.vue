@@ -76,7 +76,7 @@ export default {
     var userPosts = await userPostsRes.json();
 
     this.info = userInfo;
-    this.data = userPosts;
+    this.data.posts = userPosts;
   },
   fetchOnServer: false,
 };
