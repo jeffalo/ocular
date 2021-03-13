@@ -40,12 +40,7 @@ export default {
     });
   },
   mounted: function () {
-    const blocksPlugin = document.createElement("script");
-    blocksPlugin.setAttribute("src", "/lib/scratchblocks.js");
-    blocksPlugin.addEventListener("load", (e) => {
-      this.scratchBlocksify();
-    });
-    document.head.appendChild(blocksPlugin);
+    this.scratchBlocksify();
   },
   async fetch() {
     var postRes = await fetch(

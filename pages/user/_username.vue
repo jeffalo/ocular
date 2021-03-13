@@ -38,7 +38,7 @@ export default {
         `https://scratchdb.lefty.one/v3/forum/user/posts/${this.user}/${this.page}`
       );
       var postData = await postsRes.json();
-      this.data.posts.push(...postData.posts);
+      this.data.posts.push(...postData);
     },
     scratchBlocksify() {
       scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
@@ -57,12 +57,7 @@ export default {
     });
   },
   mounted: function () {
-    const blocksPlugin = document.createElement("script");
-    blocksPlugin.setAttribute("src", "/lib/scratchblocks.js");
-    blocksPlugin.addEventListener("load", (e) => {
-      this.scratchBlocksify();
-    });
-    document.head.appendChild(blocksPlugin);
+    this.scratchBlocksify();
   },
   async fetch() {
     var userInfoRes = await fetch(
