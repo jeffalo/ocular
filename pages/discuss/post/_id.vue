@@ -1,7 +1,7 @@
 <script>
   export default {
     middleware(context) {
-        return context.redirect(`/youtube/${context.route.params.id}`)
+        return context.redirect(`/post/${context.route.params.id}`)
     }
   }
 </script>
