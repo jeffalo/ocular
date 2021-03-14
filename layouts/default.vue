@@ -5,7 +5,7 @@
 </template>
 
 <style>
-:root{
+:root {
   --brand: #0fbd8c;
   --background: white;
   --input-background: white;
@@ -21,7 +21,7 @@
   --footer-text: #8d96b3;
 }
 
-.dark-mode{
+.dark-mode {
   --brand: #ff6600; /* CC5500 looks cool too (orange)*/
   --background: #111;
   --input-background: #141414;
@@ -35,6 +35,10 @@
   --table-border: #2c2c2c;
   --text: white;
   --footer-text: #a1a1a1;
+}
+
+.scratch-mode{
+  --brand: #28a5da;
 }
 
 html,body {

@@ -23,7 +23,8 @@ export default {
       let current = this.$colorMode.preference
       if(current == 'system') return this.$colorMode.preference = 'light'
       if(current == 'light') return this.$colorMode.preference = 'dark'
-      if(current == 'dark') return this.$colorMode.preference = 'system'
+      if(current == 'dark') return this.$colorMode.preference = 'scratch'
+      if(current == 'scratch') return this.$colorMode.preference = 'system'
     }
   }
 }
