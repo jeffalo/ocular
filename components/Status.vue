@@ -19,14 +19,11 @@ export default {
     };
   },
   async fetch() {
-    await fetch("https://my-ocular.jeffalo.net/api/user/" + this.user)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status) {
-          this.status = data.status;
-          this.color = data.color;
-        }
-      });
+    let data = await this.$store.dispatch('statuses/loadUser', {name: this.user})
+    if (data.status) {
+      this.status = data.status;
+      this.color = data.color;
+    }
   },
   fetchOnServer: false,
 };
