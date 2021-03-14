@@ -112,7 +112,9 @@
   width: 600px;
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid lightgray;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
   margin-bottom: 0.5em;
 }
 
@@ -120,14 +122,16 @@ select {
   width: 120px;
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid lightgray;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
   margin-bottom: 0.5em;
 }
 
 .sbb {
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid var(--input-border);
   margin-bottom: 0.5em;
   line-height: normal;
 }
@@ -139,29 +143,29 @@ select {
 
 .info td,
 .info th {
-  border: 1px solid #ddd;
+  border: 1px solid var(--table-border);
   padding: 8px;
 }
 
 .info tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: var(--table-stripe);
   transition: 250ms;
 }
 
 .info tr:nth-child(odd) {
-  background-color: #ffffff;
+  background-color: var(--background);
   transition: 250ms;
 }
 
 .info tr:hover {
-  background-color: #e6e6e6;
+  background-color: var(--table-hover);
 }
 
 .info th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #0fbd8c;
+  background-color: var(--brand);
   color: white;
 }
 

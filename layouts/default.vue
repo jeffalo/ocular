@@ -5,10 +5,43 @@
 </template>
 
 <style>
+:root{
+  --brand: #0fbd8c;
+  --background: white;
+  --input-background: white;
+  --input-border: #e0e0e0;
+  --sidebar-background: #f2f2f2;
+  --sidebar-border: #e0e0e0;
+  --quote-background: #f7f7f7;
+  --quote-border: #ccc;
+  --table-stripe: #f2f2f2;
+  --table-hover: #e6e6e6;
+  --table-border: #ddd;
+  --text: #575e75;
+  --footer-text: #8d96b3;
+}
+
+.dark-mode{
+  --brand: #ff6600; /* CC5500 looks cool too (orange)*/
+  --background: #111;
+  --input-background: #141414;
+  --input-border: #2c2c2c;
+  --sidebar-background: #0a0a0a;
+  --sidebar-border: #2c2c2c;
+  --quote-background: #0a0a0a;
+  --quote-border: #2c2c2c;
+  --table-stripe: #252525;
+  --table-hover: #2c2c2c;
+  --table-border: #2c2c2c;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
 html,body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
-  color: #575e75;
+  background-color: var(--background);
+  color: var(--text);
   padding: 0;
   margin: 0;
 }
@@ -41,17 +74,6 @@ a {
 .margined {
   margin-left: 282.600px;
   margin-right: 282.600px;
-}
-
-
-footer {
-  padding-top: 10px;
-  margin-top: 10px;
-  color: #8d96b3;
-  padding-bottom: 10px;
-}
-.footer-link {
-  color: #8d96b3;
 }
 
 button {

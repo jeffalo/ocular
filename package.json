@@ -13,5 +13,7 @@
     "nuxt": "^2.14.6",
     "vue-plausible": "^1.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/color-mode": "^2.0.5"
+  }
 }

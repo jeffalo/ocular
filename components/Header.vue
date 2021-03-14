@@ -19,7 +19,7 @@
   padding-bottom: 40px;
   border: none;
   border-radius: 0;
-  background: #0fbd8c;
+  background: var(--brand);
   color: white;
 }
 

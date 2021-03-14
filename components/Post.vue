@@ -60,14 +60,14 @@ export default {
 
 .post-wrap {
   display: flex;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--sidebar-border);
   border-left: none;
 }
 
 .main-content {
   order: 2;
   width: 85%;
-  background: white;
+  background: var(--background);
   overflow: hidden;
 }
 
@@ -75,7 +75,7 @@ export default {
   order: 1;
   width: 20%;
   flex: 1;
-  background: #f2f2f2;
+  background: var(--sidebar-background);
 }
 
 .main-content,
@@ -84,12 +84,12 @@ export default {
   padding: 1em;
   padding-top: 0.5em;
   padding-bottom: 2em;
-  box-shadow: inset 1px 0 #e0e0e0;
+  box-shadow: inset 1px 0 var(--sidebar-border);
   overflow-wrap: break-word;
 }
 
 .header {
-  background-color: #0fbd8c;
+  background-color: var(--brand);
   padding: 10px;
   font-weight: bold;
   color: white;
@@ -132,7 +132,7 @@ export default {
 }
 
 .username {
-  color: #575e75;
+  color: var(--text);
   font-weight: bold;
   padding-bottom: 5px;
   display: block;
@@ -143,12 +143,12 @@ export default {
   padding: 12px 20px;
   border-style: solid;
   border-width: 1px;
-  border-color: #ccc;
-  background-color: #f7f7f7;
+  border-color: var(--quote-border);
+  background-color: var(--quote-background);
 }
 
 .main-content >>> .bb-quote-author {
-  color: #575e75;
+  color: var(--text-color);
   font-weight: bold;
 }
 
@@ -179,10 +179,10 @@ export default {
 .xss-info {
   margin-top: 20px;
   display: block;
-  color: #8d96b3;
+  color: var(--footer-text);
 }
 
 .xss-info a {
-  color: #8d96b3;
+  color: var(--footer-text);
 }
 </style>

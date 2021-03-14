@@ -53,8 +53,8 @@
 /* Just to make the grid visible */
 
 .grid>* {
-  background: #0fbd8c;
-  border: 1px white solid;
+  background: var(--brand);
+  margin: 1px;
   background-position: center center;
   background-size: cover;
 }
