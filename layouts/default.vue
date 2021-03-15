@@ -22,7 +22,7 @@
 }
 
 .dark-mode {
-  --brand: #ff6600; /* CC5500 looks cool too (orange)*/
+  --brand: #075e46; /* CC5500 looks cool too (orange), FF6600 good too */
   --background: #111;
   --input-background: #141414;
   --input-border: #2c2c2c;
