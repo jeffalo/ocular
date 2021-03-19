@@ -9,6 +9,9 @@
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
         </nuxt-link>
+        <nuxt-link to="/login">
+          <div class="content"><span>🙋&zwj;♂️ login</span></div>
+        </nuxt-link>
         <!-- 
         <a href="stats.html">
           <div class="content"><span>📊 stats</span></div>

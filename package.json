@@ -9,7 +9,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "core-js": "^3.8.3",
+    "js-cookie": "^2.2.1",
     "nuxt": "^2.14.6",
     "vue-plausible": "^1.1.2"
   },

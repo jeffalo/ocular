@@ -34,7 +34,6 @@
         <nuxt-link :to="`/user/${post.username}`">
           <img
             :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
-            id="profile-picture"
             width="90"
             height="90"
           />

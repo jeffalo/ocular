@@ -22,7 +22,7 @@ export default {
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['~/plugins/auth.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -39,6 +39,10 @@ export default {
   plausible: {
     domain: 'ocular.jeffalo.net',
     apiHost: 'https://analytics.jeffalo.net'
+  },
+
+  env: {
+    backendURL: process.env.BACKEND_URL || 'http://localhost:8081'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
