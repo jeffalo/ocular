@@ -2,14 +2,15 @@
   <div class="container">
     <Header pageName="login confirmation" pageLink="/confirm-login" />
     <div class="margined">
-        <h1>do you want to login as {{name}}</h1>
+        <h1>login as {{name}}</h1>
         <img :src="`https://fluffyscratch.hampton.pw/user/${name}/profile/picture`"
-            width="90"
-            height="90"
+            width="50"
+            height="50"
+            class="confirm-pfp"
         />
-        <p>logging in will allow you to use cool ocular stuff!!!!</p>
+        <p>logging in will allow you to customize your ocular profile, save posts for later and more</p>
         <button @click="confirm">confirm</button>
-        <button @click="deny">deny</button>
+        <button class="deny-button" @click="deny">deny</button>
       <Footer />
     </div>
   </div>
@@ -61,3 +62,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.confirm-pfp{
+    border-radius: 5px;
+}
+.deny-button{
+    background-color: grey;
+}
+</style>
