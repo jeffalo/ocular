@@ -10,7 +10,7 @@
           type="text"
           placeholder="search query"
           id="searchbox"
-          class="sb"
+          class="input"
           :value="$route.query.q"
         />
         <select
@@ -22,7 +22,7 @@
           <option value="newest">newest</option>
           <option value="oldest">oldest</option>
         </select>
-        <button type="submit" class="sbb">go</button>
+        <button type="submit" class="form-button">go</button>
       </form>
       <div v-show="splash">
         <h1>how to use</h1>
@@ -108,34 +108,6 @@
 </template>
 
 <style scoped>
-.sb {
-  width: 600px;
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  color: var(--text);
-  margin-bottom: 0.5em;
-}
-
-select {
-  width: 120px;
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  color: var(--text);
-  margin-bottom: 0.5em;
-}
-
-.sbb {
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  margin-bottom: 0.5em;
-  line-height: normal;
-}
-
 .info {
   border-collapse: collapse;
   width: 100%;
@@ -170,7 +142,7 @@ select {
 }
 
 @media only screen and (max-width: 1100px) {
-  .sb {
+  .input {
     width: 200px;
   }
 }

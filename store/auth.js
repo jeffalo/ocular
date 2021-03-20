@@ -31,7 +31,7 @@ export const actions = {
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
-                    console.warn(data.error)
+                    // console.warn(data.error)
                     dispatch('logout')
                     resolve(data.error) // i could use reject but i'd need to handle it everywhere and i dont feel like doing that
                 } else {
@@ -43,8 +43,19 @@ export const actions = {
         })
     },
     async logout({ commit }) {
-        cookies.remove('my-ocular-token')
-        commit('reset_user')
-        commit('reset_token')
+        return new Promise(async (resolve, reject) => {
+            let res = await fetch(`${process.env.backendURL}/auth/remove/?token=${cookies.get('my-ocular-token')}`, {
+                method: "POST"
+            })
+            let data = await res.json()
+            if(data.error){
+                resolve(data.error) // i could use reject but i'd need to handle it everywhere and i dont feel like doing that
+            } else {
+                cookies.remove('my-ocular-token')
+                commit('reset_user')
+                commit('reset_token')
+                resolve('logged out')
+            }
+        })
     }
 }

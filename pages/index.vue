@@ -4,13 +4,12 @@
     <div class="margined">
       <h1>ocular</h1>
       <p>ocular is the all in one forum tool for scratch</p>
-
       <div class="grid"> <!-- todo why is this grid smaller? -->
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
         </nuxt-link>
         <nuxt-link to="/login">
-          <div class="content"><span>🙋&zwj;♂️ login</span></div>
+          <div class="content"><span>💻 dashboard</span></div>
         </nuxt-link>
         <!-- 
         <a href="stats.html">
@@ -20,11 +19,6 @@
           <div class="content"><span>🔴 live</span></div>
         </a>
         -->   
-        <a href="https://my-ocular.jeffalo.net">
-          <div class="content my-ocular">
-            <span>🙋&zwj;♂️ my-ocular</span>
-          </div>
-        </a>
       </div>
       <Footer />
     </div>
@@ -71,22 +65,14 @@
   font-weight: bold;
   cursor: pointer;
   color: white;
-  font-size: 150%;
+  font-size: 135%;
   user-select: none;
   transition: 125ms;
   text-align: center;
 }
 
-.my-ocular{
-  font-size: 125%
-}
-
 .content:hover {
-  font-size: 160%;
-}
-
-.my-ocular:hover {
-  font-size: 135%;
+  backdrop-filter: brightness(0.75);
 }
 
 .content:active {

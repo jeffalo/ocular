@@ -94,6 +94,31 @@ button {
   line-height: 30px;
 }
 
+.input {
+  width: 600px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
+  margin-bottom: 0.5em;
+}
+
+select {
+  width: 120px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
+  margin-bottom: 0.5em;
+}
+
+.form-button {
+  padding: 10px;
+  line-height: normal;
+}
+
 .tooltip {
   display: block !important;
   z-index: 10000;

@@ -1,7 +1,7 @@
 const serverCookie = process.server ? require('cookie') : undefined
 const clientCookie = process.client ? require('js-cookie') : undefined
 
-// make sure to keep this the same as notauthetnicated.js
+// make sure to keep this the same as authetnicated.js
 
 export default async function ({ $auth, redirect, req, store }) {
     let token = null
@@ -16,7 +16,7 @@ export default async function ({ $auth, redirect, req, store }) {
 
     await store.dispatch('auth/login', token) // reload just incase logged out on another tab or something
 
-    if (!$auth.loggedIn()) {
-        return redirect('/login')
+    if ($auth.loggedIn()) {
+        return redirect('/')
     }
 }

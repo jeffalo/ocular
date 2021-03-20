@@ -9,6 +9,7 @@
         />
         <p>logging in will allow you to use cool ocular stuff!!!!</p>
         <button @click="confirm">confirm</button>
+        <button @click="deny">deny</button>
       <Footer />
     </div>
   </div>
@@ -17,6 +18,7 @@
 <script>
 import cookies from 'js-cookie'
 export default {
+    middleware: 'notauthenticated',
     data() {
         return {
             name: '',
@@ -31,6 +33,20 @@ export default {
             this.$router.push({
                 path: '/'
             })
+        },
+        async deny(){
+            let res = await fetch(`${process.env.backendURL}/auth/remove/?token=${this.token}`, {
+                method: "POST"
+            })
+            let data = await res.json()
+            console.log(data)
+            if(data.error){
+                console.warn(data.error)
+            } else {
+                this.$router.push({
+                    path: '/'
+                })
+            }
         }
     },
     async asyncData({route, redirect, error}) {

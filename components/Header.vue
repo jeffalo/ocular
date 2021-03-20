@@ -56,11 +56,12 @@
 export default {
   props: ['pageName', 'pageLink'],
   methods: {
-    logout() {
+    async logout() {
+      await this.$store.dispatch('auth/logout',)
+      
       this.$router.push({
         path: '/'
       })
-      this.$store.dispatch('auth/logout',)
     }
   }
 }

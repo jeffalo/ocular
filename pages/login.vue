@@ -9,8 +9,8 @@
         their privacy policies.
       </p>
       <form @submit.prevent="submit" autocomplete="off">
-        <input type="text" v-model="username"/>
-        <input type="submit" value="proceed" />
+        <input type="text" class="input" placeholder="jeffalo" v-model="username"/>
+        <button type="submit" class="form-button">go</button>
       </form>
       <Footer />
     </div>
@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  middleware: 'notauthenticated',
   data() {
     return {
       username: "",
