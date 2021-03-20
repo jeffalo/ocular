@@ -3,9 +3,20 @@
     <Header pageName="dashboard" pageLink="/dashboard" />
     <div class="margined">
       <h1>account dashboard</h1>
-      <p>loggedin {{$auth.loggedIn()}}</p>
-      <p>{{ $auth.user().status }}</p>
-      <button @click="updateUser()">asdf</button>
+      <img
+        :src="`https://fluffyscratch.hampton.pw/user/${$auth.user().name}/profile/picture`"
+        width="30"
+        height="30"
+        class="dashboard-pfp"
+      />
+      <h2 class="dashboard-username">{{ $auth.user().name }}</h2>
+      <form @submit.prevent="updateUser()">
+          <label for="status">status: </label><input name="status" type="text" class="input dashboard" v-model="status">
+          <br>
+          <label for="color">favourite colour: </label><input name="color" type="color" class="color-input" v-model="color">
+          <br>
+          <button type="submit">update</button>
+      </form>
       <Footer />
     </div>
   </div>
@@ -13,23 +24,46 @@
 
 <script>
 export default {
-  middleware: 'authenticated',
+  middleware: "authenticated",
+  data() {
+    return {
+      status: this.$auth.user().status,
+      color: this.$auth.user().color,
+    }
+  },
   methods: {
     async updateUser() {
-      await fetch(`${process.env.backendURL}/api/user/${this.$auth.user().name}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: this.$auth.token(),
-          "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({
-          status: Date.now(),
-          color: 'blue'
-        })
-      })
+      await fetch(
+        `${process.env.backendURL}/api/user/${this.$auth.user().name}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: this.$auth.token(),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: this.status,
+            color: this.color,
+          }),
+        }
+      );
 
-      await this.$store.dispatch('auth/login', this.$auth.token()) // refresh user details
-    }
-  }
-}
+      await this.$store.dispatch("auth/login", this.$auth.token()); // refresh user details
+      this.$store.commit("statuses/removeUser", {name: this.$auth.user().name}) // remove user from ocular cache so they'll see real status
+    },
+  },
+};
 </script>
+
+<style scoped>
+/* .color.input {
+
+} */
+.dashboard-username{
+  display: inline-block;
+}
+.dashboard-pfp{
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
