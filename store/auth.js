@@ -21,7 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
-    async login({ commit, dispatch }, token) {
+    async login({ commit, dispatch }, token) { // this is also used as a general purpose "refresh user details" in middlewares and dashboard.vue
         return new Promise((resolve, reject) => {
             fetch(`${process.env.backendURL}/auth/me`, {
                 headers: {

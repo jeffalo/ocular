@@ -7,6 +7,9 @@ export default ({store}, inject) => {
         user() {
             return store.state.auth.user
         },
+        token() {
+            return store.state.auth.token
+        }
     }
     inject('auth', auth)
 }
