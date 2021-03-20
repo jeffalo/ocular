@@ -4,6 +4,7 @@
     <div class="margined">
       <h1>account dashboard</h1>
       <p>loggedin {{$auth.loggedIn()}}</p>
+      <p>{{ $auth.user().status }}</p>
       <Footer />
     </div>
   </div>

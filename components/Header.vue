@@ -9,7 +9,7 @@
           <a href="https://github.com/jeffalo/ocular" class="header-link">feedback</a> |
           <a href="https://scratchdb.lefty.one" class="header-link">api and data from datonelefty</a>
           <div v-if="$auth.loggedIn()" class="header-user">
-            <nuxt-link :to="`/user/${$auth.user().name}`">{{ $auth.user().name }}</nuxt-link> | <nuxt-link :to="`/dashboard`">dashboard</nuxt-link> | <a @click="logout()" class="logout">logout</a>
+            <nuxt-link :to="`/user/${$auth.user().name}`">@{{ $auth.user().name }}</nuxt-link> | <nuxt-link :to="`/dashboard`">dashboard</nuxt-link> | <a @click="logout()" class="logout">logout</a>
           </div>
         </div>
     </div>
@@ -58,7 +58,7 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch('auth/logout',)
-      
+
       this.$router.push({
         path: '/'
       })

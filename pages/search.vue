@@ -25,8 +25,7 @@
         <button type="submit" class="form-button">go</button>
       </form>
       <div v-show="splash">
-        <h1>how to use</h1>
-        <h2>searching</h2>
+        <h2>search parameters</h2>
         <p>searches from scratchdb use a pretty neat format.</p>
         <p>
           each requirement is in the format <code>+requirement:"value"</code>,

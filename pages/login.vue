@@ -4,9 +4,7 @@
     <div class="margined">
       <h1>login</h1>
       <p>
-        ocular uses a number of services to provide various tools to enhance the
-        experience. these services may collect and or use data according to
-        their privacy policies.
+        logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
       </p>
       <form @submit.prevent="submit" autocomplete="off">
         <input type="text" class="input" placeholder="jeffalo" v-model="username"/>
