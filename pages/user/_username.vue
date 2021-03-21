@@ -9,7 +9,7 @@
         <Status :user="user" style="display: inline" />
         <h2>{{ user }}'s posts</h2>
         <Post
-          v-for="post of data.posts"
+          v-for="post of posts"
           v-bind:key="post.id"
           v-bind:post="post"
         />
@@ -26,7 +26,7 @@ export default {
     return {
       user: this.$route.params.username,
       page: 0,
-      data: {},
+      posts: {},
       info: {},
     };
   },
@@ -38,7 +38,7 @@ export default {
         `https://scratchdb.lefty.one/v3/forum/user/posts/${this.user}/${this.page}`
       );
       var postData = await postsRes.json();
-      this.data.posts.push(...postData);
+      this.posts.push(...postData);
     },
     scratchBlocksify() {
       scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
@@ -71,7 +71,7 @@ export default {
     var userPosts = await userPostsRes.json();
 
     this.info = userInfo;
-    this.data.posts = userPosts;
+    this.posts = userPosts;
   },
   fetchOnServer: false,
 };
