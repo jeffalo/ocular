@@ -13,7 +13,7 @@
     "core-js": "^3.8.3",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.14.6",
-    "vue-plausible": "^1.1.2"
+    "vue-plausible": "^1.1.4"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^2.0.5"
