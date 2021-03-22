@@ -43,7 +43,8 @@ export default {
   },
 
   redirect: [
-    { from: '^/discuss/(.*)$', to: '/$1' }
+    { from: '^/discuss/(.*)$', to: '/$1' },
+    { from: '^/users/(.*)$', to: '/user/$1' }
   ],
 
   env: {
