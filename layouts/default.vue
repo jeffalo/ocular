@@ -41,6 +41,10 @@
   --brand: #28a5da;
 }
 
+.missing-glasses-mode{
+  filter: blur(2px)
+}
+
 html,body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -117,6 +121,33 @@ select {
 .form-button {
   padding: 10px;
   line-height: normal;
+}
+
+.alert {
+	padding: 15px;
+	background-color: white;
+	color: black;
+	margin-bottom: 15px;
+}
+
+.alert .close-btn{
+  float: right;
+  cursor: pointer;
+}
+
+.alert.error {
+	background-color: #f44336;
+	color: white
+}
+
+.alert.information {
+	background-color: #2196F3;
+	color: white
+}
+
+.alert.success {
+	background-color: var(--brand);
+	color: white
 }
 
 .tooltip {
