@@ -14,19 +14,8 @@
     <div class="post-wrap">
       <section
         class="main-content"
-        v-if="post.parser.version > 0"
         v-html="post.content.html"
       ></section>
-      <section class="main-content" v-if="post.parser.version == 0">
-        {{ post.content.bb }}
-        <span class="xss-info">
-          this post is displayed as raw bbcode for your saftey
-          <nuxt-link to="/xss-info">(more info)</nuxt-link>
-          <a href="javascript:void(0)" @click="post.parser.version = 1">
-            (render anyway)
-          </a>
-        </span>
-      </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
           post.username
@@ -173,15 +162,5 @@ export default {
 
 .main-content >>> .bb-underline {
   text-decoration: underline;
-}
-
-.xss-info {
-  margin-top: 20px;
-  display: block;
-  color: var(--footer-text);
-}
-
-.xss-info a {
-  color: var(--footer-text);
 }
 </style>
