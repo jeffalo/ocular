@@ -13,6 +13,7 @@
     "core-js": "^3.8.3",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.14.6",
+    "vue-good-table": "^2.21.8",
     "vue-plausible": "^1.1.4"
   },
   "devDependencies": {
