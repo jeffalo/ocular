@@ -12,10 +12,10 @@
       >
     </div>
     <div class="post-wrap">
-      <section
-        class="main-content"
-        v-html="post.content.html"
-      ></section>
+      <section class="main-content">
+        <div class="post-content" v-html="post.content.html"></div>
+        <div class='post-footer'><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
+      </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
           post.username
@@ -57,6 +57,13 @@ export default {
   width: 85%;
   background: var(--background);
   overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.post-content{
+  display: block;
+  width: 100%;
 }
 
 .main-nav {
@@ -69,11 +76,17 @@ export default {
 .main-content,
 .main-sidebar,
 .main-nav {
-  padding: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 2em;
+  padding: 0.5em 1em;
   box-shadow: inset 1px 0 var(--sidebar-border);
   overflow-wrap: break-word;
+}
+
+.post-footer{
+  padding-top: 2em;
+  align-self: flex-end;
+  text-align: right;
+  display: block;
+  width: 100%;
 }
 
 .header {
