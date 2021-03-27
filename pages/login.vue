@@ -3,6 +3,9 @@
     <Header pageName="login" pageLink="/login" />
     <div class="margined">
       <h1>login</h1>
+      <div :class="`alert error`" v-if="$route.query.error">
+        {{ errorMessages[$route.query.error] }}
+      </div>
       <p>
         logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
       </p>
@@ -21,6 +24,7 @@ export default {
   data() {
     return {
       username: "",
+      errorMessages: ['failed fluffyscratch auth: make sure you are logged into the correct scratch account and try again. login currently does not support new scratchers. ','123']
     };
   },
   methods: {
