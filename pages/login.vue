@@ -10,7 +10,7 @@
         logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
       </p>
       <form @submit.prevent="submit" autocomplete="off">
-        <input type="text" class="input" placeholder="jeffalo" v-model="username"/>
+        <input type="text" class="input" :placeholder="randomUsername" v-model="username"/>
         <button type="submit" class="form-button">go</button>
       </form>
       <Footer />
@@ -24,8 +24,18 @@ export default {
   data() {
     return {
       username: "",
-      errorMessages: ['failed fluffyscratch auth: make sure you are logged into the correct scratch account and try again. login currently does not support new scratchers. ','123']
+      errorMessages: [
+      'failed fluffyscratch auth: make sure you are logged into the correct scratch account and try again. login currently does not support new scratchers. ',
+      'somehow you authenticated correctly but your scratch account couldnt be found. contact jeffalo.'
+      ],
+      usernames: ['Jeffalo', 'CatsUnited', 'Za-Chary', 'fdreerf', 'mybearworld', '-InsanityGames-', 'Paddle2See', 'Harakou', 'leahcimto', 'WindOctahedron', 'DatOneLefty', 'Virus6120 ']
+      // just some random usernames to make stuff more lively. TODO: api endpoint on my-ocular for random user?
     };
+  },
+  computed: {
+    randomUsername () {
+      return this.usernames[Math.floor(Math.random() * this.usernames.length)];
+    }
   },
   methods: {
     async submit() {
