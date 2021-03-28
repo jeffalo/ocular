@@ -14,7 +14,7 @@
     <div class="post-wrap">
       <section class="main-content">
         <div class="post-content" v-html="post.content.html"></div>
-        <div class='post-footer'><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
+        <div class='post-footer'><span v-if="$auth.loggedIn()"><Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
       </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
@@ -38,6 +38,31 @@
 <script>
 export default {
   props: ["post"],
+  methods: {
+    async star(id){ // toggle star state
+      let res = await fetch(`${process.env.backendURL}/api/star/${this.post.id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: this.$auth.token(),
+          "Content-Type": "application/json",
+        }
+      })
+      let data = await res.json()
+      this.starred = data.starred
+    }
+  },
+  async fetch() {
+    let res = await fetch(`${process.env.backendURL}/api/starred/${this.post.id}`, {
+      headers: {
+        Authorization: this.$auth.token(),
+        "Content-Type": "application/json",
+      }
+    })
+    let data = await res.json()
+    console.log(data)
+    this.starred = data.starred
+  },
+  fetchOnServer: false
 };
 </script>
 

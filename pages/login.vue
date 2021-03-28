@@ -28,7 +28,7 @@ export default {
       'failed fluffyscratch auth: make sure you are logged into the correct scratch account and try again. login currently does not support new scratchers. ',
       'somehow you authenticated correctly but your scratch account couldnt be found. contact jeffalo.'
       ],
-      usernames: ['Jeffalo', 'CatsUnited', 'Za-Chary', 'fdreerf', 'mybearworld', '-InsanityGames-', 'Paddle2See', 'Harakou', 'leahcimto', 'WindOctahedron', 'DatOneLefty', 'Virus6120 ']
+      usernames: ['Jeffalo', 'CatsUnited', 'Za-Chary', 'fdreerf', 'mybearworld', '-InsanityGames-', 'Paddle2See', 'Harakou', 'leahcimto', 'WindOctahedron', 'DatOneLefty', 'Virus6120', 'GrahamSH']
       // just some random usernames to make stuff more lively. TODO: api endpoint on my-ocular for random user?
     };
   },
