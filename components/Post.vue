@@ -72,19 +72,6 @@ export default {
       return doc.documentElement.innerHTML
     } 
   },
-  methods: {
-    async star(id){ // toggle star state
-      let res = await fetch(`${process.env.backendURL}/api/star/${this.post.id}`, {
-        method: 'POST',
-        headers: {
-          Authorization: this.$auth.token(),
-          "Content-Type": "application/json",
-        }
-      })
-      let data = await res.json()
-      this.starred = data.starred
-    }
-  },
   async fetch() {
     let res = await fetch(`${process.env.backendURL}/api/starred/${this.post.id}`, {
       headers: {
