@@ -37,7 +37,6 @@ export default {
       },
     });
     let data = await res.json();
-    console.log(data);
     this.starred = data.starred;
     // this.stars = data.stars;
   },
