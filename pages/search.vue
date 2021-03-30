@@ -91,15 +91,7 @@
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-show="!splash">
-        <Loading v-if="$fetchState.pending" />
-        <div v-if="!$fetchState.pending">
-          <Post
-            v-for="post of posts.posts"
-            v-bind:key="post.id"
-            v-bind:post="post"
-          />
-          <button @click="loadMore()">Load More</button>
-        </div>
+        <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
       <Footer />
     </div>
@@ -156,51 +148,34 @@ export default {
     return {
       search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
       sort: encodeURIComponent(decodeURIComponent(this.$route.query.sort)),
-      topic: encodeURIComponent(decodeURIComponent(this.$route.query.topic)),
-      post: encodeURIComponent(decodeURIComponent(this.$route.query.post)),
       showLoadMore: false,
       page: 0,
-      posts: {},
+      data: {},
       splash: false,
       ssr: true,
     };
   },
   methods: {
     async loadMore() {
+      this.showLoadMore = false
       this.page++;
       var res = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       );
 
       var data = await res.json();
-      this.posts.posts.push(...data.posts);
+      this.data.posts.push(...data.posts);
+
+      this.showLoadMore = true
     },
-    scratchBlocksify() {
-      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
-        style: "scratch2", // Optional
-      });
-      document
-        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
-        .forEach((i) => {
-          i.classList.add("scratchblockrendered");
-        });
-    },
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      this.scratchBlocksify();
-    });
-  },
-  mounted: function () {
-    this.scratchBlocksify();
   },
   async fetch() {
     if (this.search !== "undefined") {
-      this.showLoadMore = true;
-      this.posts = await fetch(
+      this.data = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       ).then((res) => res.json());
       this.splash = false;
+      this.showLoadMore = true;
       return;
     }
 

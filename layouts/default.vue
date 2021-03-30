@@ -54,6 +54,10 @@ html,body {
   margin: 0;
 }
 
+body{
+  overflow-y: scroll; /* Show scrollbars */
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -84,7 +88,7 @@ a {
   margin-right: 282.600px;
 }
 
-button {
+button,button {
   border-radius: 4px;
   border: none;
   background: #4d97ff;

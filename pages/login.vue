@@ -9,10 +9,7 @@
       <p>
         logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
       </p>
-      <form @submit.prevent="submit" autocomplete="off">
-        <input type="text" class="input" :placeholder="randomUsername" v-model="username"/>
-        <button type="submit" class="form-button">go</button>
-      </form>
+      <button @click="login">🐈 login with scratch <img></button>
       <Footer />
     </div>
   </div>
@@ -25,7 +22,7 @@ export default {
     return {
       username: "",
       errorMessages: [
-      'failed fluffyscratch auth: make sure you are logged into the correct scratch account and try again. login currently does not support new scratchers. ',
+      'failed fluffyscratch auth: keep in mind login currently does not support new scratchers.',
       'somehow you authenticated correctly but your scratch account couldnt be found. contact jeffalo.'
       ],
       usernames: ['Jeffalo', 'CatsUnited', 'Za-Chary', 'fdreerf', 'mybearworld', '-InsanityGames-', 'Paddle2See', 'Harakou', 'leahcimto', 'WindOctahedron', 'DatOneLefty', 'Virus6120', 'GrahamSH']
@@ -38,8 +35,8 @@ export default {
     }
   },
   methods: {
-    async submit() {
-      if(this.username) window.location.href = `${process.env.backendURL}/auth/begin?user=${this.username}`;
+    async login() {
+      window.location.href = `${process.env.backendURL}/auth/begin?user=${this.username}`;
     },
   },
 };

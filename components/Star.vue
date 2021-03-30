@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       starred: false,
+      stars: 0
     };
   },
   methods: {
@@ -24,6 +25,7 @@ export default {
         });
         let data = await res.json();
         this.starred = data.starred;
+        // this.stars = data.stars;
       }
     },
   },
@@ -37,6 +39,7 @@ export default {
     let data = await res.json();
     console.log(data);
     this.starred = data.starred;
+    // this.stars = data.stars;
   },
   fetchOnServer: false,
 };

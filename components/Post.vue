@@ -13,7 +13,7 @@
     </div>
     <div class="post-wrap">
       <section class="main-content">
-        <div class="post-content" v-html="post.content.html"></div>
+        <div class="post-content" v-html="blockifiedContent"></div>
         <div class='post-footer'><span v-if="$auth.loggedIn()"><Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
       </section>
       <nav class="main-nav">
@@ -38,6 +38,40 @@
 <script>
 export default {
   props: ["post"],
+  computed: {
+    blockifiedContent() {
+      // adapted from https://github.com/scratchblocks/scratchblocks/blob/master/index.js
+      let content = this.post.content.html
+      let options = {
+        style: "scratch2",
+        inline: false,
+        languages: ["en"],
+
+        read: scratchblocks.read, // function(el, options) => code
+        parse: scratchblocks.parse, // function(code, options) => doc
+        render: scratchblocks.render, // function(doc) => svg
+      }
+      const parser = new DOMParser();
+
+      const doc = parser.parseFromString(content, "text/html");
+
+      let results = [].slice.apply(doc.querySelectorAll('pre.blocks:not(.scratchblockrendered)'))
+      results.forEach(function(el) {
+        var code = options.read(el, options)
+
+        var parsed = options.parse(code, options)
+
+        var svg = options.render(parsed, options)
+
+        var container = doc.createElement("div")
+        container.className = "scratchblocks"
+        container.appendChild(svg)
+        el.innerHTML = ""
+        el.appendChild(container)
+      })
+      return doc.documentElement.innerHTML
+    } 
+  },
   methods: {
     async star(id){ // toggle star state
       let res = await fetch(`${process.env.backendURL}/api/star/${this.post.id}`, {
@@ -59,7 +93,6 @@ export default {
       }
     })
     let data = await res.json()
-    console.log(data)
     this.starred = data.starred
   },
   fetchOnServer: false
