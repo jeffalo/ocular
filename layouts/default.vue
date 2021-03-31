@@ -41,6 +41,22 @@
   --brand: #28a5da;
 }
 
+.catsunited-mode {
+  --brand: #4e1117; 
+  --background: #131313;
+  --input-background: #1C1C1C;
+  --input-border: #4e1117;
+  --sidebar-background: #131313;
+  --sidebar-border: #131313;
+  --quote-background: #0a0a0a;
+  --quote-border: #4e1117;
+  --table-stripe: #1C1C1C;
+  --table-hover: #0e0e0e;
+  --table-border: #4e1117;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
 .missing-glasses-mode{
   filter: blur(2px)
 }
