@@ -19,6 +19,11 @@
       </div>
       </div>
       <form @submit.prevent="updateUser()">
+          <div v-if="$auth.user().admin">
+            <label for="user">user: </label><input name="user" type="text" class="input dashboard" autocomplete="off" v-model="user">
+            <br>
+            {{ adminMessage }}
+          </div>
           <label for="status">status: </label><input name="status" type="text" class="input dashboard" v-model="status">
           <br>
           <label for="color">favourite colour: </label><input name="color" type="color" class="color-input" v-model="color">
@@ -35,9 +40,16 @@ export default {
   middleware: "authenticated",
   data() {
     return {
+      user: this.$auth.user().name,
       status: this.$auth.user().status,
       color: this.$auth.user().color,
-      alerts: []
+      alerts: [],
+      adminMessage: ''
+    }
+  },
+  watch: {
+    user: function(username) {
+      this.adminFeedback()
     }
   },
   methods: {
@@ -45,7 +57,7 @@ export default {
       await this.$store.dispatch("auth/login", this.$auth.token()); // refresh user details
       if(this.$auth.user()){
         let res = await fetch(
-          `${process.env.backendURL}/api/user/${this.$auth.user().name}`,
+          `${process.env.backendURL}/api/user/${this.user}`,
           {
             method: "PUT",
             headers: {
@@ -61,7 +73,7 @@ export default {
 
         let data = await res.json()
 
-        this.$store.commit("statuses/removeUser", {name: this.$auth.user().name}) // remove user from ocular cache so they'll see real status
+        this.$store.commit("statuses/removeUser", {name: this.user}) // remove user from ocular cache so they'll see real status
 
         if(data){
           if(!data.error) {
@@ -82,6 +94,24 @@ export default {
         })
       }
     },
+    async adminFeedback() {
+      // return info on what's going to happen when an admin presses update and match inputs with user data
+      if(this.user !== '') {
+        let res = await fetch(`${process.env.backendURL}/api/user/${this.user}?noReplace=true`)
+        let data = await res.json()
+        this.status = data.status || ''
+        this.color = data.color || ''
+        if(!data._id) {
+          this.adminMessage = `${this.user} does not have an ocular account. this will create a new one for them`
+        } else {
+          this.adminMessage = ''
+        }
+      } else {
+        this.status = ''
+        this.color = ''
+        this.adminMessage = 'you need to put in a username lol'
+      }
+    }
   },
 };
 </script>
