@@ -30,6 +30,8 @@
           <br>
           <button type="submit" class="update-btn">update</button>
       </form>
+      <br>
+      <nuxt-link to="/dashboard/users">user list</nuxt-link>
       <Footer />
     </div>
   </div>

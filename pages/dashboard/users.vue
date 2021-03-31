@@ -5,7 +5,8 @@
       <client-only>
         <vue-good-table
         :columns="columns"
-        :rows="rows"/>
+        :rows="rows"
+        :theme="$colorMode.value == 'dark'? 'black-rhino' : ''"/>
       </client-only>
       <Footer />
       </div>
