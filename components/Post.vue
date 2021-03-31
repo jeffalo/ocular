@@ -14,7 +14,7 @@
     <div class="post-wrap">
       <section class="main-content">
         <div class="post-content" v-html="blockifiedContent"></div>
-        <div class='post-footer'><span v-if="$auth.loggedIn()"><Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
+        <div class='post-footer'><span v-if="$auth.loggedIn()"><ReactionButtons :post="post"/> | <Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
       </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
@@ -121,7 +121,7 @@ export default {
 .main-content,
 .main-sidebar,
 .main-nav {
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
   box-shadow: inset 1px 0 var(--sidebar-border);
   overflow-wrap: break-word;
 }
