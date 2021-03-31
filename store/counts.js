@@ -20,7 +20,6 @@ export const actions = {
         }
 
         // this is the first time
-        console.log('first time', found)
 
         let promise = new Promise((resolve, reject) => {
             fetch("https://scratchdb.lefty.one/v3/forum/user/info/" + name)

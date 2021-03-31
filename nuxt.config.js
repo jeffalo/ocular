@@ -22,7 +22,7 @@ export default {
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['~/plugins/auth.js', { src: '~/plugins/vue-good-table', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -34,11 +34,21 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'vue-plausible'
+    'vue-plausible',
+    '@nuxtjs/redirect-module'
   ],
   plausible: {
     domain: 'ocular.jeffalo.net',
     apiHost: 'https://analytics.jeffalo.net'
+  },
+
+  redirect: [
+    { from: '^/discuss/(.*)$', to: '/$1' },
+    { from: '^/users/(.*)$', to: '/user/$1' }
+  ],
+
+  env: {
+    backendURL: process.env.BACKEND_URL || 'http://localhost:8081'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

@@ -20,10 +20,9 @@ export const actions = {
         }
 
         // this is the first time
-        console.log('first time', found)
 
         let promise = new Promise((resolve, reject) => {
-            fetch("https://my-ocular.jeffalo.net/api/user/" + name)
+            fetch(`${process.env.backendURL}/api/user/` + name)
             .then((res) => res.json())
             .then(data => {
                 resolve(data)
@@ -46,6 +45,11 @@ export const mutations = {
         } else {
             state.users.push({ name, data, promise, loading })
         }
+    },
+    removeUser(state, { name }) {
+        state.users = state.users.filter(user => {
+            return user.name !== name;
+        })
     },
     initUser(state, { name, promise } ) {
         let found = findUser(state, name)

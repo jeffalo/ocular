@@ -12,20 +12,9 @@
       >
     </div>
     <div class="post-wrap">
-      <section
-        class="main-content"
-        v-if="post.parser.version > 0"
-        v-html="post.content.html"
-      ></section>
-      <section class="main-content" v-if="post.parser.version == 0">
-        {{ post.content.bb }}
-        <span class="xss-info">
-          this post is displayed as raw bbcode for your saftey
-          <nuxt-link to="/xss-info">(more info)</nuxt-link>
-          <a href="javascript:void(0)" @click="post.parser.version = 1">
-            (render anyway)
-          </a>
-        </span>
+      <section class="main-content">
+        <div class="post-content" v-html="blockifiedContent"></div>
+        <div class='post-footer'><span v-if="$auth.loggedIn()"><ReactionButtons :post="post"/> | <Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
       </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
@@ -34,7 +23,6 @@
         <nuxt-link :to="`/user/${post.username}`">
           <img
             :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
-            id="profile-picture"
             width="90"
             height="90"
           />
@@ -50,6 +38,51 @@
 <script>
 export default {
   props: ["post"],
+  computed: {
+    blockifiedContent() {
+      // adapted from https://github.com/scratchblocks/scratchblocks/blob/master/index.js
+      let content = this.post.content.html
+      let options = {
+        style: "scratch2",
+        inline: false,
+        languages: ["en"],
+
+        read: scratchblocks.read, // function(el, options) => code
+        parse: scratchblocks.parse, // function(code, options) => doc
+        render: scratchblocks.render, // function(doc) => svg
+      }
+      const parser = new DOMParser();
+
+      const doc = parser.parseFromString(content, "text/html");
+
+      let results = [].slice.apply(doc.querySelectorAll('pre.blocks:not(.scratchblockrendered)'))
+      results.forEach(function(el) {
+        var code = options.read(el, options)
+
+        var parsed = options.parse(code, options)
+
+        var svg = options.render(parsed, options)
+
+        var container = doc.createElement("div")
+        container.className = "scratchblocks"
+        container.appendChild(svg)
+        el.innerHTML = ""
+        el.appendChild(container)
+      })
+      return doc.documentElement.innerHTML
+    } 
+  },
+  async fetch() {
+    let res = await fetch(`${process.env.backendURL}/api/starred/${this.post.id}`, {
+      headers: {
+        Authorization: this.$auth.token(),
+        "Content-Type": "application/json",
+      }
+    })
+    let data = await res.json()
+    this.starred = data.starred
+  },
+  fetchOnServer: false
 };
 </script>
 
@@ -69,6 +102,13 @@ export default {
   width: 85%;
   background: var(--background);
   overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.post-content{
+  display: block;
+  width: 100%;
 }
 
 .main-nav {
@@ -81,11 +121,17 @@ export default {
 .main-content,
 .main-sidebar,
 .main-nav {
-  padding: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 2em;
+  padding: 0.75em 1em;
   box-shadow: inset 1px 0 var(--sidebar-border);
   overflow-wrap: break-word;
+}
+
+.post-footer{
+  padding-top: 2em;
+  align-self: flex-end;
+  text-align: right;
+  display: block;
+  width: 100%;
 }
 
 .header {
@@ -174,15 +220,5 @@ export default {
 
 .main-content >>> .bb-underline {
   text-decoration: underline;
-}
-
-.xss-info {
-  margin-top: 20px;
-  display: block;
-  color: var(--footer-text);
-}
-
-.xss-info a {
-  color: var(--footer-text);
 }
 </style>

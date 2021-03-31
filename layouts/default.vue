@@ -41,6 +41,26 @@
   --brand: #28a5da;
 }
 
+.catsunited-mode {
+  --brand: #4e1117; 
+  --background: #131313;
+  --input-background: #1C1C1C;
+  --input-border: #4e1117;
+  --sidebar-background: #131313;
+  --sidebar-border: #131313;
+  --quote-background: #0a0a0a;
+  --quote-border: #4e1117;
+  --table-stripe: #1C1C1C;
+  --table-hover: #0e0e0e;
+  --table-border: #4e1117;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
+.missing-glasses-mode{
+  filter: blur(2px)
+}
+
 html,body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -48,6 +68,10 @@ html,body {
   color: var(--text);
   padding: 0;
   margin: 0;
+}
+
+body{
+  overflow-y: scroll; /* Show scrollbars */
 }
 
 * {
@@ -80,7 +104,7 @@ a {
   margin-right: 282.600px;
 }
 
-button {
+button,button {
   border-radius: 4px;
   border: none;
   background: #4d97ff;
@@ -92,6 +116,58 @@ button {
   cursor: pointer;
   display: inline-block;
   line-height: 30px;
+}
+
+.input {
+  width: 600px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
+  margin-bottom: 0.5em;
+}
+
+select {
+  width: 120px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text);
+  margin-bottom: 0.5em;
+}
+
+.form-button {
+  padding: 10px;
+  line-height: normal;
+}
+
+.alert {
+	padding: 15px;
+	background-color: white;
+	color: black;
+	margin-bottom: 15px;
+}
+
+.alert .close-btn{
+  float: right;
+  cursor: pointer;
+}
+
+.alert.error {
+	background-color: #f44336;
+	color: white
+}
+
+.alert.information {
+	background-color: #2196F3;
+	color: white
+}
+
+.alert.success {
+	background-color: var(--brand);
+	color: white
 }
 
 .tooltip {

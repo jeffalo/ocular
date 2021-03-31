@@ -13,12 +13,7 @@
             category: <b>{{ data.posts[0].topic.category }}</b>
           </p>
         </div>
-        <Post
-          v-for="post of data.posts"
-          v-bind:key="post.id"
-          v-bind:post="post"
-        />
-        <button @click="loadMore()">Load More</button>
+        <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
       <Footer />
     </div>
@@ -32,10 +27,12 @@ export default {
       topic: this.$route.params.topic,
       page: 0,
       data: {},
+      showLoadMore: false
     };
   },
   methods: {
     async loadMore() {
+      this.showLoadMore = false
       this.page++;
 
       var postsRes = await fetch(
@@ -43,25 +40,9 @@ export default {
       );
       var postData = await postsRes.json();
       this.data.posts.push(...postData.posts);
+
+      this.showLoadMore = true
     },
-    scratchBlocksify() {
-      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
-        style: "scratch2", // Optional
-      });
-      document
-        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
-        .forEach((i) => {
-          i.classList.add("scratchblockrendered");
-        });
-    },
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      this.scratchBlocksify();
-    });
-  },
-  mounted: function () {
-    this.scratchBlocksify();
   },
   async fetch() {
     var userPostsRes = await fetch(
@@ -70,6 +51,7 @@ export default {
     var userPosts = await userPostsRes.json();
 
     this.data = userPosts;
+    this.showLoadMore = true
   },
   fetchOnServer: false,
 };

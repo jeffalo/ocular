@@ -8,12 +8,7 @@
         <!-- todo: use classes instead of inline css -->
         <Status :user="user" style="display: inline" />
         <h2>{{ user }}'s posts</h2>
-        <Post
-          v-for="post of data.posts"
-          v-bind:key="post.id"
-          v-bind:post="post"
-        />
-        <button @click="loadMore()">Load More</button>
+        <PostList :posts="posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
       <Footer />
     </div>
@@ -26,38 +21,25 @@ export default {
     return {
       user: this.$route.params.username,
       page: 0,
-      data: {},
+      posts: {},
       info: {},
+      showLoadMore: false
     };
   },
   methods: {
     async loadMore() {
+      this.showLoadMore = false
       this.page++;
 
       var postsRes = await fetch(
         `https://scratchdb.lefty.one/v3/forum/user/posts/${this.user}/${this.page}`
       );
       var postData = await postsRes.json();
-      this.data.posts.push(...postData);
+      if(Array.isArray(postData)){
+        this.posts.push(...postData);
+        this.showLoadMore = true 
+      }
     },
-    scratchBlocksify() {
-      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
-        style: "scratch2", // Optional
-      });
-      document
-        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
-        .forEach((i) => {
-          i.classList.add("scratchblockrendered");
-        });
-    },
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      this.scratchBlocksify();
-    });
-  },
-  mounted: function () {
-    this.scratchBlocksify();
   },
   async fetch() {
     var userInfoRes = await fetch(
@@ -71,7 +53,9 @@ export default {
     var userPosts = await userPostsRes.json();
 
     this.info = userInfo;
-    this.data.posts = userPosts;
+    this.posts = userPosts;
+
+    this.showLoadMore = true
   },
   fetchOnServer: false,
 };

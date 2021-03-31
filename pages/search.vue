@@ -10,7 +10,7 @@
           type="text"
           placeholder="search query"
           id="searchbox"
-          class="sb"
+          class="input"
           :value="$route.query.q"
         />
         <select
@@ -22,11 +22,10 @@
           <option value="newest">newest</option>
           <option value="oldest">oldest</option>
         </select>
-        <button type="submit" class="sbb">go</button>
+        <button type="submit" class="form-button">go</button>
       </form>
       <div v-show="splash">
-        <h1>how to use</h1>
-        <h2>searching</h2>
+        <h2>search parameters</h2>
         <p>searches from scratchdb use a pretty neat format.</p>
         <p>
           each requirement is in the format <code>+requirement:"value"</code>,
@@ -92,15 +91,7 @@
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-show="!splash">
-        <Loading v-if="$fetchState.pending" />
-        <div v-if="!$fetchState.pending">
-          <Post
-            v-for="post of posts.posts"
-            v-bind:key="post.id"
-            v-bind:post="post"
-          />
-          <button @click="loadMore()">Load More</button>
-        </div>
+        <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
       <Footer />
     </div>
@@ -108,34 +99,6 @@
 </template>
 
 <style scoped>
-.sb {
-  width: 600px;
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  color: var(--text);
-  margin-bottom: 0.5em;
-}
-
-select {
-  width: 120px;
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  color: var(--text);
-  margin-bottom: 0.5em;
-}
-
-.sbb {
-  border-radius: 5px;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  margin-bottom: 0.5em;
-  line-height: normal;
-}
-
 .info {
   border-collapse: collapse;
   width: 100%;
@@ -170,7 +133,7 @@ select {
 }
 
 @media only screen and (max-width: 1100px) {
-  .sb {
+  .input {
     width: 200px;
   }
 }
@@ -185,51 +148,34 @@ export default {
     return {
       search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
       sort: encodeURIComponent(decodeURIComponent(this.$route.query.sort)),
-      topic: encodeURIComponent(decodeURIComponent(this.$route.query.topic)),
-      post: encodeURIComponent(decodeURIComponent(this.$route.query.post)),
       showLoadMore: false,
       page: 0,
-      posts: {},
+      data: {},
       splash: false,
       ssr: true,
     };
   },
   methods: {
     async loadMore() {
+      this.showLoadMore = false
       this.page++;
       var res = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       );
 
       var data = await res.json();
-      this.posts.posts.push(...data.posts);
+      this.data.posts.push(...data.posts);
+
+      this.showLoadMore = true
     },
-    scratchBlocksify() {
-      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
-        style: "scratch2", // Optional
-      });
-      document
-        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
-        .forEach((i) => {
-          i.classList.add("scratchblockrendered");
-        });
-    },
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      this.scratchBlocksify();
-    });
-  },
-  mounted: function () {
-    this.scratchBlocksify();
   },
   async fetch() {
     if (this.search !== "undefined") {
-      this.showLoadMore = true;
-      this.posts = await fetch(
+      this.data = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       ).then((res) => res.json());
       this.splash = false;
+      this.showLoadMore = true;
       return;
     }
 
