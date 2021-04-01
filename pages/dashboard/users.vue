@@ -28,6 +28,10 @@ export default {
           field: 'name',
         },
         {
+          label: 'status',
+          field: 'status',
+        },
+        {
           label: 'color',
           field: 'color'
         },
