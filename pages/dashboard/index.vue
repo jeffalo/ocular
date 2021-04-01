@@ -79,12 +79,12 @@ export default {
 
         if(data){
           if(!data.error) {
-            this.alerts.push({
+            this.alerts.unshift({
               body: data.ok,
               type: 'success'
             })
           } else {
-            this.alerts.push({
+            this.alerts.unshift({
               body: data.error,
               type: 'error'
             })
