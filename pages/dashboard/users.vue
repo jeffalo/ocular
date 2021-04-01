@@ -6,7 +6,10 @@
         <vue-good-table
         :columns="columns"
         :rows="rows"
-        :theme="$colorMode.value == 'dark'? 'black-rhino' : ''"/>
+        :pagination-options="{
+          enabled: true
+        }"
+        :theme="$colorMode.value == 'dark' || $colorMode.value == 'catsunited' ? 'nocturnal' : ''"/>
       </client-only>
       <Footer />
       </div>
@@ -59,7 +62,6 @@ export default {
       },
     });
     let data = await res.json();
-    console.log(data)
     this.rows = data
   }
 };
