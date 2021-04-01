@@ -31,7 +31,7 @@
           <button type="submit" class="update-btn">update</button>
       </form>
       <br>
-      <nuxt-link to="/dashboard/users">user list</nuxt-link>
+      <nuxt-link to="/dashboard/users" v-if="$auth.user().admin">user list</nuxt-link>
       <Footer />
     </div>
   </div>
