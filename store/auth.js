@@ -45,13 +45,15 @@ export const actions = {
     async logout({ commit }) {
         return new Promise(async (resolve, reject) => {
             let token = cookies.get('my-ocular-token')
-            cookies.remove('my-ocular-token')
-            commit('reset_user')
-            commit('reset_token')
             let res = await fetch(`${process.env.backendURL}/auth/remove/?token=${token}`, {
                 method: "POST"
             })
             let data = await res.json()
+            
+            cookies.remove('my-ocular-token')
+            commit('reset_user')
+            commit('reset_token')
+
             if(data.error){
                 resolve(data.error) // i could use reject but i'd need to handle it everywhere and i dont feel like doing that
             } else {
