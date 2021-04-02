@@ -11,7 +11,9 @@ it's up at [ocular.jeffalo.net](ocular.jeffalo.net)
 - hosted at home
 - and obviously scratch!
 
-## run
+## how to run
+
+you will need your own my-ocular server if you don't want to use production data, otherwise you can use the production my-ocular server by setting the `BACKEND_URL` env variable to `https://my-ocular.jeffalo.net`. keep in mind you will get cors errors unless you run the nuxt server on `localhost` port `8000` or `8001`. you can change the nuxt server port via the `PORT` env variable.
 
 ```bash
 # install dependencies
