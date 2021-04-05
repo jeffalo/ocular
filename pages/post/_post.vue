@@ -11,6 +11,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: this.post.content.bb? `${this.post.username}: "${this.post.content.bb}"` : `post id ${this.id}`
+    }
+  },
   data() {
     return {
       id: this.$route.params.post,

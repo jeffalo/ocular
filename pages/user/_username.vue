@@ -17,6 +17,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.user}'s scratch forum posts`
+    }
+  },
   data() {
     return {
       user: this.$route.params.username,

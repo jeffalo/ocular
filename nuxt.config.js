@@ -1,11 +1,13 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'ocular',
+    titleTemplate: (titleChunk) => {
+      return titleChunk ? `ocular | ${titleChunk}` : 'ocular';
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'the all in one forum tool for scratch' }
+      { hid: 'description', name: 'description', content: 'scratch forum search and more!' }
     ],
     script: [
       {

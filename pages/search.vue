@@ -140,6 +140,9 @@
 </style>
 <script>
 export default {
+  head: {
+    title: 'scratch forum search'
+  },
   ssr: true,
   watch: {
     "$route.query": "$fetch",

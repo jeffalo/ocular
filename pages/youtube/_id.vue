@@ -15,3 +15,11 @@
   display: block;
 }
 </style>
+
+<script>
+export default {
+  head: {
+    title: 'youtube player'
+  },
+}
+</script>

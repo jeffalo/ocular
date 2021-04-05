@@ -3,7 +3,7 @@
     <Header />
     <div class="margined">
       <h1>ocular</h1>
-      <p>ocular is the all in one forum tool for scratch</p>
+      <p>scratch forum search and more!</p>
       <div class="grid"> <!-- todo why is this grid smaller? -->
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>

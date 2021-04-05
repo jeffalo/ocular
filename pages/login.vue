@@ -18,6 +18,9 @@
 <script>
 export default {
   middleware: 'notauthenticated',
+  head: {
+    title: 'login'
+  },
   data() {
     return {
       username: "",

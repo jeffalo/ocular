@@ -40,6 +40,9 @@
 <script>
 export default {
   middleware: "authenticated",
+  head: {
+    title: 'dashboard'
+  },
   data() {
     return {
       user: this.$auth.user().name,

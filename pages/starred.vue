@@ -15,6 +15,9 @@
 <script>
 export default {
   middleware: "authenticated",
+  head: {
+    title: 'starred posts'
+  },
   data() {
     return {
       page: 0,

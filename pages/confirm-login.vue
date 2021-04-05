@@ -20,6 +20,9 @@
 import cookies from 'js-cookie'
 export default {
     middleware: 'notauthenticated',
+    head: {
+        title: 'confirm login'
+    },
     data() {
         return {
             name: '',

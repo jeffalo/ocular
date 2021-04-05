@@ -19,6 +19,9 @@
 <script>
 export default {
   middleware: 'admin',
+  head: {
+    title: 'user list'
+  },
   data(){
     return {
       columns: [

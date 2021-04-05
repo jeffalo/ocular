@@ -22,6 +22,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: this.data.posts ? this.data.posts[0].topic.title : `topic id ${this.topic}`
+    }
+  },
   data() {
     return {
       topic: this.$route.params.topic,
