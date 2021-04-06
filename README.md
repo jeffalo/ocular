@@ -1,19 +1,18 @@
 # 🔍 ocular
-ocular is the search tool for the scratch forums.
+Ocular is the search tool for the scratch forums.
+It's up at [ocular.jeffalo.net](ocular.jeffalo.net), so try it out!
 
-it's up at [ocular.jeffalo.net](ocular.jeffalo.net)
+## Behind the scenes
+- Data from [DatOneLefty's ScratchDB](https://scratchdb.lefty.one/).
+- Styling taken from [Maximouse](https://scratch.mit.edu/users/Maximouse)'s userstyle.
+- Big inspiration from [forums.scratchstats.com](https://forums.scratchstats.com).
+- Nuxt because SSR.
+- Hosted at home.
+- And obviously scratch!
 
-## behind the scenes
-- data from [DatOneLefty's ScratchDB](https://scratchdb.lefty.one/)
-- styling taken from [Maximouse](https://scratch.mit.edu/users/Maximouse)'s userstyle
-- big inspiration from [forums.scratchstats.com](https://forums.scratchstats.com)
-- nuxt because SSR
-- hosted at home
-- and obviously scratch!
+## How to run
 
-## how to run
-
-you will need your own my-ocular server if you don't want to use production data, otherwise you can use the production my-ocular server by setting the `BACKEND_URL` env variable to `https://my-ocular.jeffalo.net`. keep in mind you will get cors errors unless you run the nuxt server on `localhost` port `8000` or `8001`. you can change the nuxt server port via the `PORT` env variable.
+You will need your own my-ocular server if you don't want to use production data, otherwise you can use the production my-ocular server by setting the `BACKEND_URL` env variable to `https://my-ocular.jeffalo.net`. Keep in mind you will get cors errors unless you run the nuxt server on `localhost` port `8000` or `8001`. you can change the nuxt server port via the `PORT` env variable!
 
 ```bash
 # install dependencies
