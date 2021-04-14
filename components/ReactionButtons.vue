@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     async react(id, emoji) {
-      // toggle star state
       this.loading = true
       await this.$store.dispatch("auth/login", this.$auth.token()); // refresh user details
       if(this.$auth.user()){
