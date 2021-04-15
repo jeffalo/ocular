@@ -46,7 +46,11 @@ export default {
 
   redirect: [
     { from: '^/discuss/(.*)$', to: '/$1' },
-    { from: '^/users/(.*)$', to: '/user/$1' }
+    { from: '^/users/(.*)$', to: '/user/$1' },
+    { from: '^/@(.*)$', to: '/user/$1' },
+    { from: '^/u/(.*)$', to: '/user/$1' },
+    { from: '^/t/(.*)$', to: '/topic/$1' },
+    { from: '^/p/(.*)$', to: '/post/$1' },
   ],
 
   env: {
