@@ -57,6 +57,22 @@
   --footer-text: #a1a1a1;
 }
 
+.classic-dark-mode {
+  --brand: #df5900; /* previously FF6600, slightly darker for eyes */
+  --background: #111;
+  --input-background: #141414;
+  --input-border: #2c2c2c;
+  --sidebar-background: #0a0a0a;
+  --sidebar-border: #2c2c2c;
+  --quote-background: #0a0a0a;
+  --quote-border: #2c2c2c;
+  --table-stripe: #252525;
+  --table-hover: #2c2c2c;
+  --table-border: #2c2c2c;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
 .missing-glasses-mode{
   filter: blur(2px)
 }
