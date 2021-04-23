@@ -1,7 +1,7 @@
 <template>
     <main class="margined">
         <div v-if="$auth.loggedIn()" v-show="!loading">
-            are you sure you want to toggle reaction to post {{ $route.params.id }} with "{{ $route.query.emoji }}"?
+            are you sure you want to toggle reaction to {{ text }} with "{{ $route.query.emoji }}"?
             <button @click="react($route.params.id, $route.query.emoji)">yes</button>
             <button @click="close()">no</button>
         </div>
@@ -50,6 +50,14 @@ export default {
             if(!window.closed){
                 alert('please close this window')
             }
+        }
+    },
+    async asyncData({ route }) {
+        let postData = await fetch(`https://scratchdb.lefty.one/v3/forum/post/info/${route.params.id}`).then(res=>res.json())
+        if(postData.username) {
+            return {text: `${postData.username}'s post`}
+        } else {
+            return {text: `post id ${route.params.id}`}
         }
     }
 }
