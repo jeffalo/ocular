@@ -1,7 +1,7 @@
 <template>
     <main class="margined">
         <div v-if="$auth.loggedIn()" v-show="!loading">
-            are you sure you want to toggle reaction to {{ text }} with "{{ $route.query.emoji }}"?
+            are you sure you want to toggle reaction to <a :href="`https://scratch.mit.edu/discuss/posts/${$route.params.id}`">{{ text }}</a> with "{{ $route.query.emoji }}"?
             <button @click="react($route.params.id, $route.query.emoji)">yes</button>
             <button @click="close()">no</button>
         </div>
