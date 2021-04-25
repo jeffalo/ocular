@@ -20,6 +20,7 @@ export default {
 .date-mobile {
   color: white;
   text-decoration: none;
+  display: none;
 }
 
 @media only screen and (max-width: 750px) {
