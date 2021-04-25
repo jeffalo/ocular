@@ -114,7 +114,7 @@ export default {
 .main-nav {
   order: 1;
   width: 20%;
-  flex: 1;
+  flex: 0 0 auto;
   background: var(--sidebar-background);
 }
 
