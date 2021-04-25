@@ -25,9 +25,10 @@
             :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
             width="90"
             height="90"
+            class="pfp"
           />
         </nuxt-link>
-        <span class="rank">Scratcher</span>
+        <!-- <span class="rank">Scratcher</span> -->
         <PostCount :user="post.username" />
         <Status :user="post.username" style="display: block;" />
       </nav>
@@ -113,7 +114,7 @@ export default {
 
 .main-nav {
   order: 1;
-  width: 20%;
+  width: 15%;
   flex: 0 0 auto;
   background: var(--sidebar-background);
 }
@@ -124,6 +125,11 @@ export default {
   padding: 0.75em 1em;
   box-shadow: inset 1px 0 var(--sidebar-border);
   overflow-wrap: break-word;
+}
+
+.pfp {
+  width: 90px;
+  height: auto;
 }
 
 .post-footer{
@@ -151,11 +157,6 @@ export default {
 
 .view-scratch {
   float: right;
-  color: white;
-  text-decoration: none;
-}
-
-.date {
   color: white;
   text-decoration: none;
 }
@@ -220,5 +221,14 @@ export default {
 
 .main-content >>> .bb-underline {
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 750px) {
+  .pfp {
+    width: 75%
+  }
+  .main-nav {
+    width: 20%;
+  }
 }
 </style>

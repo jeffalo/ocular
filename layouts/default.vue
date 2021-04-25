@@ -292,7 +292,7 @@ select {
   transition: opacity .15s;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1500px) {
   .margined {
     /*background-color: lightblue;*/
     margin-left: 10px;
