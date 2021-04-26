@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="privacy" pageLink="/privacy"/>
+    <Header pageName="privacy" pageLink="/privacy" />
     <div class="margined">
       <h1>privacy</h1>
       <p>
@@ -24,19 +24,26 @@
         APIs),
         <a href="https://fluffyscratch.hampton.pw">fluffyscratch</a> (profile
         picture and auth api)
-        <a href="https://api.scratch.mit.edu">scratch api</a> (scratch's official api)
+        <a href="https://api.scratch.mit.edu">scratch api</a> (scratch's
+        official api)
       </p>
-      <p>it is important to note that ocular does not store any scratch data. it only
-        presents data from the apis listed above. i only store data that powers the
-        ocular login and profile customization. the data can be deleted on the
+      <p>
+        it is important to note that ocular does not store any scratch data. it
+        only presents data from the apis listed above. i only store data that
+        powers the ocular login and profile customization. the data can be
+        deleted on the
         <nuxt-link to="/dashboard">dashboard</nuxt-link>
+      </p>
+      <p>
+        ocular (and my other projects) are hosted on a server running nginx. for
+        security purposes, nginx logs may include ip addresses.
       </p>
       <p>
         for external services, please consult their sites for information about
         how data is stored and used, if you have any questions about your
         privacy when using ocular feel free to contact me and ask about it.
       </p>
-    <Footer />
+      <Footer />
     </div>
   </div>
 </template>
@@ -44,7 +51,7 @@
 <script>
 export default {
   head: {
-    title: 'privacy'
+    title: "privacy",
   },
-}
+};
 </script>
