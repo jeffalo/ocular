@@ -5,7 +5,7 @@
             <button @click="react($route.params.id, $route.query.emoji)">yes</button>
             <button @click="close()">no</button>
         </div>
-        <div v-show="loading">
+        <div v-show="loading && !done">
             loading... this could take a second.
         </div>
         <div v-if="!$auth.loggedIn()">
@@ -18,7 +18,8 @@
 export default {
     data() {
         return {
-            loading: false
+            loading: false,
+            done: false
         }
     },
     methods: {
@@ -38,6 +39,13 @@ export default {
                 });
                 let data = await res.json();
                 this.loading = false
+                this.done = true
+                if (!window.opener && !window.opener !== window) {
+                    // user is not in a popup
+                    this.$router.push({
+                        path: `/post/${this.$route.params.id}`
+                    })
+                }
                 if(data.error) {
                     alert(data.error)
                 } else {
