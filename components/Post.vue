@@ -129,7 +129,7 @@ export default {
 
 .pfp {
   width: 90px;
-  height: auto;
+  height: 90px;
 }
 
 .post-footer{
