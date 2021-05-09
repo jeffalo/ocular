@@ -37,7 +37,8 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     'vue-plausible',
-    '@nuxtjs/redirect-module'
+    '@nuxtjs/redirect-module',
+    '@nuxt/content'
   ],
   plausible: {
     domain: 'ocular.jeffalo.net',
@@ -51,6 +52,8 @@ export default {
     { from: '^/u/(.*)$', to: '/user/$1' },
     { from: '^/t/(.*)$', to: '/topic/$1' },
     { from: '^/p/(.*)$', to: '/post/$1' },
+    { from: '^/privacy', to: '/docs/privacy' },
+    { from: '^/about', to: '/docs/about' },
   ],
 
   env: {

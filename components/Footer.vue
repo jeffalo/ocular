@@ -11,7 +11,7 @@
     <a class="footer-link" href="https://hamptonmoore.com">@herohamp</a>
     <br /><br />this forum viewer tool falls under Creative Commons
     Attribution-ShareAlike 2.0 license <br /><br />
-    <nuxt-link class="footer-link" to="/privacy">privacy</nuxt-link>
+    <nuxt-link class="footer-link" to="/docs/privacy">privacy</nuxt-link>
     | <button class="footer-link" @click="toggleTheme()">🎨 theme ({{ $colorMode.preference }})</button>
   </footer>
 </template>

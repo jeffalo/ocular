@@ -4,12 +4,16 @@
     <div class="margined">
       <h1>ocular</h1>
       <p>scratch forum search and more!</p>
-      <div class="grid"> <!-- todo why is this grid smaller? -->
+      <div class="grid">
+        <!-- todo why is this grid smaller? -->
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
         </nuxt-link>
         <nuxt-link to="/dashboard">
           <div class="content"><span>💻 dashboard</span></div>
+        </nuxt-link>
+        <nuxt-link to="/docs">
+          <div class="content"><span>📜 docs</span></div>
         </nuxt-link>
         <!-- 
         <a href="stats.html">
@@ -18,7 +22,7 @@
         <a href="live.html">
           <div class="content"><span>🔴 live</span></div>
         </a>
-        -->   
+        -->
       </div>
       <Footer />
     </div>
@@ -35,21 +39,21 @@
 }
 
 .grid::before {
-  content: '';
+  content: "";
   width: 0;
   padding-bottom: 100%;
   grid-row: 1 / 1;
   grid-column: 1 / 1;
 }
 
-.grid>*:first-child {
+.grid > *:first-child {
   grid-row: 1 / 1;
   grid-column: 1 / 1;
 }
 
 /* Just to make the grid visible */
 
-.grid>* {
+.grid > * {
   background: var(--brand);
   margin: 1px;
   background-position: center center;
@@ -79,7 +83,7 @@
   backdrop-filter: brightness(0.5);
 }
 
-.content>span {
+.content > span {
   display: flex;
   justify-content: center;
   align-items: center;

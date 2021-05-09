@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/redirect-module": "^0.3.1",
     "cookie": "^0.4.1",
     "core-js": "^3.8.3",
