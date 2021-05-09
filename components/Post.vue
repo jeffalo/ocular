@@ -132,7 +132,8 @@ export default {
   height: 90px;
 }
 
-.post-footer{
+.post-footer {
+  line-height: 28px;
   padding-top: 2em;
   align-self: flex-end;
   text-align: right;

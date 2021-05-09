@@ -81,6 +81,8 @@ export default {
   background-color: var(--sidebar-background);
   margin: 0px 5px;
   padding: 4px;
+  display: inline-block; /* don't wrap in the middle of a reaction */
+  line-height: normal;
   border-radius: 6px;
   box-shadow: 0 0 2px var(--brand);
   opacity: 1;
