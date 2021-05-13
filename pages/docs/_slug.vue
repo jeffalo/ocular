@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header
-      :crumbs="[{link:'/docs', text:'docs'}, {link:`/docs${page.path}`, text: page.headertitle || page.title}]"
+      :crumbs="[{link: '/docs', text:'docs'}, {link: page.path, text: page.headertitle || page.title}]"
     />
     <div class="margined">
       <h1>{{ page.title }}</h1>
@@ -32,7 +32,7 @@ export default {
   },
   async asyncData({ $content, params, error }) {
     const slug = params.slug || "index";
-    const page = await $content(slug)
+    const page = await $content('docs', slug)
       .fetch()
       .catch((err) => {
         error({ statusCode: 404, message: "This page could not be found" });
