@@ -1,9 +1,7 @@
 <template>
   <div class="container">
     <Header
-      :crumbs="[{link:'asdf', text:'asdf'},{link:'asdf', text:'asdf'}]"
-      :pageName="page.headertitle || page.title"
-      :pageLink="`/docs${page.path}`"
+      :crumbs="[{link:'/docs', text:'docs'}, {link:`/docs${page.path}`, text: page.headertitle || page.title}]"
     />
     <div class="margined">
       <h1>{{ page.title }}</h1>

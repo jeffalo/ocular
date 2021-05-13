@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="starred" pageLink="/starred" />
+    <Header :crumbs="[{link:'/starred', text:'starred'}]" />
     <div class="margined">
       <h1>starred posts</h1>
       <Loading v-if="$fetchState.pending" />

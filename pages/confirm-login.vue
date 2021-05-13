@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="login confirmation" pageLink="/confirm-login" />
+    <Header :crumbs="[{link:'/confirm-login', text:'login confirmation'}]"/>
     <div class="margined">
         <h1>login as {{name}}</h1>
         <img :src="`https://fluffyscratch.hampton.pw/user/${name}/profile/picture`"

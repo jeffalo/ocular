@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="user list" pageLink="/dashboard/users" />
+    <Header :crumbs="[{link:'/dashboard', text:'dashboard'}, {link:'/dashboard/users', text:'users'}]" />
     <div class="margined">
       <client-only>
         <vue-good-table

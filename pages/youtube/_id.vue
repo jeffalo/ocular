@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="youtube" :pageLink="`/youtube/${$nuxt.context.route.params.id}`" />
+    <Header :crumbs="[{link:`/youtube/${$nuxt.context.route.params.id}`, text:'youtube'}]" />
     <div class="margined">
       <h1>youtube</h1>
       <p>scratch converts youtube links to links to their own player page to prevent people from seeing youtube or something. this page is here to simulate the true scratch experience.</p>

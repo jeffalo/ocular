@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="topic" :pageLink="`/topic/${topic}`" />
+    <Header :crumbs="[{link:`/topic/${topic}`, text:'topic'}]" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
       <div v-if="!$fetchState.pending">

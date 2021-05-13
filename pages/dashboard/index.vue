@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="dashboard" pageLink="/dashboard" />
+    <Header :crumbs="[{link:'/dashboard', text:'dashboard'}]" />
     <div class="margined">
       <h1>account dashboard</h1>
       <img

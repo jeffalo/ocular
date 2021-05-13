@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="search" pageLink="/search" />
+    <Header :crumbs="[{link:'/search', text:'search'}]" />
     <div class="margined">
       <h1>search</h1>
       <form method="get">

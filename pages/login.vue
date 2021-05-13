@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="login" pageLink="/login" />
+    <Header :crumbs="[{link:'/login', text:'login'}]" />
     <div class="margined">
       <h1>login</h1>
       <div :class="`alert error`" v-if="$route.query.error">

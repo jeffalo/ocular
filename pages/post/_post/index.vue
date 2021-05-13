@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header pageName="post" :pageLink="`/post/${id}`" />
+    <Header :crumbs="[{link:`/post/${id}`, text:'post'}]" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
       <Post v-if="!$fetchState.pending" v-bind:post="post"/>
