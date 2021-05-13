@@ -5,7 +5,7 @@ description: ocular privacy stuff.
 
 *TLDR: ocular only collects basic analytics data, registered user data and data that powers features such as reactions and starring. I don't want your private info.*
 
-ocular uses a number of services to provide various tools to enhance the experience. These services may collect and or use data according to their individual privacy policies.
+ocular uses a number of services to provide various tools to enhance the experience. These services may collect and or use data according to their privacy policies.
 
 - To collect basic usage analytics, ocular uses a self-hosted instance of [Plausible Analytics](https://plausible.io). You can find out more about what kind of information is collected at the [Plausible Analytics website](https://plausible.io).
 

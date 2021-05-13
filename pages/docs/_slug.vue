@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .table {
   margin: 12px 0;
-  padding: 5px 18px;
+  padding: 2px 18px;
   border-style: solid;
   border-width: 1px;
   border-color: var(--quote-border);

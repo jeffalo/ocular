@@ -125,11 +125,11 @@ this is a special page on `ocular.jeffalo.net`, it works well with the my-ocular
 
 (from from `https://ocular.jeffalo.net/react/5213429?emoji=🚀`)
 
-![screenshot of ocular reaction popup](/reaction-screenshot.png)]
+![screenshot of ocular reaction popup](/reaction-screenshot.png)
 
 ## ocular status secrets
 
-did you know you can include automatically updating elements to your ocular statuses? place one of these in your status make yourself look cool and knowledgeable!
+hey you! did you know you can include automatically updating elements to your ocular statuses? place one of these in your status make yourself look cool and knowledgeable!
 
 - `{joke}` for a funny joke
 - `{total}` for the total amount of registered ocular users
