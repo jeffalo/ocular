@@ -21,7 +21,11 @@ export default {
     title: 'docs'
   },
   async asyncData({ $content, params, error }) {
-    const documents = await $content('docs').only(['title']).fetch()
+    const documents = await $content('docs').only(['title'])
+      .fetch()
+      .catch((err) => {
+          error(err);
+      });
     return { documents }
   },
 };
