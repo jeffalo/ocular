@@ -12,6 +12,7 @@
             </span>
         </h1>
         <div class="margined">
+          <nuxt-link to="/docs/about">about</nuxt-link> |
           <a href="https://github.com/jeffalo/ocular" class="header-link">feedback</a> |
           <a href="https://scratchdb.lefty.one" class="header-link">api and data from datonelefty</a>
           <div v-if="$auth.loggedIn()" class="header-user">
