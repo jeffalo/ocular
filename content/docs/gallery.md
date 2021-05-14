@@ -10,4 +10,4 @@ description: how are people using the ocular api?
 - [signature history viewer](https://signature-history.9gr.repl.co/)
 - [Scratch Tools](https://scratchtools.edu.eu.org/)
 
-want to add something? [edit this page](https://github.com/jeffalo/ocular/blob/main/content/gallery.md)
+want to add something? [edit this page](https://github.com/jeffalo/ocular/blob/main/content/docs/gallery.md)
