@@ -22,7 +22,7 @@
         }}</nuxt-link>
         <nuxt-link :to="`/user/${post.username}`">
           <img
-            :src="`https://fluffyscratch.hampton.pw/user/${post.username}/profile/picture`"
+            :src="`${backendURL}/api/user/${post.username}/picture`"
             width="90"
             height="90"
             class="pfp"
@@ -39,6 +39,11 @@
 <script>
 export default {
   props: ["post"],
+  data() {
+    return {
+      backendURL: process.env.backendURL
+    }
+  },
   computed: {
     blockifiedContent() {
       // adapted from https://github.com/scratchblocks/scratchblocks/blob/master/index.js

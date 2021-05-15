@@ -3,7 +3,7 @@
     <Header :crumbs="[{link:'/confirm-login', text:'login confirmation'}]"/>
     <div class="margined">
         <h1>login as {{name}}</h1>
-        <img :src="`https://fluffyscratch.hampton.pw/user/${name}/profile/picture`"
+        <img :src="`${backendURL}/api/user/${name}/picture`"
             width="50"
             height="50"
             class="confirm-pfp"
@@ -28,6 +28,7 @@ export default {
             name: '',
             token: '',
             oneTimeToken: this.$route.query.token,
+            backendURL: process.env.backendURL
         }
     },
     methods: {

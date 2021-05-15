@@ -9,7 +9,7 @@
           name="q"
           type="text"
           placeholder="search query"
-          id="searchbox"
+          ref="searchbox"
           class="input"
           :value="$route.query.q"
         />
@@ -24,6 +24,13 @@
         </select>
         <button type="submit" class="form-button">go</button>
       </form>
+      <div class="speed">
+        speed:
+        <button @click="addParameter('content')">contains</button>
+        <button @click="addParameter('title')">in title</button>
+        <button @click="addParameter('username')">written by</button> 
+        <button @click="addParameter('category')">in category</button> 
+      </div>
       <div v-show="splash">
         <h2>search parameters</h2>
         <p>searches from scratchdb use a pretty neat format.</p>
@@ -99,6 +106,10 @@
 </template>
 
 <style scoped>
+.speed {
+  margin-bottom: 8px;
+}
+
 .info {
   border-collapse: collapse;
   width: 100%;
@@ -171,6 +182,12 @@ export default {
 
       this.showLoadMore = true
     },
+    addParameter(param) {
+      let box = this.$refs.searchbox
+      box.value += `${box.value.length == 0? '' : ' '}+${param}:""`
+      box.focus()
+      box.setSelectionRange(box.value.length-1, box.value.length-1);
+    }
   },
   async fetch() {
     if (this.search !== "undefined") {

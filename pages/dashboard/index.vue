@@ -4,7 +4,7 @@
     <div class="margined">
       <h1>account dashboard</h1>
       <img
-        :src="`https://fluffyscratch.hampton.pw/user/${$auth.user().name}/profile/picture`"
+        :src="`${backendURL}/api/user/${$auth.user().name}/picture`"
         width="30"
         height="30"
         class="dashboard-pfp"
@@ -49,6 +49,7 @@ export default {
       status: this.$auth.user().status,
       color: this.$auth.user().color,
       alerts: [],
+      backendURL: process.env.backendURL,
       adminMessage: ''
     }
   },
