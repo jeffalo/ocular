@@ -231,7 +231,8 @@ export default {
 
 @media only screen and (max-width: 750px) {
   .pfp {
-    width: 75%
+    width: 75%;
+    height: auto;
   }
   .main-nav {
     width: 20%;
