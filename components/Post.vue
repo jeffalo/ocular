@@ -211,6 +211,8 @@ export default {
   max-height: 450px;
 }
 
+.main-content >>> .code pre {margin: 0}
+
 .main-content >>> .bb-quote-author {
   color: var(--text-color);
   font-weight: bold;
