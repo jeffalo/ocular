@@ -12,11 +12,11 @@
             </span>
         </h1>
         <div class="margined">
-          <nuxt-link to="/docs/about">about</nuxt-link> |
-          <a href="https://github.com/jeffalo/ocular" class="header-link">feedback</a> |
-          <a href="https://scratchdb.lefty.one" class="header-link">api and data from datonelefty</a>
+          <nuxt-link to="/docs/about">about</nuxt-link> <span>|</span>
+          <a href="https://github.com/jeffalo/ocular" class="header-link">feedback</a> <span class="full">|</span>
+          <a href="https://scratchdb.lefty.one" class="header-link full">api and data from datonelefty</a>
           <div v-if="$auth.loggedIn()" class="header-user">
-            <nuxt-link :to="`/user/${$auth.user().name}`">@{{ $auth.user().name }}</nuxt-link> | <nuxt-link :to="`/starred`">starred</nuxt-link> | <nuxt-link :to="`/dashboard`">dashboard</nuxt-link> | <a @click="logout()" class="logout">logout</a>
+            <nuxt-link :to="`/user/${$auth.user().name}`">@{{ $auth.user().name }}</nuxt-link> <span>|</span> <nuxt-link :to="`/starred`">starred</nuxt-link> | <nuxt-link :to="`/dashboard`">dashboard</nuxt-link> | <a @click="logout()" class="logout">logout</a>
           </div>
         </div>
     </div>

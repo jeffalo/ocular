@@ -292,6 +292,19 @@ select {
   transition: opacity .15s;
 }
 
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 750px) {
+  .full {
+    display: none;
+  }
+  .mobile {
+    display: initial;
+  }
+}
+
 @media only screen and (max-width: 1500px) {
   .margined {
     /*background-color: lightblue;*/
