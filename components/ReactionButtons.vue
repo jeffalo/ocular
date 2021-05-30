@@ -138,7 +138,7 @@ export default {
 }
 
 .reaction-button-popover:hover {
-  opacity: 75%;
+  opacity: 0.75;
 }
 
 .reaction-button-popover.selected {
