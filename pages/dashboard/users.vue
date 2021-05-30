@@ -9,6 +9,9 @@
         :pagination-options="{
           enabled: true
         }"
+        :search-options="{
+          enabled: true
+        }"
         :theme="$colorMode.value == 'dark' || $colorMode.value == 'catsunited' || $colorMode.value == 'classic-dark' ? 'nocturnal' : ''"/>
       </client-only>
       <Footer />

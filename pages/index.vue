@@ -9,6 +9,9 @@
         <nuxt-link to="/search">
           <div class="content"><span>🔍 search</span></div>
         </nuxt-link>
+        <nuxt-link to="/browse">
+          <div class="content"><span>🌐 browse</span></div>
+        </nuxt-link>
         <nuxt-link to="/dashboard">
           <div class="content"><span>💻 dashboard</span></div>
         </nuxt-link>

@@ -7,6 +7,12 @@
         <h1 style="display: inline-block">{{ user }}</h1>
         <!-- todo: use classes instead of inline css -->
         <Status :user="user" style="display: inline" />
+        <details class="signature-spoiler">
+          <summary>signature</summary>
+          <div class="signature">
+            <Render v-if="info.signature" :content="info.signature"/>
+          </div>
+        </details>
         <h2>{{ user }}'s posts</h2>
         <PostList :posts="posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
@@ -65,3 +71,22 @@ export default {
   fetchOnServer: false,
 };
 </script>
+
+<style scoped>
+.signature-spoiler {
+  margin-bottom: 15px;
+  padding: 12px 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--quote-border);
+  background-color: var(--quote-background);
+}
+
+.signature-spoiler summary {
+  cursor: pointer;
+}
+
+.signature-spoiler .signature {
+  margin-top: 10px;
+}
+</style>

@@ -12,13 +12,13 @@
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/redirect-module": "^0.3.1",
     "cookie": "^0.4.1",
-    "core-js": "^3.8.3",
+    "core-js": "^3.13.1",
     "js-cookie": "^2.2.1",
-    "nuxt": "^2.14.6",
-    "vue-good-table": "^2.21.8",
+    "nuxt": "^2.15.6",
+    "vue-good-table": "^2.21.10",
     "vue-plausible": "^1.1.4"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^2.0.5"
+    "@nuxtjs/color-mode": "^2.0.9"
   }
 }
