@@ -269,15 +269,15 @@ select {
 }
 
 .tooltip.popover .popover-inner {
-  background: #f9f9f9;
-  color: black;
-  padding: 24px;
+  background: #000000b5;
+  color: white;
+  padding: 10px;
   border-radius: 5px;
   box-shadow: 0 5px 30px rgba(black, .1);
 }
 
 .tooltip.popover .popover-arrow {
-  border-color: #f9f9f9;
+  border-color: #000000b5;
 }
 
 .tooltip[aria-hidden='true'] {

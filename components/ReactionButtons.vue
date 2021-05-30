@@ -1,25 +1,53 @@
 <template>
-  <span v-if="$auth.loggedIn()">
-    <span v-if="$auth.user().admin">
+  <span>
+    <span v-if="$auth.loggedIn() && $auth.user().admin">
       <form class="admin-reaction-form" @submit.prevent="customReaction()">
         <input
           class="admin-reaction-input"
           type="text"
           v-model="adminCustomReaction"
+          placeholder="custom reaction"
         />
       </form>
     </span>
     <a
-      v-for="reaction of reactions"
+      v-for="reaction of filteredReactions"
       :key="reaction.emoji"
       class="reaction-button"
       :class="{
-        selected: reaction.reactions.find((r) => r.user == $auth.user().name),
+        selected:
+          $auth.loggedIn() &&
+          reaction.reactions.find((r) => r.user == $auth.user().name),
         loading,
       }"
       @click="react(post.id, reaction.emoji)"
       >{{ reaction.emoji }} {{ reaction.reactions.length }}</a
     >
+    <v-popover
+      placement="top"
+      class="reactions-popover"
+      v-if="$auth.loggedIn()"
+    >
+      <!-- This will be the popover target (for the events and position) -->
+      <button class="open-reaction-popover">😀</button>
+      <!-- This will be the content of the popover -->
+      <div slot="popover">
+        <a
+          v-for="reaction of reactions"
+          :key="reaction.emoji"
+          class="reaction-button-popover"
+          v-close-popover
+          :class="{
+            selected: reaction.reactions.find(
+              (r) => r.user == $auth.user().name
+            ),
+            loading,
+          }"
+          @click="react(post.id, reaction.emoji)"
+          >{{ reaction.emoji }}</a
+        >
+      </div>
+    </v-popover>
   </span>
 </template>
 
@@ -32,6 +60,11 @@ export default {
       adminCustomReaction: "",
       loading: false,
     };
+  },
+  computed: {
+    filteredReactions() {
+      return this.reactions.filter((r) => r.reactions.length > 0);
+    },
   },
   methods: {
     async react(id, emoji) {
@@ -55,6 +88,10 @@ export default {
           this.reactions = data;
           this.loading = false;
         }
+      } else {
+        this.$router.push({
+          path: "/login",
+        });
       }
     },
     customReaction() {
@@ -89,6 +126,25 @@ export default {
   transition: opacity 500ms;
 }
 
+.reaction-button-popover {
+  padding: 4px;
+  color: white;
+  margin: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 500ms;
+  user-select: none;
+}
+
+.reaction-button-popover:hover {
+  opacity: 75%;
+}
+
+.reaction-button-popover.selected {
+  background-color: var(--brand);
+}
+
 .reaction-button.selected {
   color: white;
   background-color: var(--brand);
@@ -96,6 +152,21 @@ export default {
 
 .reaction-button.loading {
   opacity: 0.5;
+}
+
+.open-reaction-popover {
+  background: none;
+  filter: grayscale();
+  transition: filter 500ms;
+  user-select: none;
+}
+
+.open .open-reaction-popover {
+  filter: none;
+}
+
+.reactions-popover {
+  display: inline;
 }
 
 .admin-reaction-form {

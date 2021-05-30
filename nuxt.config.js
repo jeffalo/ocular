@@ -24,7 +24,7 @@ export default {
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/auth.js', { src: '~/plugins/vue-good-table', ssr: false }],
+  plugins: ['~/plugins/auth.js', { src: '~/plugins/vue-good-table', ssr: false }, '~/plugins/vue-tooltip.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
