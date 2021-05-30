@@ -38,10 +38,15 @@ export default {
 td,th {
   border-style: solid;
   border-width: 1px;
-  border-color: var(--input-border)
+  border-color: var(--input-border);
 }
 
 td {
   padding: 8px 6px;
+}
+
+td span {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 </style>
