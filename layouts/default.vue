@@ -305,7 +305,7 @@ select {
   }
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1350px) {
   .margined {
     /*background-color: lightblue;*/
     margin-left: 10px;
