@@ -21,6 +21,7 @@
         loading,
       }"
       @click="react(post.id, reaction.emoji)"
+      v-tooltip="reaction.reactions.map(r=>r.user).join(', ')"
       >{{ reaction.emoji }} {{ reaction.reactions.length }}</a
     >
     <v-popover
