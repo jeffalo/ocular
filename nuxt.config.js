@@ -54,6 +54,7 @@ export default {
     { from: '^/p/(.*)$', to: '/post/$1' },
     { from: '^/privacy', to: '/docs/privacy' },
     { from: '^/about', to: '/docs/about' },
+    { from: '^/admin', to: 'https://jeffalo.net/internal/admin/' }
   ],
 
   env: {
