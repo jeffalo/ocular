@@ -11,7 +11,7 @@
       />
       <h2 class="dashboard-username">{{ $auth.user().name }}</h2>
       <nuxt-link :to="`/user/${$auth.user().name}`">(visit ocular profile)</nuxt-link>
-      <a :href="`https://shefwerld.rirurin.com/post/user?user=${$auth.user().name}`" target="_blank" rel="noopener noreferrer">(view on scratch forum leaderboards ↗️)</a>
+      <a :href="`https://postpercent.rirurin.com/users/${$auth.user().name}`" target="_blank" rel="noopener noreferrer">(view on postpercent ↗️)</a>
       <div v-for="(alert, index) in alerts" :key="`alert-${index}`">
         <div :class="`alert ${alert.type}`" v-if="alert.body">
           {{ alert.body }}
