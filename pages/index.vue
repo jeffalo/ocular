@@ -91,4 +91,20 @@
   justify-content: center;
   align-items: center;
 }
+
+:root {
+    --brand: #5b910c;
+    --background: #3b7d0d;
+    --input-background: #fff;
+    --input-border: #e0e0e0;
+    --sidebar-background: #f2f2f2;
+    --sidebar-border: #e0e0e0;
+    --quote-background: #f7f7f7;
+    --quote-border: #ccc;
+    --table-stripe: #f2f2f2;
+    --table-hover: #e6e6e6;
+    --table-border: #ddd;
+    --text: #fff;
+    --footer-text: #6ba614;
+}
 </style>
