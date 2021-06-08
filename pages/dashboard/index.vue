@@ -24,7 +24,7 @@
             <br>
             {{ adminMessage }}
           </div>
-          <label for="status">status: </label><input name="status" type="text" class="input dashboard" maxlength="300" v-model="status">
+          <label for="status">status: </label><input name="status" type="text" class="input dashboard" maxlength="50" v-model="status">
           <br>
           <label for="color">favourite colour: </label><input name="color" type="color" class="color-input" v-model="color">
           <br>
@@ -115,7 +115,7 @@ export default {
       } else {
         this.status = ''
         this.color = ''
-        this.adminMessage = 'you need to put in a username lol'
+        this.adminMessage = 'you need to put in a username'
       }
     }
   },
