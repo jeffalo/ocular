@@ -8,7 +8,7 @@ description: how are people using the ocular api?
 - [Scratch Forum Leaderboards](https://shefwerld.rirurin.com/post/)
 - [postpercent](https://postpercent.rirurin.com/)
 - [theforumhelpers.github.io](https://theforumhelpers.github.io/)
-- [signature history viewer](https://signature-history.9gr.repl.co/)
+- [Scratory](https://scratory.vercel.app/)
 - [Scratch Tools](https://scratchtools.edu.eu.org/)
 
 want to add something? [edit this page](https://github.com/jeffalo/ocular/blob/main/content/docs/gallery.md)
