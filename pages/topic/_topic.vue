@@ -10,7 +10,7 @@
             id: <b>{{ data.posts[0].topic.id }}</b>
           </p>
           <p>
-            category: <b>{{ data.posts[0].topic.category }}</b>
+            category: <b><nuxt-link :to="`/browse/${category}`">{{ data.posts[0].topic.category }}</nuxt-link></b>
           </p>
         </div>
         <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
@@ -21,6 +21,12 @@
 </template>
 
 <script>
+import map from "@/assets/category-map.js";
+
+function getKey(map, value) { // thanks https://stackoverflow.com/a/53313763/9918633
+  return [...map].find(([key, val]) => val == value)[0]
+}
+
 export default {
   head() {
     return {
@@ -32,6 +38,7 @@ export default {
       topic: this.$route.params.topic,
       page: 0,
       data: {},
+      category: '',
       showLoadMore: false
     };
   },
@@ -50,12 +57,13 @@ export default {
     },
   },
   async fetch() {
-    var userPostsRes = await fetch(
+    var postsRes = await fetch(
       `https://scratchdb.lefty.one/v3/forum/search/?q=%2Btopic%3A${this.topic}&page=${this.page}&o=oldest`
     );
-    var userPosts = await userPostsRes.json();
+    var postData = await postsRes.json();
 
-    this.data = userPosts;
+    this.data = postData;
+    this.category = getKey(map, postData.posts[0].topic.category) //get category id from name 
     this.showLoadMore = true
   },
   fetchOnServer: false,
