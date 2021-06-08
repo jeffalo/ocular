@@ -4,7 +4,7 @@ headertitle: api gallery
 description: how are people using the ocular api?
 ---
 
-- a browser extension. i wish i could tell you which one, but scratch cat says i cant(/topic/284272).
+- a browser extension. i wish i could tell you which one, but scratch cat says i [can not](/topic/284272).
 - [shefwerld](https://shefwerld.rirurin.com/post/)
 - [postpercent](https://postpercent.rirurin.com/)
 - [theforumhelpers.github.io](https://theforumhelpers.github.io/)
