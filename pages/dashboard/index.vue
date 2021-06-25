@@ -28,6 +28,11 @@
           <br>
           <label for="color">favourite colour: </label><input name="color" type="color" class="color-input" v-model="color">
           <br>
+          <div v-if="$auth.user().admin">
+            <label for="banned">banned: </label><input type="checkbox" name="banned" v-model="banned">
+            <br><br>
+            <a href="#" @click="deleteUser()">⚠ delete this user's data</a><br>
+          </div>
           <button type="submit" class="update-btn">update</button>
       </form>
       <br>
@@ -48,6 +53,7 @@ export default {
       user: this.$auth.user().name,
       status: this.$auth.user().status,
       color: this.$auth.user().color,
+      banned: this.$auth.user().banned,
       alerts: [],
       backendURL: process.env.backendURL,
       adminMessage: ''
@@ -73,6 +79,7 @@ export default {
             body: JSON.stringify({
               status: this.status,
               color: this.color,
+              banned: this.banned
             }),
           }
         );
@@ -100,6 +107,35 @@ export default {
         })
       }
     },
+    async deleteUser() {
+      if(confirm(`are you sure you want to delete all data for ${this.user}?`) && confirm("do you know what you're doing? theres like one use case for this and its really rare. pressing [OK] will delete all of this user's data with no way to go back.")) {
+        let res = await fetch(`${process.env.backendURL}/api/user/${this.user}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: this.$auth.token(),
+            "Content-Type": "application/json",
+          }
+        });
+
+        let data = await res.json()
+
+        this.$store.commit("statuses/removeUser", {name: this.user}) // remove user from ocular cache
+
+        if(data){
+          if(!data.error) {
+            this.alerts.unshift({
+              body: data.ok,
+              type: 'success'
+            })
+          } else {
+            this.alerts.unshift({
+              body: data.error,
+              type: 'error'
+            })
+          }
+        }
+      }    
+    },
     async adminFeedback() {
       // return info on what's going to happen when an admin presses update and match inputs with user data
       if(this.user !== '') {
@@ -107,6 +143,7 @@ export default {
         let data = await res.json()
         this.status = data.status || ''
         this.color = data.color || ''
+        this.banned = data.banned || false
         if(!data._id) {
           this.adminMessage = `${this.user} does not have an ocular account. this will create a new one for them`
         } else {
