@@ -5,7 +5,7 @@
 <script>
 export default {
   colorMode() {
-    return 'light';
+    return "light";
   },
   head() {
     return {
@@ -24,26 +24,6 @@ export default {
         topic: {},
       },
     };
-  },
-  methods: {
-    scratchBlocksify() {
-      scratchblocks.renderMatching("pre.blocks:not(.scratchblockrendered)", {
-        style: "scratch2", // Optional
-      });
-      document
-        .querySelectorAll("pre.blocks:not(.scratchblockrendered)")
-        .forEach((i) => {
-          i.classList.add("scratchblockrendered");
-        });
-    },
-  },
-  updated: function () {
-    this.$nextTick(function () {
-      this.scratchBlocksify();
-    });
-  },
-  mounted: function () {
-    this.scratchBlocksify();
   },
   async fetch() {
     var postRes = await fetch(
