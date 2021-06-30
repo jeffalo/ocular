@@ -73,6 +73,6 @@ export default {
 
 <style scoped>
 main {
-    padding: 20px
+    padding: 10px
 }
 </style>
