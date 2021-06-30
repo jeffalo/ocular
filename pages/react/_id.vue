@@ -2,7 +2,7 @@
     <main class="margined">
         <div v-if="$auth.loggedIn()" v-show="!loading">
             are you sure you want to toggle reaction to <a :href="`https://scratch.mit.edu/discuss/post/${$route.params.id}`">{{ text }}</a> with "{{ $route.query.emoji }}"?
-            <button @click="react($route.params.id, $route.query.emoji)">yes</button>
+            <button autofocus @click="react($route.params.id, $route.query.emoji)">yes</button>
             <button @click="close()">no</button>
         </div>
         <div v-show="loading && !done">
@@ -70,3 +70,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+main {
+    padding: 20px
+}
+</style>
