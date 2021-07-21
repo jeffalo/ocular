@@ -55,7 +55,7 @@ export default new Map(
         // ["53", "[unknown (for now)]"],
         ["54", "Scratch Day 2017"],
         ["55", "Africa"],
-        // ["56", "[unknown (for now)]"],
+        ["56", "Scratch Day 2018"],
         ["57", "Scratch 3.0 Beta"],
         ["58", "Camp Counselors 2020"],
         ["59", "فارسی"],
