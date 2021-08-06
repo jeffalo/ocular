@@ -12,6 +12,7 @@
         :pagination-options="{ enabled: true }"
         :search-options="{ enabled: true }"
         :theme="$colorMode.value == 'dark' || $colorMode.value == 'catsunited' || $colorMode.value == 'classic-dark' ? 'nocturnal' : ''"
+        @on-sort-change="unchangedRows = JSON.parse(JSON.stringify(rows))"
         >
           <template v-slot:table-row="{ row, column, formattedRow }">
             <span v-if="column.field === 'status'">
@@ -43,6 +44,11 @@
 </template>
 
 <script>
+import vgtDefaultType from "vue-good-table/src/components/types/default.js";
+import vgtBoolType from "vue-good-table/src/components/types/boolean.js";
+
+const [{ compare: compareString }, { compare: compareBool }] = [vgtDefaultType, vgtBoolType];
+
 export default {
   middleware: 'admin',
   head: {
@@ -54,6 +60,7 @@ export default {
         {
           label: 'internal id',
           field: '_id',
+          globalSearchDisabled: true,
         },
         {
           label: 'name',
@@ -62,22 +69,30 @@ export default {
         {
           label: 'status',
           field: 'status',
+          sortFn: this.sortWithoutChangingWheneverYouChangeAnything
         },
         {
           label: 'color',
-          field: 'color'
+          field: 'color',
+          sortFn: this.sortWithoutChangingWheneverYouChangeAnything
         },
         {
           label: 'banned?',
-          field: 'banned'
+          field: 'banned',
+          globalSearchDisabled: true,
+          sortFn: this.sortWithoutChangingWheneverYouChangeAnything,
+          type: 'boolean'
         },
         {
           label: 'admin?',
-          field: 'admin'
+          field: 'admin',
+          globalSearchDisabled: true,
+          type: 'boolean'
         },
         {
           label: 'updated at',
-          field: 'meta.updated'
+          field: 'meta.updated',
+          globalSearchDisabled: true,
         },
         {
           label: 'updated by',
@@ -85,6 +100,7 @@ export default {
         },
       ],
       rows: [],
+      unchangedRows: [],
       changed: []
     };
   },
@@ -98,9 +114,12 @@ export default {
     let data = await res.json();
     this.rows = data;
     this.changed = Array.from({ length: data.length }).fill(false);
-   //alert(JSON.stringify(data));
+    this.unchangedRows = JSON.parse(JSON.stringify(this.rows));
   },
   methods: {
+    sortWithoutChangingWheneverYouChangeAnything(x, y, col, rowx, rowy) {
+      return (col.type === "boolean" ? compareBool : compareString)(this.unchangedRows.find(x => x._id === rowx._id)[col.field], this.unchangedRows.find(y => y._id === rowy._id)[col.field]);
+    },
     updateChanged (index, value) {
       this.$set(this.changed, index, value);
     },
@@ -122,11 +141,12 @@ export default {
       this.updateChanged(index, true);
     },
     async saveChanges() {
+      this.unchangedRows = JSON.parse(JSON.stringify(this.rows));
       await this.$store.dispatch("auth/login", this.$auth.token()); // refresh user details
       if(this.$auth.user()){
-        for (const index in this.changes.filter(a => a)) {
-          let user = this.rows[index];
-          let res = await fetch(
+        for (const index in this.changed.filter(a => a)) { // for each index of users that have had their details changed
+          let user = this.rows[index]; // this is the actual user object
+          let res = await fetch( // updare user
           `${process.env.backendURL}/api/user/${user.name}`,
             {
               method: "PUT",
@@ -154,6 +174,7 @@ export default {
             }
           }
         }
+        this.$nuxt.refresh(); // refresh table
       } else {
         this.$router.push({
           path: '/login'
