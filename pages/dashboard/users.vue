@@ -13,21 +13,23 @@
         :search-options="{ enabled: true }"
         :theme="$colorMode.value == 'dark' || $colorMode.value == 'catsunited' || $colorMode.value == 'classic-dark' ? 'nocturnal' : ''"
         >
-          <template v-slot:table-row="{ row, column, index, formattedRow }">
-            <span v-if="column.field === 'status'" :key="index">
+          <template v-slot:table-row="{ row, column, formattedRow }">
+            <span v-if="column.field === 'status'">
               <div
                 contenteditable
                 class="status-edit"
-                @blur="statusChanged(index, $event.target.innerText)"
+                @blur="statusChanged(row.originalIndex, $event.target.innerText)"
               >
                 {{ row.status }}
               </div>
             </span>
-            <span v-else-if="column.field === 'color'" :key="index">
-              <input type="color" :value="row.color" @change="updateColor(index, $event.target.value)" /> {{ row.color }}
+            <span v-else-if="column.field === 'color'">
+              <input type="color" :value="row.color" @change="updateColor(row.originalIndex, $event.target.value)" /> 
+              {{ row.color }}
             </span>
-            <span v-else-if="column.field === 'banned'" :key="index">
-              <input type="checkbox" :checked="row.banned" @change="setBanned(index, $event.target.checked)"/> {{ !!row.banned }}
+            <span v-else-if="column.field === 'banned'">
+              <input type="checkbox" :checked="row.banned" @change="setBanned(row.originalIndex, $event.target.checked)"/> 
+              {{ !!row.banned }}
             </span>
             <span v-else>
               {{ formattedRow[column.field] }}
@@ -42,7 +44,7 @@
 
 <script>
 export default {
-  //middleware: 'admin',
+  middleware: 'admin',
   head: {
     title: 'user list'
   },
@@ -87,19 +89,13 @@ export default {
     };
   },
   async fetch() {
-    /*let res = await fetch(`${process.env.backendURL}/api/users`, {
+    let res = await fetch(`${process.env.backendURL}/api/users`, {
       method: "GET",
       headers: {
         Authorization: this.$auth.token(),
       },
     });
-    let data = await res.json();*/
-    let data = await Promise.all(["pufferfish101007",  "pufferfish_test",  "jeffalo", "dhuls", "scratchusername40", "catsunited", "grahamsh", "za-chary", "harakou", "paddle2see", "griffpatch", "CST1229", "chiroyce", "9gr", "kccuber", "uwv"].map(async u => {
-      let res = await (await fetch("https://my-ocular.jeffalo.net/api/user/" + u)).json()
-     // console.log(res);
-     // alert(res);
-      return res;
-      }));
+    let data = await res.json();
     this.rows = data;
     this.changed = Array.from({ length: data.length }).fill(false);
    //alert(JSON.stringify(data));
@@ -121,7 +117,6 @@ export default {
       this.updateChanged(index, true);
     },
     setBanned(index, banned) {
-      alert(banned);
       if (!!banned === !!this.rows[index].banned) return;
       this.$set(this.rows[index], "banned", banned);
       this.updateChanged(index, true);
