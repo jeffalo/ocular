@@ -144,7 +144,8 @@ export default {
       this.unchangedRows = JSON.parse(JSON.stringify(this.rows));
       await this.$store.dispatch("auth/login", this.$auth.token()); // refresh user details
       if(this.$auth.user()){
-        for (const index in this.changed.filter(a => a)) { // for each index of users that have had their details changed
+        for (const index in this.changed) { // for each index of users that have had their details changed
+          if (!this.changed(index)) continue;
           let user = this.rows[index]; // this is the actual user object
           let res = await fetch( // updare user
           `${process.env.backendURL}/api/user/${user.name}`,
@@ -167,13 +168,14 @@ export default {
           this.$store.commit("statuses/removeUser", { name: user.name }) // remove user from ocular cache so they'll see real status
 
           if(data) {
-            if(!data.error) {
-              alert(data.ok)
-            } else {
-              alert(data.error)
+            if(data.error) {
+              alert(data.error);
+              this.$nuxt.refresh();
+              return;
             }
           }
         }
+        alert("User(s) updated");
         this.$nuxt.refresh(); // refresh table
       } else {
         this.$router.push({
