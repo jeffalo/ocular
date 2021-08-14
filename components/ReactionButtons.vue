@@ -21,8 +21,14 @@
         loading,
       }"
       @click="react(post.id, reaction.emoji)"
-      v-tooltip="reaction.reactions.map(r=>r.user).join(', ')"
-      >{{ reaction.emoji }} {{ reaction.reactions.length }}</a
+      v-tooltip="reaction.reactions.map((r) => r.user).join(', ')"
+    >
+      <img
+        src="https://assets.scratch.mit.edu/4cb0221262b39a58590609ce1152ae52.png"
+        v-if="reaction.emoji == 'squirrel'"
+      />
+      <span v-else>{{ reaction.emoji }}</span>
+      {{ reaction.reactions.length }}</a
     >
     <v-popover
       placement="top"
@@ -45,7 +51,13 @@
             loading,
           }"
           @click="react(post.id, reaction.emoji)"
-          >{{ reaction.emoji }}</a
+        >
+          <img
+            src="https://assets.scratch.mit.edu/4cb0221262b39a58590609ce1152ae52.png"
+            v-if="reaction.emoji == 'squirrel'"
+          />
+          <span v-else>{{ reaction.emoji }}</span>
+          {{ reaction.reactions.length }}</a
         >
       </div>
     </v-popover>
