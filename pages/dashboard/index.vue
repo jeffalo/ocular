@@ -50,13 +50,21 @@ export default {
   },
   data() {
     return {
-      user: this.$auth.user().name,
+      user: this.$auth.user().admin ? (this.$route.query.name || this.$auth.user().name) : this.$auth.user().name,
       status: this.$auth.user().status,
       color: this.$auth.user().color,
       banned: this.$auth.user().banned,
       alerts: [],
       backendURL: process.env.backendURL,
       adminMessage: ''
+    }
+  },
+  async fetch () {
+    if (this.user !== this.$auth.user().name) {
+      const userInfo = await (await fetch(`${this.backendURL}/api/user/${this.user}?noReplace=true`)).json();
+      ({
+        status: this.status, color: this.color, banned: this.banned
+      } = userInfo);
     }
   },
   watch: {
