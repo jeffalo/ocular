@@ -154,7 +154,7 @@
         if (this.$auth.user()) {
           for (const index in this.changed) {
             // for each index of users that have had their details changed
-            if (!this.changed(index)) continue;
+            if (!this.changed[index]) continue;
             let user = this.rows[index]; // this is the actual user object
             let res = await fetch(// updare user
               `${process.env.backendURL}/api/user/${user.name}`,
