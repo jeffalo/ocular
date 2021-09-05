@@ -15,7 +15,10 @@
         @on-sort-change="unchangedRows = JSON.parse(JSON.stringify(rows))"
         >
           <template v-slot:table-row="{ row, column, formattedRow }">
-            <span v-if="column.field === 'status'">
+            <span v-if="column.field === 'name'">
+              {{ row.name }} <a :href="`/dashboard?user=${row.name}`" target="_blank">dashboard ↗</a> <a :href="`https://scratch.mit.edu/users/${row.name}/`" target="_blank">scratch ↗</a>
+            </span>
+            <span v-else-if="column.field === 'status'">
               <div
                 contenteditable
                 class="status-edit"
