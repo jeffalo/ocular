@@ -11,5 +11,6 @@ description: how are people using the ocular api?
 - [Scratory](https://scratory.vercel.app/)
 - [Scratch Tools](https://scratchtools.edu.eu.org/)
 - [Magnifier](https://magnifier.potatophant.net/)
+- [Scratch Profiler](https://scratchprofiler.cf)
 
 want to add something? [edit this page](https://github.com/jeffalo/ocular/blob/main/content/docs/gallery.md)
