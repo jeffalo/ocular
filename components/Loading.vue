@@ -44,7 +44,19 @@ export default {
         "i am running out of trivia",
         "i want you to see za-chary's 5000 Followers Podcast",
         "the scratch wiki has a wacky domain name",
-        "the scratch team's admin panel may have at some point had a template specifically for fnaf project alerts"
+        "the scratch team's admin panel may have at some point had a template specifically for fnaf project alerts",
+        "jeffalo did not write this message",
+        "scratchdb might stand for scratch donut buffet",
+        "jeffalo starts with a letter",
+        "ocular statuses are displayed on a variety of websites",
+        "any scratch url starting https://scratch.mit.edu/go leads to a 403",
+        'you can no longer sign up to scratch with the name "jeffalo"',
+        "when scratchdb is down, ocular may not work",
+        "you are reading this, or maybe not",
+        "the",
+        "ocular uses vue",
+        "no",
+        "the word ocular has three vowels and three consonants"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
