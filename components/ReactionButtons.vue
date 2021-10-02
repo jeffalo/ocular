@@ -24,8 +24,8 @@
       v-tooltip="reaction.reactions.map((r) => r.user).join(', ')"
     >
       <img
-        src="https://assets.scratch.mit.edu/4cb0221262b39a58590609ce1152ae52.png"
-        v-if="reaction.emoji == 'squirrel'"
+        :src="`/emojis/${reaction.emoji.substring(1, reaction.emoji.length-1)}.png`"
+        v-if="reaction.emoji.startsWith(':') && reaction.emoji.endsWith(':')"
       />
       <span v-else>{{ reaction.emoji }}</span>
       {{ reaction.reactions.length }}</a
@@ -53,8 +53,8 @@
           @click="react(post.id, reaction.emoji)"
         >
           <img
-            src="https://assets.scratch.mit.edu/4cb0221262b39a58590609ce1152ae52.png"
-            v-if="reaction.emoji == 'squirrel'"
+            :src="`/emojis/${reaction.emoji.substring(1, reaction.emoji.length-1)}.png`"
+            v-if="reaction.emoji.startsWith(':') && reaction.emoji.endsWith(':')"
           />
           <span v-else>{{ reaction.emoji }}</span>
           {{ reaction.reactions.length }}</a
