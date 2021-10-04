@@ -4,9 +4,12 @@
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
       <div v-if="!$fetchState.pending">
-        <h1 style="display: inline-block">{{ user }}</h1>
-        <!-- todo: use classes instead of inline css -->
-        <Status :user="user" style="display: inline" />
+        <h1 class="user-name">{{ user }}</h1>
+        <h3 class="view-scratch"><a
+            :href="`https://scratch.mit.edu/users/${user}`"
+            class="view-scratch"
+        >scratch profile</a></h3>
+        <Status :user="user" class="user-status" />
         <details class="signature-spoiler">
           <summary>signature</summary>
           <div class="signature">
@@ -88,5 +91,19 @@ export default {
 
 .signature-spoiler .signature {
   margin-top: 10px;
+}
+
+.user-name {
+  display: inline-block;
+}
+
+.user-status {
+  display: inline-block;
+}
+
+.view-scratch {
+  float: right;
+  text-decoration: none;
+  display: inline-block;
 }
 </style>
