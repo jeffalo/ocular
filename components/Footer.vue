@@ -1,14 +1,14 @@
 <template>
   <footer>
     ocular is an open source project, with styling aspects inspired by
-    <a href="https://scratch.mit.edu/users/maximouse" class="footer-link"
+    <a target="_blank" href="https://scratch.mit.edu/users/maximouse" class="footer-link"
       >@Maximouse</a
     >
     and Scratch by MIT<br />
     API and data from
-    <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
+    <a class="footer-link" target="_blank" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
     | authentication api from
-    <a class="footer-link" href="https://hamptonmoore.com">@herohamp</a>
+    <a class="footer-link" target="_blank" href="https://hamptonmoore.com">@herohamp</a>
     <br /><br />this forum viewer tool falls under Creative Commons
     Attribution-ShareAlike 2.0 license <br /><br />
     <nuxt-link class="footer-link" to="/docs/privacy">privacy</nuxt-link>

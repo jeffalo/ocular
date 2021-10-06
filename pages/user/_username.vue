@@ -6,6 +6,7 @@
       <div v-if="!$fetchState.pending">
         <h1 class="user-name">{{ user }}</h1>
         <h3 class="view-scratch"><a
+            target="_blank"
             :href="`https://scratch.mit.edu/users/${user}`"
             class="view-scratch"
         >scratch profile</a></h3>

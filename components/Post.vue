@@ -5,7 +5,7 @@
       <nuxt-link :to="`/topic/${post.topic.id}`" class="topic-link">{{
         post.topic.title
       }}</nuxt-link>
-      <a
+      <a target="_blank"
         :href="`https://scratch.mit.edu/discuss/post/${post.id}`"
         class="view-scratch"
         >view on scratch</a
@@ -14,7 +14,7 @@
     <div class="post-wrap">
       <section class="main-content">
         <Render class="post-content" :content="post.content.html" />
-        <div class='post-footer'><ReactionButtons :post="post"/> | <span v-if="$auth.loggedIn()"> <Star :post="post"/> | </span><a :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
+        <div class='post-footer'><ReactionButtons :post="post"/> | <span v-if="$auth.loggedIn()"> <Star :post="post"/> | </span><a target="_blank" :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
       </section>
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username">{{
