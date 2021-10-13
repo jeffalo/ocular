@@ -14,7 +14,7 @@ export default {
         'this is the third "did you know" message i have written',
         "there was a small window of time where you could backpack scratchblocks from the forums",
         'ocular was originally called "Jeffalo Post Viewer"',
-        "according to all known laws of aviation there is no way there is no way a bee should be able to fly",
+        "according to all known laws of aviation there is no way a bee should be able to fly",
         "only cool people have an ocular statuses?",
         'the word "notch" was originally "oche" but people misheard it when others said "an oche"',
         "the scratch team can see your gender",
