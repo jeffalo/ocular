@@ -58,7 +58,12 @@ export default {
         "no",
         "the word ocular has three vowels and three consonants"
         "ocular is 1 year old!",
-        "ocular-svelte is coming soon!"
+        "ocular-svelte is coming soon!",
+        "scratch 3 released on january 2nd, 2019",
+        "scratch 2 released on may 9th, 2013",
+        "in scratch, youtube videos are converted to a scratch page to hide comments and other elements",
+        "yes",
+        "scratch is entirely open source"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
