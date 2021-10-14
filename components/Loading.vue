@@ -57,6 +57,8 @@ export default {
         "ocular uses vue",
         "no",
         "the word ocular has three vowels and three consonants"
+        "ocular is 1 year old!",
+        "ocular-svelte coming soon!"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
