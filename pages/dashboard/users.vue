@@ -16,7 +16,7 @@
           >
           <template v-slot:table-row="{ row, column, formattedRow }">
             <span v-if="column.field === 'name'">
-              {{ row.name }} <a :href="`/dashboard?user=${row.name}`" target="_blank">d</a> <a :href="`https://scratch.mit.edu/users/${row.name}/`" target="_blank">s</a>
+              {{ row.name }} <a :href="`/dashboard?name=${row.name}`" target="_blank">d</a> <a :href="`https://scratch.mit.edu/users/${row.name}/`" target="_blank">s</a>
             </span>
             <span v-else-if="column.field === 'status'">
               <div
