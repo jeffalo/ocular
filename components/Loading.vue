@@ -56,6 +56,7 @@ export default {
         "the",
         "ocular uses vue",
         "no",
+        "the ice cream machine is broken",
         "the word ocular has three vowels and three consonants"
       ]
     return {
