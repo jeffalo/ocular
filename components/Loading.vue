@@ -56,7 +56,17 @@ export default {
         "the",
         "ocular uses vue",
         "no",
-        "the word ocular has three vowels and three consonants"
+        "the word ocular has three vowels and three consonants",
+        "you can't spell ocular without u",
+        "the word ocular is related to vision",
+        "ocular's API is in a separate repository from the rest of ocular",
+        "there is a svelte version of ocular that is currently unreleased",
+        "i wrote this at 2:22 PM",
+        "ocular is at least a year old",
+        "ocular's privacy policy is something you should read",
+        "there are a few people contributing to ocular's open source code",
+        '"coural" is an anagram of "ocular"',
+        "ocular works on obscure platforms, such as watchOS"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
