@@ -46,6 +46,7 @@ export default {
 
 <style scoped>
 .star-button{
+  font-weight: normal;
   cursor: pointer;
   user-select: none;
 }

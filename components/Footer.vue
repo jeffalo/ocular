@@ -12,7 +12,7 @@
     <br /><br />this forum viewer tool falls under Creative Commons
     Attribution-ShareAlike 2.0 license <br /><br />
     <nuxt-link class="footer-link" to="/docs/privacy">privacy</nuxt-link>
-    | <button class="footer-link" @click="toggleTheme()">🎨 theme ({{ $colorMode.preference }})</button>
+    | <button class="footer-link" @click="toggleTheme()"><Emoji>🎨</Emoji> theme ({{ $colorMode.preference }})</button>
   </footer>
 </template>
 

@@ -9,7 +9,7 @@
       <p>
         logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
       </p>
-      <button @click="login">🐈 login with scratch</button>
+      <button @click="login"><Emoji>🐈</Emoji> login with scratch</button>
       <Footer />
     </div>
   </div>
