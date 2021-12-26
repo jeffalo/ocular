@@ -7,16 +7,16 @@
       <div class="grid">
         <!-- todo why is this grid smaller? -->
         <nuxt-link to="/search">
-          <div class="content"><span>🔍 search</span></div>
+          <div class="content"><span><Emoji>🔍</Emoji> search</span></div>
         </nuxt-link>
         <nuxt-link to="/browse">
-          <div class="content"><span>🌐 browse</span></div>
+          <div class="content"><span><Emoji>🌐</Emoji> browse</span></div>
         </nuxt-link>
         <nuxt-link to="/dashboard">
-          <div class="content"><span>💻 dashboard</span></div>
+          <div class="content"><span><Emoji>💻</Emoji> dashboard</span></div>
         </nuxt-link>
         <nuxt-link to="/docs">
-          <div class="content"><span>📜 docs</span></div>
+          <div class="content"><span><Emoji>📜</Emoji> docs</span></div>
         </nuxt-link>
         <!-- 
         <a href="stats.html">
@@ -84,11 +84,5 @@
 
 .content:active {
   backdrop-filter: brightness(0.5);
-}
-
-.content > span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>

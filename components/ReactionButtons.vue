@@ -27,7 +27,7 @@
         :src="`/emojis/${reaction.emoji.substring(1, reaction.emoji.length-1)}.png`"
         v-if="reaction.emoji.startsWith(':') && reaction.emoji.endsWith(':')"
       />
-      <span v-else>{{ reaction.emoji }}</span>
+      <Emoji v-else>{{ reaction.emoji }}</Emoji>
       {{ reaction.reactions.length }}</a
     >
     <v-popover
@@ -56,7 +56,7 @@
             :src="`/emojis/${reaction.emoji.substring(1, reaction.emoji.length-1)}.png`"
             v-if="reaction.emoji.startsWith(':') && reaction.emoji.endsWith(':')"
           />
-          <span v-else>{{ reaction.emoji }}</span>
+          <Emoji v-else>{{ reaction.emoji }}</Emoji>
           {{ reaction.reactions.length }}</a
         >
       </div>
@@ -169,6 +169,7 @@ export default {
 
 .open-reaction-popover {
   background: none;
+  font-weight: normal;
   filter: grayscale();
   transition: filter 500ms;
   user-select: none;
