@@ -22,11 +22,6 @@ export default {
     toggleTheme() {
       let current = this.$colorMode.preference
       let themes = ['system', 'light', 'dark', 'scratch', 'scratch-dark', 'catsunited' , 'classic-dark']
-      if (!(Math.floor(Math.random() * (168 - 1) + 1) == 68)) {
-        let switchTo = themes[themes.indexOf(current)+1]
-      } else {
-        let switchTo = 'missing-glasses'
-      }
       this.$colorMode.preference = switchTo || 'system'
     }
   }
