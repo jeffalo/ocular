@@ -22,6 +22,7 @@ export default {
     toggleTheme() {
       let current = this.$colorMode.preference
       let themes = ['system', 'light', 'dark', 'scratch', 'scratch-dark', 'catsunited' , 'classic-dark']
+      let switchTo = themes[themes.indexOf(current)+1]
       this.$colorMode.preference = switchTo || 'system'
     }
   }
