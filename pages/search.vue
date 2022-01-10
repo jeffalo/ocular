@@ -160,7 +160,7 @@ export default {
   },
   data() {
     return {
-      search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
+      search: encodeURIComponent(decodeURIComponent(String(this.$route.query.q))),
       sort: encodeURIComponent(decodeURIComponent(this.$route.query.sort)),
       showLoadMore: false,
       page: 0,
@@ -190,7 +190,7 @@ export default {
     }
   },
   async fetch() {
-    if (this.search !== "undefined") {
+    if (this.search !=== undefined) {
       this.data = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
       ).then((res) => res.json());
