@@ -86,7 +86,7 @@
             <tr>
               <td>content</td>
               <td>
-                requres that the resulting posts have this in their content
+                requires that the resulting posts have this in their content
               </td>
             </tr>
           </tbody>
