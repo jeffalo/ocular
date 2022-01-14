@@ -66,7 +66,9 @@ export default {
         "ocular's privacy policy is something you should read",
         "there are a few people contributing to ocular's open source code",
         '"coural" is an anagram of "ocular"',
-        "ocular works on obscure platforms, such as watchOS"
+        "ocular works on obscure platforms, such as watchOS",
+        "ocular used to have a forums stats bar like postpercent",
+        "the studio update topic was the first topic to have 100 on a single reaction"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
