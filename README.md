@@ -1,7 +1,7 @@
 # 🔍 ocular
 ocular is the search tool for the scratch forums.
 
-it's up at [ocular.jeffalo.net](ocular.jeffalo.net)
+it's up at [ocular.jeffalo.net](https://ocular.jeffalo.net)
 
 ## behind the scenes
 - data from [DatOneLefty's ScratchDB](https://scratchdb.lefty.one/)
