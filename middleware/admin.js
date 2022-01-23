@@ -1,7 +1,7 @@
 const serverCookie = process.server ? require('cookie') : undefined
 const clientCookie = process.client ? require('js-cookie') : undefined
 
-// make sure to keep this the same as authetnicated.js
+// make sure to keep this the same as authenticated.js
 
 export default async function ({ $auth, redirect, req, store }) {
     let token = null
@@ -14,7 +14,7 @@ export default async function ({ $auth, redirect, req, store }) {
         token = clientCookie.get('my-ocular-token')
     }
 
-    await store.dispatch('auth/login', token) // reload just incase logged out on another tab or something
+    await store.dispatch('auth/login', token) // reload just in case logged out on another tab or something
 
     if (!$auth.user().admin) {
         return redirect('/')
