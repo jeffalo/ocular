@@ -15,6 +15,8 @@
           <nuxt-link to="/docs/about">about</nuxt-link> <span>|</span>
           <a href="https://github.com/jeffalo/ocular" class="header-link">github</a> <span class="full">|</span>
           <a href="https://scratchdb.lefty.one" class="header-link full">api and data from datonelefty</a>
+          <button class="header-link full" @click="dog()">cat</button>
+          <img v-if="dogURL" :src="dogURL" style="display: block" width="200">
           <div v-if="$auth.loggedIn()" class="header-user">
             <nuxt-link :to="`/user/${$auth.user().name}`">@{{ $auth.user().name }}</nuxt-link> <span>|</span> <nuxt-link :to="`/starred`">starred</nuxt-link> | <nuxt-link :to="`/dashboard`">dashboard</nuxt-link> | <a @click="logout()" class="logout">logout</a>
           </div>
@@ -62,6 +64,11 @@
 <script>
 export default {
   props: ['crumbs'],
+  data() {
+    return {
+      dogURL: ""
+    }
+  },
   methods: {
     async logout() {
       await this.$store.dispatch('auth/logout',)
@@ -69,6 +76,11 @@ export default {
       this.$router.push({
         path: '/'
       })
+    },
+    async dog() {
+      let dog = await fetch('https://dog.ceo/api/breeds/image/random').then(res => res.json())
+
+      this.dogURL = dog.message
     }
   }
 }
