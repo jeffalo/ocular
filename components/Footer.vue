@@ -13,17 +13,31 @@
     Attribution-ShareAlike 2.0 license <br /><br />
     <nuxt-link class="footer-link" to="/docs/privacy">privacy</nuxt-link>
     | <button class="footer-link" @click="toggleTheme()"><Emoji>🎨</Emoji> theme ({{ $colorMode.preference }})</button>
+    <span v-if="$colorMode.preference == 'catsunited'">|</span>
+    <button class="footer-link full" v-if="$colorMode.preference == 'catsunited'" @click="dog()">cat</button>
+    <img v-if="dogURL" :src="dogURL" style="display: block; margin-top: 10px;" width="200">
   </footer>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      dogURL: ""
+    }
+  },
   methods: {
     toggleTheme() {
       let current = this.$colorMode.preference
       let themes = ['system', 'light', 'dark', 'scratch', 'catsunited' , 'classic-dark']
       let switchTo = themes[themes.indexOf(current)+1]
       this.$colorMode.preference = switchTo || 'system'
+    },
+    async dog() {
+      this.dogURL = ""
+      let dog = await fetch('https://dog.ceo/api/breeds/image/random').then(res => res.json())
+
+      this.dogURL = dog.message
     }
   }
 }
