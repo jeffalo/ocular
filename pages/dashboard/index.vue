@@ -33,7 +33,7 @@
             <br><br>
             <a href="#" @click="deleteUser()">⚠ delete this user's data</a><br>
           </div>
-          <button type="submit" class="update-btn">update</button>
+          <button type="submit" class="update-btn">update</button> or <button type="button" class="update-btn"><a href="https://aviateapp.eu.org/dashboard" target="_blank">use Aviate</a></button>
       </form>
       <br>
       <nuxt-link to="/dashboard/users" v-if="$auth.user().admin">user list</nuxt-link>
@@ -142,7 +142,7 @@ export default {
             })
           }
         }
-      }    
+      }
     },
     async adminFeedback() {
       // return info on what's going to happen when an admin presses update and match inputs with user data
@@ -181,5 +181,9 @@ export default {
 
 .update-btn{
   margin-top: 15px;
+}
+
+.update-btn>a {
+  color: white;
 }
 </style>
