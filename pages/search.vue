@@ -92,7 +92,7 @@
             <tr>
               <td>closed</td>
               <td>
-                requires the posts to be closed or not
+                specifies whether the containing topics are closed. use "1" to only get posts in topics that are closed, and "0" to get posts only in topics that are open
               </td>
             </tr>
             <tr>
