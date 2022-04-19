@@ -3,12 +3,16 @@
     <Header :crumbs="[{ link: `/browse/${id}`, text: 'browse' }]" />
     <div class="margined">
       <h1>browse topics</h1>
-      <p>note: this feature is in beta and may change at any time. also it's a bit slow due to scratchdb things.</p>
+      <p>
+        note: this feature is in beta and may change at any time. also it's a
+        bit slow due to scratchdb things.
+      </p>
       <ForumSelector :selected="id" />
       <Loading v-if="$fetchState.pending" />
+      <Error v-if="error" :error="error.title" :details="error.details" />
       <TopicList
         :topics="topics"
-        v-if="!$fetchState.pending"
+        v-if="!$fetchState.pending && !error"
         :showLoadMore="showLoadMore"
         @loadMore="loadMore()"
       />
@@ -28,6 +32,7 @@ export default {
       topics: [],
       page: 0,
       showLoadMore: false,
+      error: null,
     };
   },
   async asyncData({ params, error }) {
@@ -45,7 +50,13 @@ export default {
         this.showLoadMore = false;
         let topicListRes = await fetch(
           `https://scratchdb.lefty.one/v3/forum/category/topics/${this.category}/${page}/?detail=2`
-        );
+        ).catch((err) => {
+          this.error = {
+            title: "Network Error",
+            details: "Failed to connect to ScratchDB.",
+          };
+          resolve();
+        });
         let topicList = await topicListRes.json();
 
         this.topics.push(...topicList);

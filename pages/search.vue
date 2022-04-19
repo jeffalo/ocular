@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header :crumbs="[{link:'/search', text:'search'}]" />
+    <Header :crumbs="[{ link: '/search', text: 'search' }]" />
     <div class="margined">
       <h1>search</h1>
       <form method="get">
@@ -28,8 +28,8 @@
         speed:
         <button @click="addParameter('content')">contains</button>
         <button @click="addParameter('title')">in title</button>
-        <button @click="addParameter('username')">written by</button> 
-        <button @click="addParameter('category')">in category</button> 
+        <button @click="addParameter('username')">written by</button>
+        <button @click="addParameter('category')">in category</button>
       </div>
       <div v-show="splash">
         <h2>search parameters</h2>
@@ -92,13 +92,17 @@
             <tr>
               <td>closed</td>
               <td>
-                specifies whether the containing topics are closed. use "1" to only get posts in topics that are closed, and "0" to get posts only in topics that are open
+                specifies whether the containing topics are closed. use "1" to
+                only get posts in topics that are closed, and "0" to get posts
+                only in topics that are open
               </td>
             </tr>
             <tr>
               <td>status</td>
               <td>
-                requires the poster to be a member of the matching group (for example, +status:\"Scratch Team" returns only posts from the scratch team)
+                requires the poster to be a member of the matching group (for
+                example, +status:\"Scratch Team" returns only posts from the
+                scratch team)
               </td>
             </tr>
           </tbody>
@@ -110,7 +114,13 @@
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
       <div v-show="!splash">
-        <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
+        <Error v-if="error" :error="error.title" :details="error.details" />
+        <PostList
+          :posts="data.posts"
+          :loading="$fetchState.pending"
+          @loadMore="loadMore()"
+          :showLoadMore="showLoadMore"
+        />
       </div>
       <Footer />
     </div>
@@ -164,7 +174,7 @@
 <script>
 export default {
   head: {
-    title: 'scratch forum search'
+    title: "scratch forum search",
   },
   ssr: true,
   watch: {
@@ -179,33 +189,48 @@ export default {
       data: {},
       splash: false,
       ssr: true,
+      error: null,
     };
   },
   methods: {
     async loadMore() {
-      this.showLoadMore = false
+      this.showLoadMore = false;
       this.page++;
       var res = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
-      );
+      ).catch((err) => {
+        this.error = {
+          title: "Network Error",
+          details: "Failed to connect to ScratchDB.",
+        };
+      });
 
       var data = await res.json();
       this.data.posts.push(...data.posts);
 
-      this.showLoadMore = true
+      this.showLoadMore = true;
     },
     addParameter(param) {
-      let box = this.$refs.searchbox
-      box.value += `${box.value.length == 0? '' : ' '}+${param}:""`
-      box.focus()
-      box.setSelectionRange(box.value.length-1, box.value.length-1);
-    }
+      let box = this.$refs.searchbox;
+      box.value += `${box.value.length == 0 ? "" : " "}+${param}:""`;
+      box.focus();
+      box.setSelectionRange(box.value.length - 1, box.value.length - 1);
+    },
   },
   async fetch() {
     if (this.search !== "undefined") {
+      let that = this;
       this.data = await fetch(
         `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
-      ).then((res) => res.json());
+      )
+        .then((res) => res.json())
+        .catch((err) => {
+          this.error = {
+            title: "Network Error",
+            details: "Failed to connect to ScratchDB.",
+          };
+          return { posts: [] };
+        });
       this.splash = false;
       this.showLoadMore = true;
       return;
