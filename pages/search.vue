@@ -89,6 +89,18 @@
                 requires that the resulting posts have this in their content
               </td>
             </tr>
+            <tr>
+              <td>closed</td>
+              <td>
+                specifies whether the containing topics are closed. use "1" to only get posts in topics that are closed, and "0" to get posts only in topics that are open
+              </td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>
+                requires the poster to be a member of the matching group (for example, +status:\"Scratch Team" returns only posts from the scratch team)
+              </td>
+            </tr>
           </tbody>
         </table>
         <br />
