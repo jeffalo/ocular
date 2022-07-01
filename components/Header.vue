@@ -12,6 +12,7 @@
             </span>
         </h1>
         <div class="margined">
+          <div style="width: 100%; height: 4px; background: black; margin-bottom: 10px;" title="Technoblade never dies."></div>
           <nuxt-link to="/docs/about">about</nuxt-link> <span>|</span>
           <a href="https://github.com/jeffalo/ocular" class="header-link">github</a> <span class="full">|</span>
           <a href="https://scratchdb.lefty.one" class="header-link full">api and data from datonelefty</a>
