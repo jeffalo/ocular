@@ -35,6 +35,7 @@
   --table-border: #2c2c2c;
   --text: white;
   --footer-text: #a1a1a1;
+  --tile-border-radius: 5pt;
 }
 
 .scratch-mode{
