@@ -8,7 +8,7 @@
     API and data from
     <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
     | authentication api from
-    <a class="footer-link" href="https://hamptonmoore.com">@herohamp</a>
+    <a class="footer-link" href="https://auth.itinerary.eu.org/">@Looky1173</a>
     <br /><br />this forum viewer tool falls under Creative Commons
     Attribution-ShareAlike 2.0 license <br /><br />
     <nuxt-link class="footer-link" to="/docs/privacy">privacy</nuxt-link>
