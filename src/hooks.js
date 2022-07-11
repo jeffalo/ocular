@@ -32,7 +32,7 @@ export async function handle({ event, resolve }) {
       if (jwtUser) {
         const dbConnection = await connectToDatabase();
         const db = dbConnection.db;
-        user = await db.collection('users').findOne({
+        const user = await db.collection('users').findOne({
           'name': jwtUser.username
         });
 
