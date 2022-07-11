@@ -1,4 +1,6 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const DB_URL = process.env.DB_URL || "mongodb://localhost"
 export const MONGODB_DB = process.env.MONGODB_DB || "my-ocular"
@@ -41,6 +43,8 @@ export const connectToDatabase = async () => {
           strength: 2
         }
       });
+
+      console.log('connected to db: ', db)
 
       return {
         client,
