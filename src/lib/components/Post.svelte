@@ -128,8 +128,11 @@
 		padding: 0.75em 1em;
 		box-shadow: inset 1px 0 var(--sidebar-border);
 		overflow-wrap: break-word;
-		display: flex;
+	}
+
+	.content-container {
 		flex-direction: column;
+		display: flex;
 	}
 
 	.content {
