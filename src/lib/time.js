@@ -10,12 +10,14 @@ export default function (inputTime) {
 
   let year = ` ${date.getFullYear()}`;
 
-  if (now.getDate() == date.getDate()) {
+  let sameMonth = now.getMonth() == date.getMonth() && now.getFullYear() == date.getFullYear()
+
+  if (now.getDate() == date.getDate() && sameMonth) {
     day = "Today";
     year = "";
   }
 
-  if (now.getDate() - 1 == date.getDate()) {
+  if (now.getDate() - 1 == date.getDate() && sameMonth) {
     day = "Yesterday";
     year = "";
   }
