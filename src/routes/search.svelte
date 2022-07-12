@@ -9,7 +9,9 @@
 		if (query) {
 			const apiURL = `https://scratchdb.lefty.one/v3/forum/search?q=${encodeURIComponent(
 				query
-			)}&o=${encodeURIComponent(sort)}&page=${encodeURIComponent(pageNumber - 1)}`;
+			)}&o=${encodeURIComponent(sort)}&page=${encodeURIComponent(
+				pageNumber - 1
+			)}&cache=${Date.now()}`; // TODO: don't do this.
 
 			try {
 				const response = await fetchWithTimeout(apiURL, {
