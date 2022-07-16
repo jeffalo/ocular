@@ -54,6 +54,7 @@
 <script>
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Post from '$lib/components/Post.svelte';
+	import SearchForm from '$lib/components/SearchForm.svelte';
 
 	export let type;
 	export let posts;
@@ -62,19 +63,110 @@
 	export let query;
 	export let sort;
 	export let pageNumber;
+
+	let searchInput;
+
+	function addOperator(operator) {
+		searchInput.value += `${searchInput.value.length == 0 ? '' : ' '}+${operator}:""`;
+		searchInput.focus();
+		searchInput.setSelectionRange(searchInput.value.length - 1, searchInput.value.length - 1);
+	}
 </script>
 
-<form method="get">
-	<input value={query} required="required" name="q" type="text" placeholder="search query" />
-	<select name="sort">
-		<option value="relevance" selected={sort == 'relevance' || !sort} default>relevance</option>
-		<option value="newest" selected={sort == 'newest'}>newest</option>
-		<option value="oldest" selected={sort == 'oldest'}>oldest</option>
-	</select>
-	<button type="submit" class="form-button">go</button>
-</form>
+<h1>Scratch Forum Search</h1>
+<SearchForm {query} {sort} bind:searchInput />
+
 {#if type == 'home'}
-	some stuff would go here
+	<h2>Search Parameters</h2>
+	ScratchDB uses a query parser to support search operators. Each requirement is in the format +requirement:"value".
+	If you don't include any operators, ScratchDB will perform a simple content search. Prefix operators
+	with + to require it to be true, - to require it to be false and ~ if it should be true, but is not
+	required.
+
+	<table class="info">
+		<thead>
+			<tr>
+				<th>Usage</th>
+				<th>Results</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr
+				on:click={() => {
+					addOperator('content');
+				}}
+			>
+				<td>+content:"appelmoeshapje"</td>
+				<td>Requires that all results contain a certain string</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('username');
+				}}
+			>
+				<td>+username:"Jeffalo"</td>
+				<td>Requires that all results are posted by a certain user</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('status');
+				}}
+			>
+				<td>+status:"Scratch Team"</td>
+				<td>
+					Requires that all results are posted by users of a specific Scratch rank. (New Scratcher,
+					Scratcher, Scratch Team)
+				</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('category');
+				}}
+			>
+				<td>+category:"Advanced Topics"</td>
+				<td>
+					Requires that all results are posted in a certain subforum (This does not have to be
+					complete, +category:"Things" will match posts in "Things I'm Making and Creating" and "
+					Things I'm Reading and Playing")
+				</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('topic');
+				}}
+			>
+				<td>+topic:"446450"</td>
+				<td>Requires that all results are posted in a certain topic by ID</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('title');
+				}}
+			>
+				<td>+title:"ocular"</td>
+				<td>Requires that all results are posted in a certain topic by title</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('closed');
+				}}
+			>
+				<td>+closed:"0"</td>
+				<td>
+					Requires that all results are posted in a certain topic by closed status (0 is open, and 1
+					is closed)
+				</td>
+			</tr>
+			<tr
+				on:click={() => {
+					addOperator('id');
+				}}
+			>
+				<td>+id:"5302781"</td>
+				<td>Returns a single post by ID</td>
+			</tr>
+		</tbody>
+	</table>
 {:else if type == 'error'}
 	<p>error</p>
 {:else}
@@ -102,7 +194,34 @@
 {/if}
 
 <style>
-	form {
-		display: flex;
+	.info {
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.info td,
+	.info th {
+		border: 1px solid var(--table-border);
+		padding: 8px;
+	}
+	.info tr:nth-child(even) {
+		background-color: var(--table-stripe);
+		transition: 250ms;
+	}
+	.info tr:nth-child(odd) {
+		background-color: var(--background);
+		transition: 250ms;
+	}
+	.info tr:hover {
+		background-color: var(--table-hover);
+		cursor: pointer;
+	}
+	.info th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: var(--brand);
+		color: white;
 	}
 </style>

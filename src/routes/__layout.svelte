@@ -3,6 +3,7 @@
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { fade } from 'svelte/transition';
 	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
 </script>
 
 <SvelteToast />
@@ -16,38 +17,49 @@
 		<div>
 			<img src="/icon/white.svg" alt="ocular" />
 			<a href="/">
-				<h1>ocular rewritten</h1>
+				<h1>ocular <span class="tag">rewritten</span></h1>
 			</a>
 			<nav>
-				<a href="/">home</a>
 				<a href="/search">search</a>
-				<a href="/topic/446450">test topic</a>
+				<a href="https://github.com/jeffalo/ocular">github</a>
+				<a href="/about">about</a>
 				{#if $session.authenticated}
-					{JSON.stringify($session.settings)}
-					<a href="/user/{$session.user.username}">@{$session.user.username}</a>
-					<a href="/dashboard">dashboard</a>
-					<a href="/auth/logout">logout</a>
+					<span class="authenticated-links">
+						<a href="/user/{$session.user.username}">@{$session.user.username}</a>
+						<a href="/dashboard">dashboard</a>
+						<a
+							href="/auth/logout"
+							on:click|preventDefault={() => {
+								let sure = confirm('Are you sure that you want to log out?');
+								if (sure) {
+									goto('/auth/logout');
+								}
+							}}>logout</a
+						>
+					</span>
+				{:else}
+					<a href="/login">login</a>
 				{/if}
-				<!-- <form method="get" action="/search">
-					<input
-						required="required"
-						name="q"
-						type="text"
-						placeholder="search query"
-					/>
-					<select name="sort">
-						<option value="relevance">relevance</option>
-						<option value="newest">newest</option>
-						<option value="oldest">oldest</option>
-					</select>
-					<button type="submit" class="form-button">go</button>
-				</form> -->
 			</nav>
 		</div>
 	</header>
 
 	<main>
 		<slot />
+		<footer>
+			ocular is an open source project, with styling aspects inspired by
+			<a href="https://scratch.mit.edu/users/maximouse">@Maximouse</a>
+			and Scratch by MIT<br />
+			API and data from
+			<a href="https://scratchdb.lefty.one/">@DatOneLefty</a>
+			| Authentication API from
+			<a href="https://auth.itinerary.eu.org/">@Looky1173</a>
+			<br /><br />This community made tool falls under Creative Commons Attribution-ShareAlike 2.0
+			license.<br /><br />
+			<a href="/docs/privacy">Privacy</a>
+			|
+			<a href="/dashboard">Themes</a>
+		</footer>
 	</main>
 </div>
 
@@ -71,6 +83,48 @@
 	header a {
 		color: white;
 		/* text-decoration: none; */
+	}
+
+	.authenticated-links {
+		float: right;
+	}
+
+	footer {
+		color: var(--footer-text);
+		padding-top: 10px;
+		margin-top: 30px;
+		padding-bottom: 10px;
+	}
+
+	footer a,
+	button {
+		font-weight: 700;
+		background: none;
+		border: none;
+		border-radius: 0;
+		padding: 0;
+		margin: 0;
+		line-height: normal;
+		cursor: pointer;
+		color: var(--footer-text);
+	}
+
+	.tag {
+		border-radius: 4px;
+		padding: 2px;
+		font-size: small;
+		font-weight: normal;
+		font-family: monospace;
+		background-color: var(--background);
+		color: var(--text);
+	}
+
+	.tag::before {
+		content: '[';
+	}
+
+	.tag::after {
+		content: ']';
 	}
 
 	.lds-hourglass {

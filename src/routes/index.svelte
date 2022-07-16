@@ -1,8 +1,8 @@
-<h1>ocular rewritten</h1>
-<p>search for scratch</p>
-<h2>dev links</h2>
-<ul>
-	<li><a href="/search">search</a></li>
-	<li><a href="/about">about</a></li>
-	<li><a href="/login">login</a></li>
-</ul>
+<script>
+	import SearchForm from '$lib/components/SearchForm.svelte';
+</script>
+
+<h1>ocular</h1>
+<p>Search for the Scratch Discussion Forums.</p>
+<SearchForm />
+<a href="/search">(more query options)</a>
