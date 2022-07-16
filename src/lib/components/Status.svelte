@@ -107,7 +107,7 @@
 </script>
 
 {#await promise}
-	<p>loading</p>
+	<span class="post-count">loading</span>
 {:then data}
 	{#if showPostCount && data.userInfo && !data.userInfo.error}
 		<span class="post-count">{data.userInfo.counts.total.count} posts</span>

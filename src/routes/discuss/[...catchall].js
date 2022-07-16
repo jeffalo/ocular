@@ -1,9 +1,9 @@
 export async function get(event) {
-  console.log(event.params.catchall)
+  console.log(event.url.href.replaceAll('/discuss', ''))
   return {
     status: 302,
     headers: {
-      location: `/${event.params.catchall}`
+      location: event.url.href.replaceAll('/discuss', '')
     }
   }
 }
