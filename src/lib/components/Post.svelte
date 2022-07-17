@@ -64,7 +64,7 @@
 		<div class="peoplebox">
 			<a href="/user/{post.username}">
 				<span class="username">{post.username}</span>
-				<img src="/api/picture/{post.username}" width="90" height="90" alt={post.username} />
+				<img src="/api/user/{post.username}/picture" width="90" height="90" alt={post.username} />
 			</a>
 			<Status user={post.username} />
 		</div>
