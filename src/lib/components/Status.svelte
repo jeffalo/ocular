@@ -7,6 +7,7 @@
 	import { error, success } from '$lib/toaster';
 	import { statuses } from '$lib/stores.js';
 	import { tick, onMount } from 'svelte';
+	import { base, assets } from '$app/paths';
 
 	async function fetchStatus(username) {
 		// simply return a promise that resolves to the my-ocular data of username
@@ -50,8 +51,8 @@
 	let promise = new Promise(() => {}); // we will use this promise to show a loading indicator
 
 	onMount(async () => {
-		// only run this client side, because the server doesnt know how to fetch /api/
 		promise = getStatus(user);
+		// only run this client side, because the server doesnt know how to fetch /api/
 	});
 
 	let editMode = false;

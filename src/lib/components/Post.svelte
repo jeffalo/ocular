@@ -6,7 +6,10 @@
 	export let blockPreferenceOverride = false;
 
 	import Status from '$lib/components/Status.svelte';
+	import Signature from '$lib/components/Signature.svelte';
 	import timeFormat from '$lib/time.js';
+
+	let showingSignature = $session.settings.showSignatures; // TODO: default this based on settings
 
 	let scratchblocksModule = null;
 
@@ -71,8 +74,18 @@
 		<div class="content-container">
 			<div class="content">
 				{@html blockifiedContent}
+				{#if showingSignature}
+					<Signature user={post.username} />
+				{/if}
 			</div>
 			<div class="footer">
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a
+					href="#"
+					on:click|preventDefault={() => {
+						showingSignature = !showingSignature;
+					}}>Toggle signature</a
+				>
 				<a href="https://scratch.mit.edu/discuss/misc/?action=report&post_id={post.id}">Report</a>
 			</div>
 		</div>
@@ -160,7 +173,6 @@
 	}
 
 	.footer {
-		line-height: 28px;
 		padding-top: 2em;
 		align-self: flex-end;
 		text-align: right;

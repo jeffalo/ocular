@@ -19,8 +19,19 @@ export async function put(event) {
 
   let body = await event.request.json()
 
+  /* adding a new setting:
+  
+    add it to the array below, with validation of the values
+    (also make sure to put it in the object creation at the bottom)
+
+    in src/hooks.js, add it to getSession following the same format as the others, and also add sane defaults for logged out users
+
+    add a useful form option to src/routes/dashboard.svelte
+  */
+
+
   // validate settings
-  const validSettings = ['blocks', 'theme']
+  const validSettings = ['blocks', 'theme', 'showSignatures']
 
   if (Object.keys(body).some(s => !validSettings.includes(s))) {
     return {
@@ -31,6 +42,7 @@ export async function put(event) {
     }
   }
 
+  // individual settings validation
   const validBlockTypes = ['2.0', '3.0'];
 
   if (!validBlockTypes.includes(body.blocks)) {
@@ -53,9 +65,19 @@ export async function put(event) {
     }
   }
 
+  if (typeof body.showSignatures !== 'boolean') {
+    return {
+      status: 400,
+      body: {
+        error: `showSignatures must be either true or false`
+      }
+    }
+  }
+
   let settings = {
-    blocks: body.blocks || event.locals.settings.blocks,
-    theme: body.theme || event.locals.settings.theme
+    blocks: body.blocks,
+    theme: body.theme,
+    showSignatures: body.showSignatures
   }
 
   await db.collection('users').updateOne(

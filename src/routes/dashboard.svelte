@@ -27,7 +27,11 @@
 		const data = new FormData(form);
 		const settings = {};
 		for (const [key, value] of data.entries()) {
-			settings[key] = value;
+			if (value == 'true' || value == 'false') {
+				settings[key] = value === 'true';
+			} else {
+				settings[key] = value;
+			}
 		}
 		const response = await fetch('/api/settings', {
 			method: 'PUT',
@@ -137,11 +141,33 @@
 				{/each}
 			</div>
 		</div>
+		<div>
+			<p>
+				showing signatures by default?
+				<input type="hidden" name="showSignatures" value="false" />
+				<!-- 
+					
+					^^^ this checkbox makes it so that showSignatures will either be true or false. otherwise it wouldn't be included by FormData at all.
+					does it break the spec? probably
+					is it cheating? probably
+					do i want to add a special case for checkboxes in my FormData to JSON parsing? no. 
+
+				-->
+				<input
+					type="checkbox"
+					name="showSignatures"
+					id="showSignatures"
+					value="true"
+					on:change={updateSettings}
+					checked={$session.settings.showSignatures == true}
+				/>
+			</p>
+		</div>
 		<!-- <button type="submit">Submit</button> -->
 	</div>
 </form>
 
-{#key selectedBlockPreference}
+{#key $session.settings}
 	<Post post={examplePost} blockPreferenceOverride={selectedBlockPreference} />
 {/key}
 
@@ -165,8 +191,8 @@
 	.settings-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-column-gap: 0px;
-		grid-row-gap: 0px;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
 	}
 
 	.theme-block {

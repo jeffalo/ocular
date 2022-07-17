@@ -67,6 +67,7 @@ export const getSession = async (event) => {
       settings: {
         blocks: event.locals.session.user.settings?.blocks || '2.0',
         theme: event.locals.session.user.settings?.theme || 'system',
+        showSignatures: event.locals.session.user.settings?.showSignatures || false
       },
       user: {
         username: event.locals.session.user.name,
@@ -77,7 +78,8 @@ export const getSession = async (event) => {
       settings: {
         // default settings
         blocks: "2.0",
-        theme: 'system'
+        theme: 'system',
+        showSignatures: false
       },
     };
 };

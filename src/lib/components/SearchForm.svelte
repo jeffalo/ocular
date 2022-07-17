@@ -32,6 +32,21 @@
 	<button type="submit" class="form-button">go</button>
 </form>
 
+<svelte:window
+	on:keypress={(event) => {
+		if (event.key !== '/') {
+			return;
+		}
+
+		if (['INPUT', 'TEXTAREA', 'SELECT', 'OPTION'].includes(event.target.tagName)) return;
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		searchInput.focus();
+	}}
+/>
+
 <style>
 	form {
 		display: flex;

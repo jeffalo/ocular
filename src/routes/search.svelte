@@ -78,10 +78,13 @@
 
 {#if type == 'home'}
 	<h2>Search Parameters</h2>
-	ScratchDB uses a query parser to support search operators. Each requirement is in the format +requirement:"value".
-	If you don't include any operators, ScratchDB will perform a simple content search. Prefix operators
-	with + to require it to be true, - to require it to be false and ~ if it should be true, but is not
-	required.
+	<p>
+		ocular search is a frontend for <a href="https://scratchdb.lefty.one/">ScratchDB</a>. ScratchDB
+		uses a query parser to support search operators. Each requirement is in the format
+		+requirement:"value". If you don't include any operators, ScratchDB will perform a simple
+		content search. Prefix an operator with + to require it to be true, - to require it to be false
+		and ~ if it should be true, but is not required.
+	</p>
 
 	<table class="info">
 		<thead>
