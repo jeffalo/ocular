@@ -86,14 +86,18 @@
 	};
 </script>
 
-<h2>dashboard</h2>
+<h2>Dashboard</h2>
+<p class="description-text">
+	Your ocular status is a short message and colour, which is displayed across ocular and other
+	Scratch related sites.
+</p>
 <Status user={$session.user.username} editable="true" showPostCount={false} />
 
 <form bind:this={settingsForm} on:submit|preventDefault={updateSettings}>
-	<h3>setttings</h3>
+	<h3>Setttings</h3>
 	<div class="settings-grid">
 		<div>
-			<p>current block type: {$session.settings.blocks}</p>
+			<p>Block type: {$session.settings.blocks}</p>
 			<div id="3.0-option">
 				<input
 					type="radio"
@@ -123,7 +127,7 @@
 			</div>
 		</div>
 		<div>
-			<p>current theme: {$session.settings.theme}</p>
+			<p>Theme: {$session.settings.theme}</p>
 			<div class="themes light-mode">
 				<!-- to make this work, set the parent container to light mode so that the default variables work ^ -->
 				{#each themes as theme}
@@ -143,7 +147,7 @@
 		</div>
 		<div>
 			<p>
-				showing signatures by default?
+				Show signatures by default
 				<input type="hidden" name="showSignatures" value="false" />
 				<!-- 
 					
@@ -201,5 +205,9 @@
 		border-left: 4px var(--brand) solid;
 		background-color: var(--background);
 		color: var(--text);
+	}
+
+	.description-text {
+		color: var(--footer-text);
 	}
 </style>

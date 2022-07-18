@@ -179,6 +179,19 @@
 			page 200.
 		</div>
 	{/if}
+	{#if hits == 0}
+		<div class="no-results">
+			<p>Your search - <b>{query}</b> - did not match any posts.</p>
+			<ul>
+				<li>Make sure that all words are spelled correctly.</li>
+				<li>Try different keywords.</li>
+				<li>Try more general keywords.</li>
+				<li>Try fewer keywords.</li>
+				<li><a href="/search">Search operators</a></li>
+				<!-- :P -->
+			</ul>
+		</div>
+	{/if}
 	<Pagination
 		currentPageNumber={pageNumber}
 		total={hits}
@@ -226,5 +239,11 @@
 		text-align: left;
 		background-color: var(--brand);
 		color: white;
+	}
+
+	.no-results {
+		padding: 10px;
+		border: 1px var(--input-border) dashed;
+		border-radius: 5px;
 	}
 </style>

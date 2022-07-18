@@ -182,11 +182,8 @@ select {
 	height: 35px;
 	border-radius: 5px;
 	padding: 10px;
-	border: 1px solid #e0e0e0;
 	border: 1px solid var(--input-border);
-	background-color: #fff;
 	background-color: var(--input-background);
-	color: #575e75;
 	color: var(--text);
 	margin-bottom: 0.5em;
 }
