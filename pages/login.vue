@@ -7,7 +7,7 @@
         {{ errorMessages[$route.query.error] }}
       </div>
       <p>
-        logging into ocular will allow you to customize your profile, save posts and more! if do not have an account, this will create one for you
+        logging into ocular will allow you to customize your profile, save posts and more! if you do not have an account, this will create one for you
       </p>
       <button @click="login"><Emoji>🐈</Emoji> login with scratch</button>
       <Footer />
