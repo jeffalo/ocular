@@ -112,9 +112,6 @@
       <div v-show="!splash">
         <PostList :posts="data.posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
       </div>
-      <div v-if="data.posts.length == 0">
-        <p>No posts found, please try refining your query.</p>
-      </div>
       <Footer />
     </div>
   </div>
