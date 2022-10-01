@@ -37,6 +37,22 @@
   --footer-text: #a1a1a1;
 }
 
+.gray-mode {
+  --brand: #222222;
+  --background: #111;
+  --input-background: #141414;
+  --input-border: #2c2c2c;
+  --sidebar-background: #0a0a0a;
+  --sidebar-border: #2c2c2c;
+  --quote-background: #0a0a0a;
+  --quote-border: #2c2c2c;
+  --table-stripe: #252525;
+  --table-hover: #2c2c2c;
+  --table-border: #2c2c2c;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
 .scratch-mode{
   --brand: #28a5da;
 }
