@@ -11,7 +11,7 @@ ocular uses a number of services to provide various tools to enhance the experie
 
 - ocular uses [CloudFlare](https://cloudflare.com) to proxy requests, this keeps the site running smoothly and allows me to host ocular right from my home.
 
-- Data about Scratch forum posts comes from [ScratchDB](https://scratchdb.lefty.one), and Scratch based authentication is handled by [FluffyScratch](https://github.com/hamptonmoore/FluffyScratch). All other Scratch data comes straight from [the official Scratch API](https://github.com/llk/scratch-rest-api).
+- Data about Scratch forum posts comes from [ScratchDB](https://scratchdb.lefty.one), and Scratch based authentication is handled by [Scratch Auth](https://auth.itinerary.eu.org/). All other Scratch data comes straight from [the official Scratch API](https://github.com/llk/scratch-rest-api).
 
 - ocular does not store any Scratch data. ocular's purpose is to present data from the APIs listed above. Outside of analytics, ocular only stores registered user data, and data to power reactions and starring. User accounts are not required to use the base functionality of ocular.
 

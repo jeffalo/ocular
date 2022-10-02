@@ -69,5 +69,10 @@ export default {
   loading: {
     color: 'white',
     height: '2px'
+  },
+
+  server: {
+    host: '0.0.0.0',
+    port: '3000' // optional
   }
 }
