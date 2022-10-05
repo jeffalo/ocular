@@ -6,8 +6,13 @@
         v-for="post of posts"
         v-bind:key="post.id"
         v-bind:post="post"
+        v-bind:isOP="op == post.username"
       />
-      <Error  v-if="posts && posts.length == 0" error="No posts found" details="Please try refining your query."></Error>
+      <Error
+        v-if="posts && posts.length == 0"
+        error="No posts found"
+        details="Please try refining your query."
+      ></Error>
       <button @click="$emit('loadMore')" v-if="showLoadMore">Load More</button>
     </div>
   </div>
@@ -15,6 +20,6 @@
 
 <script>
 export default {
-  props: ["posts", "loading", "showLoadMore"]
+  props: ["posts", "loading", "showLoadMore", "op"],
 };
 </script>
