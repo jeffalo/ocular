@@ -27,7 +27,13 @@
       <nav class="main-nav">
         <nuxt-link :to="`/user/${post.username}`" class="username"
           >{{ post.username }}
-          <p v-if="isOP" class="op-badge">OP</p></nuxt-link
+          <p
+            v-if="isOP"
+            class="op-badge"
+            title="Original poster (creator of this topic)"
+          >
+            OP
+          </p></nuxt-link
         >
         <nuxt-link :to="`/user/${post.username}`">
           <img
