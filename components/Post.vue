@@ -14,12 +14,27 @@
     <div class="post-wrap">
       <section class="main-content">
         <Render class="post-content" :content="post.content.html" />
-        <div class='post-footer'><ReactionButtons :post="post"/> | <span v-if="$auth.loggedIn()"> <Star :post="post"/> | </span><a target="_blank" :href='`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`'>Report</a></div>
+        <div class="post-footer">
+          <ReactionButtons :post="post" /> |
+          <span v-if="$auth.loggedIn()"> <Star :post="post" /> | </span
+          ><a
+            target="_blank"
+            :href="`https://scratch.mit.edu/discuss/misc/?action=report&post_id=${post.id}`"
+            >Report</a
+          >
+        </div>
       </section>
       <nav class="main-nav">
-        <nuxt-link :to="`/user/${post.username}`" class="username">{{
-          post.username
-        }}</nuxt-link>
+        <nuxt-link :to="`/user/${post.username}`" class="username"
+          >{{ post.username }}
+          <p
+            v-if="isOP"
+            class="op-badge"
+            title="Original poster (creator of this topic)"
+          >
+            OP
+          </p></nuxt-link
+        >
         <nuxt-link :to="`/user/${post.username}`">
           <img
             :src="`${backendURL}/api/user/${post.username}/picture`"
@@ -30,7 +45,7 @@
         </nuxt-link>
         <!-- <span class="rank">Scratcher</span> -->
         <PostCount :user="post.username" />
-        <Status :user="post.username" style="display: block;" />
+        <Status :user="post.username" style="display: block" />
       </nav>
     </div>
   </div>
@@ -38,23 +53,26 @@
 
 <script>
 export default {
-  props: ["post"],
+  props: ["post", "isOP"],
   data() {
     return {
-      backendURL: process.env.backendURL
-    }
+      backendURL: process.env.backendURL,
+    };
   },
   async fetch() {
-    let res = await fetch(`${process.env.backendURL}/api/starred/${this.post.id}`, {
-      headers: {
-        Authorization: this.$auth.token(),
-        "Content-Type": "application/json",
+    let res = await fetch(
+      `${process.env.backendURL}/api/starred/${this.post.id}`,
+      {
+        headers: {
+          Authorization: this.$auth.token(),
+          "Content-Type": "application/json",
+        },
       }
-    })
-    let data = await res.json()
-    this.starred = data.starred
+    );
+    let data = await res.json();
+    this.starred = data.starred;
   },
-  fetchOnServer: false
+  fetchOnServer: false,
 };
 </script>
 
@@ -78,7 +96,7 @@ export default {
   flex-flow: row wrap;
 }
 
-.post-content{
+.post-content {
   display: block;
   width: 100%;
 }
@@ -150,6 +168,14 @@ export default {
   font-weight: bold;
   padding-bottom: 5px;
   display: block;
+}
+
+.op-badge {
+  display: inline-block;
+  padding: 3px 4px;
+  background: var(--brand);
+  border-radius: 5px;
+  line-height: 1em;
 }
 
 @media only screen and (max-width: 750px) {
