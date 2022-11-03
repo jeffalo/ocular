@@ -101,7 +101,7 @@
               <td>status</td>
               <td>
                 requires the poster to be a member of the matching group (for
-                example, +status:\"Scratch Team" returns only posts from the
+                example, +status:"Scratch Team" returns only posts from the
                 scratch team)
               </td>
             </tr>
