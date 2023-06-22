@@ -29,6 +29,7 @@
           :loading="$fetchState.pending"
           @loadMore="loadMore()"
           :showLoadMore="showLoadMore"
+          :op="op"
         />
       </div>
       <Footer />
@@ -60,6 +61,7 @@ export default {
       category: "",
       showLoadMore: false,
       error: null,
+      op: "",
     };
   },
   methods: {
@@ -94,6 +96,7 @@ export default {
     var postData = await postsRes.json();
 
     this.data = postData;
+    this.op = postData.posts[0].username;
     this.category = getKey(map, postData.posts[0].topic.category); //get category id from name
     this.showLoadMore = true;
   },
