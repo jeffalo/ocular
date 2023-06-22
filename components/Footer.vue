@@ -4,7 +4,7 @@
     <a href="https://scratch.mit.edu/users/maximouse" class="footer-link"
       >@Maximouse</a
     >
-    and Scratch by MIT<br />
+    and the Scratch Foundation<br />
     API and data from
     <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
     | authentication api from
