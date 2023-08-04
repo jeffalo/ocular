@@ -21,8 +21,40 @@
   --footer-text: #8d96b3;
 }
 
+.purple-mode {
+  --brand: #855cd6;
+  --background: white;
+  --input-background: white;
+  --input-border: #e0e0e0;
+  --sidebar-background: #f2f2f2;
+  --sidebar-border: #e0e0e0;
+  --quote-background: #f7f7f7;
+  --quote-border: #ccc;
+  --table-stripe: #f2f2f2;
+  --table-hover: #e6e6e6;
+  --table-border: #ddd;
+  --text: #575e75;
+  --footer-text: #8d96b3;
+}
+
 .dark-mode {
   --brand: #075e46; /* CC5500 looks cool too (orange), FF6600 good too */
+  --background: #111;
+  --input-background: #141414;
+  --input-border: #2c2c2c;
+  --sidebar-background: #0a0a0a;
+  --sidebar-border: #2c2c2c;
+  --quote-background: #0a0a0a;
+  --quote-border: #2c2c2c;
+  --table-stripe: #252525;
+  --table-hover: #2c2c2c;
+  --table-border: #2c2c2c;
+  --text: white;
+  --footer-text: #a1a1a1;
+}
+
+.dark-purple-mode {
+  --brand: #855cd6; /* CC5500 looks cool too (orange), FF6600 good too */
   --background: #111;
   --input-background: #141414;
   --input-border: #2c2c2c;

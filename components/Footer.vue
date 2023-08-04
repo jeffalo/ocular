@@ -29,7 +29,7 @@ export default {
   methods: {
     toggleTheme() {
       let current = this.$colorMode.preference
-      let themes = ['system', 'light', 'dark', 'gray', 'scratch', 'catsunited', 'classic-dark']
+      let themes = ['system', 'light', 'purple', 'dark', 'dark-purple', 'gray', 'scratch', 'catsunited', 'classic-dark']
       let switchTo = themes[themes.indexOf(current)+1]
       this.$colorMode.preference = switchTo || 'system'
     },
