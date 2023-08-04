@@ -21,22 +21,6 @@
   --footer-text: #8d96b3;
 }
 
-.purple-mode {
-  --brand: #855cd6;
-  --background: white;
-  --input-background: white;
-  --input-border: #e0e0e0;
-  --sidebar-background: #f2f2f2;
-  --sidebar-border: #e0e0e0;
-  --quote-background: #f7f7f7;
-  --quote-border: #ccc;
-  --table-stripe: #f2f2f2;
-  --table-hover: #e6e6e6;
-  --table-border: #ddd;
-  --text: #575e75;
-  --footer-text: #8d96b3;
-}
-
 .dark-mode {
   --brand: #075e46; /* CC5500 looks cool too (orange), FF6600 good too */
   --background: #111;
@@ -87,6 +71,10 @@
 
 .scratch-mode{
   --brand: #28a5da;
+}
+
+.purple-mode {
+  --brand: #855cd6;
 }
 
 .catsunited-mode {
