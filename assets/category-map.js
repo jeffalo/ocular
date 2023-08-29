@@ -59,5 +59,7 @@ export default new Map(
         ["57", "Scratch 3.0 Beta"],
         ["58", "Camp Counselors 2020"],
         ["59", "فارسی"],
+        ["60", "Project Save & Level Codes"],
+        ["61", "April Fools Day - Suggest-Show-Question-Bugs-Help-Glitch-Tell-Etc"],
     ]
 );
