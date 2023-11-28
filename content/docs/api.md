@@ -52,7 +52,7 @@ you can use the query parameter `?noReplace=true` to retrieve raw status data
 
 ### example response
 
-(from from `https://my-ocular.jeffalo.net/api/reactions/5213429`)
+(from `https://my-ocular.jeffalo.net/api/reactions/5213429`)
 
 ```json
 [
