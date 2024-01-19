@@ -1,0 +1,221 @@
+/* IF CREATING A THEME: add it here, as [THEME NAME]-mode, and add it to $lib/themes.js } */
+
+:root {
+	/* this is a duplicate of .light-mode. make sure to change both in sync. */
+	--brand: #0fbd8c;
+	--background: white;
+	--input-background: white;
+	--input-border: #e0e0e0;
+	--sidebar-background: #f2f2f2;
+	--sidebar-border: #e0e0e0;
+	--quote-background: #f7f7f7;
+	--quote-border: #ccc;
+	--table-stripe: #f2f2f2;
+	--table-hover: #e6e6e6;
+	--table-border: #ddd;
+	--text: #575e75;
+	--footer-text: #8d96b3;
+}
+
+@media (prefers-color-scheme: dark) {
+	.system-mode {
+		/* this is a duplicate of .dark-mode. make sure to change both in sync. */
+		--brand: #075e46;
+		/* CC5500 looks cool too (orange), FF6600 good too */
+		--background: #111;
+		--input-background: #141414;
+		--input-border: #2c2c2c;
+		--sidebar-background: #0a0a0a;
+		--sidebar-border: #2c2c2c;
+		--quote-background: #0a0a0a;
+		--quote-border: #2c2c2c;
+		--table-stripe: #252525;
+		--table-hover: #2c2c2c;
+		--table-border: #2c2c2c;
+		--text: white;
+		--footer-text: #a1a1a1;
+	}
+}
+
+.light-mode {
+	/* this is a duplicate of the root defaults. make sure to change both in sync */
+	--brand: #0fbd8c;
+	--background: white;
+	--input-background: white;
+	--input-border: #e0e0e0;
+	--sidebar-background: #f2f2f2;
+	--sidebar-border: #e0e0e0;
+	--quote-background: #f7f7f7;
+	--quote-border: #ccc;
+	--table-stripe: #f2f2f2;
+	--table-hover: #e6e6e6;
+	--table-border: #ddd;
+	--text: #575e75;
+	--footer-text: #8d96b3;
+}
+
+.dark-mode {
+	/* this is a duplicate of .system-mode in dark. make sure to change both in sync. */
+	--brand: #075e46;
+	/* CC5500 looks cool too (orange), FF6600 good too */
+	--background: #111;
+	--input-background: #141414;
+	--input-border: #2c2c2c;
+	--sidebar-background: #0a0a0a;
+	--sidebar-border: #2c2c2c;
+	--quote-background: #0a0a0a;
+	--quote-border: #2c2c2c;
+	--table-stripe: #252525;
+	--table-hover: #2c2c2c;
+	--table-border: #2c2c2c;
+	--text: white;
+	--footer-text: #a1a1a1;
+}
+
+.scratch-mode {
+	--brand: #28a5da;
+}
+
+.catsunited-mode {
+	--brand: #4e1117;
+	--background: #131313;
+	--input-background: #1c1c1c;
+	--input-border: #4e1117;
+	--sidebar-background: #131313;
+	--sidebar-border: #131313;
+	--quote-background: #0a0a0a;
+	--quote-border: #4e1117;
+	--table-stripe: #1c1c1c;
+	--table-hover: #0e0e0e;
+	--table-border: #4e1117;
+	--text: white;
+	--footer-text: #a1a1a1;
+}
+
+.classic-dark-mode {
+	--brand: #df5900;
+	/* previously FF6600, slightly darker for eyes */
+	--background: #111;
+	--input-background: #141414;
+	--input-border: #2c2c2c;
+	--sidebar-background: #0a0a0a;
+	--sidebar-border: #2c2c2c;
+	--quote-background: #0a0a0a;
+	--quote-border: #2c2c2c;
+	--table-stripe: #252525;
+	--table-hover: #2c2c2c;
+	--table-border: #2c2c2c;
+	--text: white;
+	--footer-text: #a1a1a1;
+}
+
+html,
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	background-color: var(--background);
+	color: var(--text);
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+.theme-container {
+	background-color: var(--background);
+	color: var(--text);
+	min-height: 100%;
+}
+
+body {
+	overflow-y: scroll;
+	/* Show scrollbars */
+}
+
+main {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h1,
+h2 {
+	font: bold 2em;
+	margin: 0 0 0.5em 0;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+p {
+	margin: 0 0 1em 0;
+}
+
+a {
+	color: #4d97ff;
+	font-weight: bold;
+	/* text-decoration: none; */
+}
+
+button {
+	border-radius: 4px;
+	border: none;
+	background: #4d97ff;
+	box-shadow: none;
+	font-family: inherit;
+	font-weight: 700;
+	color: #fff;
+	text-shadow: none;
+	cursor: pointer;
+	display: inline-block;
+	height: 35px;
+}
+
+input[type='text'],
+select {
+	height: 35px;
+	border-radius: 5px;
+	padding: 10px;
+	border: 1px solid var(--input-border);
+	background-color: var(--input-background);
+	color: var(--text);
+	margin-bottom: 0.5em;
+}
+
+.alert {
+	padding: 15px;
+	background-color: white;
+	color: black;
+	margin-bottom: 15px;
+}
+
+.alert .close-btn {
+	float: right;
+	cursor: pointer;
+}
+
+.alert.error {
+	background-color: #f44336;
+	color: white;
+}
+
+.alert.info {
+	background-color: #2196f3;
+	color: white;
+}
+
+.alert.warn {
+	background-color: #c7481e;
+	color: white;
+}
+
+.alert.success {
+	background-color: var(--brand);
+	color: white;
+}
