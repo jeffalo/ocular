@@ -45,6 +45,7 @@ export default new Map(
         ["42", "Scratch Stability Team Forum"],
         // 43 returns 404
         ["44", "Scratch Day 2015"],
+        // 45 returns 404
         ["46", "Scratch Design Studio Forum "],
         // 47 returns 404
         ["48", "Developing Scratch Extensions"],
@@ -52,7 +53,7 @@ export default new Map(
         ["50", "Welcoming Committee"],
         ["51", "Community Blocks Forum"],
         ["52", "Scratch Day 2016"],
-        // ["53", "[unknown (for now)]"],
+        // ["53", "[unknown to the rest of the world 😉]"],
         ["54", "Scratch Day 2017"],
         ["55", "Africa"],
         ["56", "Scratch Day 2018"],
