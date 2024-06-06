@@ -61,6 +61,7 @@ export default {
         }
     },
     async asyncData({ route }) {
+        return {text: `post id ${route.params.id}`} // temporarily fix while scratchdb is down
         let postData = await fetch(`https://scratchdb.lefty.one/v3/forum/post/info/${route.params.id}`).then(res=>res.json())
         if(postData.username) {
             return {text: `${postData.username}'s post`}
