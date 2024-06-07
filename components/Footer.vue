@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <a href="https://scratchdb.lefty.one/">important notice about scratchdb (the data that ocular depends on)</a>
+    <a href="https://scratchdb.lefty.one/">ocular gets data from ScratchDB, which is currently down due to data loss. click here for more information.</a>
     <br>
     ocular is an open source project, with styling aspects inspired by
     <a href="https://scratch.mit.edu/users/maximouse" class="footer-link"
