@@ -66,7 +66,10 @@ export default {
         "ocular's privacy policy is something you should read",
         "there are a few people contributing to ocular's open source code",
         '"coural" is an anagram of "ocular"',
-        "ocular works on obscure platforms, such as watchOS"
+        "ocular works on obscure platforms, such as watchOS",
+        "some iPhones run on Android",
+        "some Macs run on Windows",
+        "it's possible to run macOS on a homemade computer, using a process known as hackintoshing"
       ]
     return {
       fact: facts[Math.floor(Math.random() * facts.length)]
