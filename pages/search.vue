@@ -4,27 +4,16 @@
     <div class="margined">
       <h1>search</h1>
       <form method="get">
-        <input
-          required
-          name="q"
-          type="text"
-          placeholder="search query"
-          ref="searchbox"
-          class="input"
-          :value="$route.query.q"
-        />
-        <select
-          name="sort"
-          id="sorting"
-          :value="$route.query.sort || 'relevance'"
-        >
+        <input required name="q" type="text" placeholder="search query" ref="searchbox" class="input"
+          :value="$route.query.q" />
+        <select name="sort" id="sorting" :value="$route.query.sort || 'relevance'">
           <option value="relevance">relevance</option>
           <option value="newest">newest</option>
           <option value="oldest">oldest</option>
         </select>
         <button type="submit" class="form-button">go</button>
       </form>
-      <div class="speed">
+      <!--<div class="speed">
         speed:
         <button @click="addParameter('content')">contains</button>
         <button @click="addParameter('title')">in title</button>
@@ -113,14 +102,17 @@
         <p><code>/topic/:topic</code> will show posts in a topic by id</p>
         <p><code>/post/:post</code> will show a single post by id</p>
       </div>
+       -->
+      <div v-show="splash">
+        <h2>ocular search</h2>
+        <p>⚠️ expect to see some broken-ness!</p>
+        <p>this is a simplified version of ocular search to replace the old broken one that depended on scratchdb v3. it is missing features (and has an incomplete database), but at least it works.</p>
+        <p>watch this space for improvements!</p>
+      </div>
       <div v-show="!splash">
         <Error v-if="error" :error="error.title" :details="error.details" />
-        <PostList
-          :posts="data.posts"
-          :loading="$fetchState.pending"
-          @loadMore="loadMore()"
-          :showLoadMore="showLoadMore"
-        />
+        <PostList :posts="data.hits" :loading="$fetchState.pending" @loadMore="loadMore()"
+          :showLoadMore="showLoadMore" />
       </div>
       <Footer />
     </div>
@@ -183,7 +175,7 @@ export default {
   data() {
     return {
       search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
-      sort: encodeURIComponent(decodeURIComponent(this.$route.query.sort)),
+      sort: this.$route.query.sort == 'newest' ? '&sort=id:desc' : (this.$route.query.sort == 'oldest' ? '&sort=id:asc' : ''),
       showLoadMore: false,
       page: 0,
       data: {},
@@ -196,9 +188,13 @@ export default {
     async loadMore() {
       this.showLoadMore = false;
       this.page++;
+      
       var res = await fetch(
-        `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
-      ).catch((err) => {
+        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}&page=${this.page+1}${this.sort}`, {
+          headers: {
+            authorization: "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4"
+          }
+        }).catch((err) => {
         this.error = {
           title: "Network Error",
           details: "Failed to connect to ScratchDB.",
@@ -206,7 +202,7 @@ export default {
       });
 
       var data = await res.json();
-      this.data.posts.push(...data.posts);
+      this.data.hits.push(...data.hits);
 
       this.showLoadMore = true;
     },
@@ -221,8 +217,11 @@ export default {
     if (this.search !== "undefined") {
       let that = this;
       this.data = await fetch(
-        `https://scratchdb.lefty.one/v3/forum/search/?q=${this.search}&o=${this.sort}&page=${this.page}`
-      )
+        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}`, {
+          headers: {
+            authorization: "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4"
+          }
+        })
         .then((res) => res.json())
         .catch((err) => {
           this.error = {

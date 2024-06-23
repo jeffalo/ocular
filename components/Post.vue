@@ -1,7 +1,7 @@
 <template>
   <div class="post">
     <div class="header">
-      <PostTime :time="post.time.posted" :linkid="post.id" />
+      <PostTime :time="post.time_posted" :linkid="post.id" />
       <nuxt-link :to="`/topic/${post.topic.id}`" class="topic-link">{{
         post.topic.title
       }}</nuxt-link>
@@ -13,7 +13,7 @@
     </div>
     <div class="post-wrap">
       <section class="main-content">
-        <Render class="post-content" :content="post.content.html" />
+        <Render class="post-content" :content="post.content" />
         <div class="post-footer">
           <ReactionButtons :post="post" /> |
           <span v-if="$auth.loggedIn()"> <Star :post="post" /> | </span
