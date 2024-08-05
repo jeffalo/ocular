@@ -14,6 +14,9 @@
     <div class="post-wrap">
       <section class="main-content">
         <Render class="post-content" :content="post.content" />
+        <p v-if="post.time_last_edited" class="last-edited">
+          Last edited by {{ post.last_edited_by }} ({{ post.time_last_edited }})
+        </p>
         <div class="post-footer">
           <ReactionButtons :post="post" /> |
           <span v-if="$auth.loggedIn()"> <Star :post="post" /> | </span
@@ -168,6 +171,11 @@ export default {
   font-weight: bold;
   padding-bottom: 5px;
   display: block;
+}
+
+.last-edited {
+  padding-top: 15px;
+  color: var(--footer-text);
 }
 
 .op-badge {

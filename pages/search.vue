@@ -4,23 +4,53 @@
     <div class="margined">
       <h1>search</h1>
       <form method="get">
-        <input required name="q" type="text" placeholder="search query" ref="searchbox" class="input"
-          :value="$route.query.q" />
-        <select name="sort" id="sorting" :value="$route.query.sort || 'relevance'">
+        <input
+          required
+          name="q"
+          type="text"
+          placeholder="search query"
+          ref="searchbox"
+          class="input"
+          :value="$route.query.q"
+        />
+        <select
+          name="sort"
+          id="sorting"
+          :value="$route.query.sort || 'relevance'"
+        >
           <option value="relevance">relevance</option>
           <option value="newest">newest</option>
           <option value="oldest">oldest</option>
         </select>
         <button type="submit" class="form-button">go</button>
+        <details :open="$route.query.filter || boundFilter">
+          <summary>Filtering</summary>
+          <input
+            type="text"
+            ref="filteringbox"
+            :name="boundFilter ? 'filter' : ''"
+            v-model="boundFilter"
+            class="input"
+            placeholder="post_number = 1"
+          />
+          <div class="speed">
+            speed:
+            <button type="button" @click="addParameter('username')">
+              written by
+            </button>
+            <button type="button" @click="addParameter('last_edited_by')">
+              edited by
+            </button>
+            <button type="button" @click="addParameter('topic.category')">
+              in category
+            </button>
+            <button type="button" @click="addParameter('time_posted')">
+              time posted
+            </button>
+          </div>
+        </details>
       </form>
-      <!--<div class="speed">
-        speed:
-        <button @click="addParameter('content')">contains</button>
-        <button @click="addParameter('title')">in title</button>
-        <button @click="addParameter('username')">written by</button>
-        <button @click="addParameter('category')">in category</button>
-      </div>
-      <div v-show="splash">
+      <!--<div v-show="splash">
         <h2>search parameters</h2>
         <p>searches from scratchdb use a pretty neat format.</p>
         <p>
@@ -106,13 +136,21 @@
       <div v-show="splash">
         <h2>ocular search</h2>
         <p>⚠️ expect to see some broken-ness!</p>
-        <p>this is a simplified version of ocular search to replace the old broken one that depended on scratchdb v3. it is missing features (and has an incomplete database), but at least it works.</p>
+        <p>
+          this is a simplified version of ocular search to replace the old
+          broken one that depended on scratchdb v3. it is missing features (and
+          has an incomplete database), but at least it works.
+        </p>
         <p>watch this space for improvements!</p>
       </div>
       <div v-show="!splash">
         <Error v-if="error" :error="error.title" :details="error.details" />
-        <PostList :posts="data.hits" :loading="$fetchState.pending" @loadMore="loadMore()"
-          :showLoadMore="showLoadMore" />
+        <PostList
+          :posts="data.hits"
+          :loading="$fetchState.pending"
+          @loadMore="loadMore()"
+          :showLoadMore="showLoadMore"
+        />
       </div>
       <Footer />
     </div>
@@ -120,8 +158,24 @@
 </template>
 
 <style scoped>
+details {
+  background-color: var(--input-background);
+  width: max-content;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--quote-border);
+  border-radius: 5px;
+  margin: 1em 0;
+  padding: 0 1.5em;
+}
+
+summary {
+  cursor: pointer;
+  margin: 1.5em 0;
+}
+
 .speed {
-  margin-bottom: 8px;
+  margin-bottom: 2em;
 }
 
 .info {
@@ -175,7 +229,18 @@ export default {
   data() {
     return {
       search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
-      sort: this.$route.query.sort == 'newest' ? '&sort=id:desc' : (this.$route.query.sort == 'oldest' ? '&sort=id:asc' : ''),
+      boundFilter: this.$route.query.filter,
+      filter: this.$route.query.filter
+        ? `&filter=${encodeURIComponent(
+            decodeURIComponent(this.$route.query.filter)
+          )}`
+        : "",
+      sort:
+        this.$route.query.sort == "newest"
+          ? "&sort=id:desc"
+          : this.$route.query.sort == "oldest"
+          ? "&sort=id:asc"
+          : "",
       showLoadMore: false,
       page: 0,
       data: {},
@@ -188,13 +253,18 @@ export default {
     async loadMore() {
       this.showLoadMore = false;
       this.page++;
-      
+
       var res = await fetch(
-        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}&page=${this.page+1}${this.sort}`, {
+        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${
+          this.search
+        }&page=${this.page + 1}${this.sort}${this.filter}`,
+        {
           headers: {
-            authorization: "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4"
-          }
-        }).catch((err) => {
+            authorization:
+              "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4",
+          },
+        }
+      ).catch((err) => {
         this.error = {
           title: "Network Error",
           details: "Failed to connect to ScratchDB.",
@@ -207,8 +277,8 @@ export default {
       this.showLoadMore = true;
     },
     addParameter(param) {
-      let box = this.$refs.searchbox;
-      box.value += `${box.value.length == 0 ? "" : " "}+${param}:""`;
+      let box = this.$refs.filteringbox;
+      box.value += `${box.value.length == 0 ? "" : " AND "}${param} = ""`;
       box.focus();
       box.setSelectionRange(box.value.length - 1, box.value.length - 1);
     },
@@ -217,11 +287,14 @@ export default {
     if (this.search !== "undefined") {
       let that = this;
       this.data = await fetch(
-        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}`, {
+        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}${this.filter}`,
+        {
           headers: {
-            authorization: "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4"
-          }
-        })
+            authorization:
+              "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4",
+          },
+        }
+      )
         .then((res) => res.json())
         .catch((err) => {
           this.error = {
@@ -230,6 +303,12 @@ export default {
           };
           return { posts: [] };
         });
+      if (this.data.message) {
+        return (this.error = {
+          title: "Search error",
+          details: this.data.message,
+        });
+      }
       this.splash = false;
       this.showLoadMore = true;
       return;
