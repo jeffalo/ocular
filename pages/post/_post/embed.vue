@@ -1,16 +1,21 @@
 <template>
-  <Post v-if="!$fetchState.pending && !error" v-bind:post="post" />
-  <Error v-else :error="error.title" :details="error.details" />
+  <div>
+    <Loading v-if="$fetchState.pending" />
+    <Post v-if="!$fetchState.pending && post && !error" v-bind:post="post" />
+    <Error
+      v-if="error"
+      :error="error.title"
+      :details="error.details"
+      :fullwidth="true"
+    />
+  </div>
 </template>
 
 <script>
 export default {
-  colorMode() {
-    return "light";
-  },
   head() {
     return {
-      title: this.post.content.bb
+      title: this.post?.content?.bb
         ? `${this.post.username}: "${this.post.content.bb}"`
         : `post id ${this.id}`,
     };
@@ -29,7 +34,13 @@ export default {
   },
   async fetch() {
     var postRes = await fetch(
-      `https://scratchdb.lefty.one/v3/forum/post/info/${this.id}`
+      `https://scratchdb.lefty.one/search/indexes/forum_posts/search?filter=id=${this.id}`,
+      {
+        headers: {
+          authorization:
+            "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4",
+        },
+      }
     ).catch((err) => {
       this.error = {
         title: "Network Error",
@@ -38,8 +49,16 @@ export default {
     });
     var postData = await postRes.json();
 
-    this.post = postData;
+    if (!postData?.hits[0]) {
+      return (this.error = {
+        title: "Post not found",
+        details: "The requested post could not be found.",
+      });
+    }
+
+    this.post = postData.hits[0];
   },
   fetchOnServer: false,
 };
 </script>
+
