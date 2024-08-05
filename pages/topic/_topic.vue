@@ -48,9 +48,10 @@ function getKey(map, value) {
 export default {
   head() {
     return {
-      title: this.data.hits
-        ? this.data.hits[0].topic.title
-        : `topic id ${this.topic}`,
+      title:
+        this.data?.hits && this.data.hits[0]
+          ? this.data.hits[0].topic.title
+          : `topic id ${this.topic}`,
     };
   },
   data() {

@@ -1,23 +1,31 @@
 <template>
   <div class="container">
-    <Header :crumbs="[{link:`/user/${user}`, text:'user'}]" />
+    <Header :crumbs="[{ link: `/user/${user}`, text: 'user' }]" />
     <div class="margined">
       <Loading v-if="$fetchState.pending" />
       <div v-if="!$fetchState.pending">
         <h1 class="user-name">{{ user }}</h1>
-        <h3 class="view-scratch"><a
+        <h3 class="view-scratch">
+          <a
             :href="`https://scratch.mit.edu/users/${user}`"
             class="view-scratch"
-        >scratch profile</a></h3>
+            >scratch profile</a
+          >
+        </h3>
         <Status :user="user" class="user-status" />
         <details class="signature-spoiler">
           <summary>signature</summary>
           <div class="signature">
-            <Render v-if="info.signature" :content="info.signature"/>
+            <Render v-if="info.signature" :content="info.signature" />
           </div>
         </details>
         <h2>{{ user }}'s posts</h2>
-        <PostList :posts="posts" :loading="$fetchState.pending" @loadMore="loadMore()" :showLoadMore="showLoadMore"/>
+        <PostList
+          :posts="posts"
+          :loading="$fetchState.pending"
+          @loadMore="loadMore()"
+          :showLoadMore="showLoadMore"
+        />
       </div>
       <Footer />
     </div>
@@ -28,8 +36,8 @@
 export default {
   head() {
     return {
-      title: `${this.user}'s scratch forum posts`
-    }
+      title: `${this.user}'s scratch forum posts`,
+    };
   },
   data() {
     return {
@@ -37,39 +45,57 @@ export default {
       page: 0,
       posts: {},
       info: {},
-      showLoadMore: false
+      showLoadMore: false,
     };
   },
   methods: {
     async loadMore() {
-      this.showLoadMore = false
+      this.showLoadMore = false;
       this.page++;
 
       var postsRes = await fetch(
-        `https://scratchdb.lefty.one/v3/forum/user/posts/${this.user}/${this.page}`
-      );
+        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?hitsPerPage=50&page=${
+          this.page + 1
+        }&sort=id:desc&filter=username=${this.user}`,
+        {
+          headers: {
+            authorization:
+              "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4",
+          },
+        }
+      ).catch((err) => {
+        this.error = {
+          title: "Network Error",
+          details: "Failed to connect to ScratchDB.",
+        };
+      });
       var postData = await postsRes.json();
-      if(Array.isArray(postData)){
-        this.posts.push(...postData);
-        this.showLoadMore = true 
-      }
+      this.posts.push(...postData.hits);
+
+      this.showLoadMore = true;
     },
   },
   async fetch() {
-    var userInfoRes = await fetch(
-      `https://scratchdb.lefty.one/v3/forum/user/info/${this.user}`
-    );
-    var userInfo = await userInfoRes.json();
+    var postsRes = await fetch(
+      `https://scratchdb.lefty.one/search/indexes/forum_posts/search?hitsPerPage=50&page=${
+        this.page + 1
+      }&sort=id:desc&filter=username=${this.user}`,
+      {
+        headers: {
+          authorization:
+            "Bearer 3396f61ef5b02abf801096be5f0b0ee620de304dd92fc6045aeb99539cd0bec4",
+        },
+      }
+    ).catch((err) => {
+      this.error = {
+        title: "Network Error",
+        details: "Failed to connect to ScratchDB.",
+      };
+    });
+    var postData = await postsRes.json();
 
-    var userPostsRes = await fetch(
-      `https://scratchdb.lefty.one/v3/forum/user/posts/${this.user}/${this.page}`
-    );
-    var userPosts = await userPostsRes.json();
-
-    this.info = userInfo;
-    this.posts = userPosts;
-
-    this.showLoadMore = true
+    this.posts = postData.hits;
+    this.showLoadMore = true;
   },
   fetchOnServer: false,
 };
@@ -107,3 +133,4 @@ export default {
   display: inline-block;
 }
 </style>
+
