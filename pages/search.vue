@@ -11,7 +11,7 @@
           placeholder="search query"
           ref="searchbox"
           class="input"
-          :value="$route.query.q"
+          :value="search"
         />
         <select
           name="sort"
@@ -228,7 +228,7 @@ export default {
   },
   data() {
     return {
-      search: encodeURIComponent(decodeURIComponent(this.$route.query.q)),
+      search: encodeURIComponent(decodeURIComponent(this.$route.query.q || "")),
       boundFilter: this.$route.query.filter,
       filter: this.$route.query.filter
         ? `&filter=${encodeURIComponent(
@@ -284,7 +284,7 @@ export default {
     },
   },
   async fetch() {
-    if (this.search !== "undefined") {
+    if (this.search) {
       let that = this;
       this.data = await fetch(
         `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}${this.filter}`,
