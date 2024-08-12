@@ -14,6 +14,7 @@ all api endpoints should be assumed to be under `my-ocular.jeffalo.net` unless o
 
 make a GET request to `/api/user/:username`
 
+you can use the query parameter `?noReplace=true` to retrieve raw status data (without replacing the elements described later)
 
 ### example response
 
@@ -47,8 +48,6 @@ note that some users have less data stored for them. you should only ever assume
 ## get reactions for a post
 
 make a GET request to `/api/reactions/:post-id`
-
-you can use the query parameter `?noReplace=true` to retrieve raw status data
 
 ### example response
 
