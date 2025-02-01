@@ -11,7 +11,7 @@ export default {
       // adapted from https://github.com/scratchblocks/scratchblocks/blob/master/index.js
       let content = this.content;
       let options = {
-        style: "scratch2",
+        style: "scratch3",
         inline: false,
         languages: ["en"],
 
