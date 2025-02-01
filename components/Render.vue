@@ -11,9 +11,9 @@ export default {
       // adapted from https://github.com/scratchblocks/scratchblocks/blob/master/index.js
       let content = this.content;
       let options = {
-        style: "scratch2",
-        inline: false,
+        style: "scratch3",
         languages: ["en"],
+        scale: 0.8,
 
         read: scratchblocks.read, // function(el, options) => code
         parse: scratchblocks.parse, // function(code, options) => doc
