@@ -28,7 +28,7 @@
           <br>
           <label for="color">favourite colour: </label><input name="color" type="color" class="color-input" v-model="color">
           <br>
-          <p>Your Ocular status must follow <a href="https://scratch.mit.edu/community_guidelines">Scratch's community guidelines</a>.</p>
+          <p>ocular statuses must follow <a href="https://scratch.mit.edu/community_guidelines">Scratch's community guidelines</a>.</p>
           <br>
           <div v-if="$auth.user().admin">
             <label for="banned">banned: </label><input type="checkbox" name="banned" v-model="banned">
