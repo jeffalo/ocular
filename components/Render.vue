@@ -12,8 +12,8 @@ export default {
       let content = this.content;
       let options = {
         style: "scratch3",
-        inline: false,
         languages: ["en"],
+        scale: 0.8,
 
         read: scratchblocks.read, // function(el, options) => code
         parse: scratchblocks.parse, // function(code, options) => doc
