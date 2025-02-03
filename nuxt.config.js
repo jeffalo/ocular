@@ -11,7 +11,7 @@ export default {
     ],
     script: [
       {
-        src: '/lib/scratchblocks.js'
+        src: '/lib/scratchblocks.min.js'
       }
     ],
     link: [

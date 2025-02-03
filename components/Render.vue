@@ -13,7 +13,7 @@ export default {
       let options = {
         style: "scratch3",
         languages: ["en"],
-        scale: 0.8,
+        scale: 0.675,
 
         read: scratchblocks.read, // function(el, options) => code
         parse: scratchblocks.parse, // function(code, options) => doc
