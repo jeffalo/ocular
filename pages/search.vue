@@ -23,7 +23,7 @@
           <option value="oldest">oldest</option>
         </select>
         <button type="submit" class="form-button">go</button>
-        <details v-bind:open="filterOpen">
+        <details :open="filterOpen">
           <summary>Filtering</summary>
           <input
             type="text"
