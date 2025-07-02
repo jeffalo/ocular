@@ -11,7 +11,7 @@
           placeholder="search query"
           ref="searchbox"
           class="input"
-          :value="search"
+          v-model="search"
         />
         <select
           name="sort"
@@ -23,7 +23,7 @@
           <option value="oldest">oldest</option>
         </select>
         <button type="submit" class="form-button">go</button>
-        <details :open="$route.query.filter || boundFilter">
+        <details :open="filterOpen">
           <summary>Filtering</summary>
           <input
             type="text"
@@ -235,6 +235,7 @@ export default {
             decodeURIComponent(this.$route.query.filter)
           )}`
         : "",
+      filterOpen: !!this.$route.query.filter,
       sort:
         this.$route.query.sort == "newest"
           ? "&sort=id:desc"
