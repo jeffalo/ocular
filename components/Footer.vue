@@ -2,11 +2,7 @@
   <footer>
     <a href="https://scratchdb.lefty.one/">ocular gets data from ScratchDB, which is currently down due to data loss. click here for more information.</a>
     <br>
-    ocular is an open source project, with styling aspects inspired by
-    <a href="https://scratch.mit.edu/users/maximouse" class="footer-link"
-      >@Maximouse</a
-    >
-    and the Scratch Foundation<br />
+    ocular is an open source project, with styling aspects inspired by the Scratch Foundation<br />
     API and data from
     <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
     | authentication api from
