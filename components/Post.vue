@@ -182,7 +182,7 @@ export default {
   display: inline-block;
   padding: 3px 4px;
   background: var(--brand);
-  color: var(--text);
+  color: ffffff;
   border-radius: 5px;
   line-height: 1em;
 }
