@@ -62,5 +62,6 @@ export default new Map(
         ["59", "فارسی"],
         ["60", "Project Save & Level Codes"],
         ["61", "April Fools Day - Suggest-Show-Question-Bugs-Help-Glitch-Tell-Etc"],
+        ["62", "हिन्दी"],
     ]
 );
