@@ -71,7 +71,7 @@ export default {
       this.page++;
 
       var postsRes = await fetch(
-        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?hitsPerPage=50&page=${
+        `https://scrabase.weredime.dev/scratchdb/search/indexes/forum_posts/search?hitsPerPage=50&page=${
           this.page + 1
         }&sort=id:asc&filter=topic.id=${this.topic}`,
         {
@@ -83,7 +83,7 @@ export default {
       ).catch((err) => {
         this.error = {
           title: "Network Error",
-          details: "Failed to connect to ScratchDB.",
+          details: "Failed to connect to Scrabase.",
         };
       });
       var postData = await postsRes.json();
@@ -94,7 +94,7 @@ export default {
   },
   async fetch() {
     var postsRes = await fetch(
-      `https://scratchdb.lefty.one/search/indexes/forum_posts/search?hitsPerPage=50&page=${
+      `https://scrabase.weredime.dev/scratchdb/search/indexes/forum_posts/search?hitsPerPage=50&page=${
         this.page + 1
       }&sort=id:asc&filter=topic.id=${this.topic}`,
       {
@@ -106,7 +106,7 @@ export default {
     ).catch((err) => {
       this.error = {
         title: "Network Error",
-        details: "Failed to connect to ScratchDB.",
+        details: "Failed to connect to Scrabase.",
       };
     });
     var postData = await postsRes.json();

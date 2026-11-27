@@ -52,7 +52,7 @@ export default {
       "ocular statuses are displayed on a variety of websites",
       "any scratch url starting https://scratch.mit.edu/go leads to a 403",
       'you can no longer sign up to scratch with the name "jeffalo"',
-      "when scratchdb is down, ocular may not work",
+      "when scrabase is down, ocular may not work",
       "you are reading this, or maybe not",
       "the",
       "ocular uses vue",
