@@ -34,7 +34,7 @@ export default {
   },
   async fetch() {
     var postRes = await fetch(
-      `https://scratchdb.lefty.one/search/indexes/forum_posts/search?filter=id=${this.id}`,
+      `https://scrabase.weredime.dev/scratchdb/search/indexes/forum_posts/search?filter=id=${this.id}`,
       {
         headers: {
           authorization:
@@ -44,7 +44,7 @@ export default {
     ).catch((err) => {
       this.error = {
         title: "Network Error",
-        details: "Failed to connect to ScratchDB.",
+        details: "Failed to connect to Scrabase.",
       };
     });
     var postData = await postRes.json();

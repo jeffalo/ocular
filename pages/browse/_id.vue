@@ -49,11 +49,11 @@ export default {
       return new Promise(async (resolve, reject) => {
         this.showLoadMore = false;
         let topicListRes = await fetch(
-          `https://scratchdb.lefty.one/v3/forum/category/topics/${this.category}/${page}/?detail=2`
+          `https://scrabase.weredime.dev/scratchdb/v3/forum/category/topics/${this.category}/${page}/?detail=2`
         ).catch((err) => {
           this.error = {
             title: "Network Error",
-            details: "Failed to connect to ScratchDB.",
+            details: "Failed to connect to Scrabase.",
           };
           resolve();
         });

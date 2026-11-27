@@ -22,7 +22,7 @@ export const actions = {
         // this is the first time
 
         let promise = new Promise((resolve, reject) => {
-            fetch("https://scratchdb.lefty.one/v3/forum/user/info/" + name)
+            fetch("https://scrabase.weredime.dev/scratchdb/v3/forum/user/info/" + name)
             .then((res) => res.json())
             .then(data => {
                 resolve(data.counts.total.count)

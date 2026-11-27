@@ -1,10 +1,9 @@
 <template>
   <footer>
-    <a href="https://scratchdb.lefty.one/">ocular gets data from ScratchDB, which is currently down due to data loss. click here for more information.</a>
-    <br>
     ocular is an open source project, with styling aspects inspired by the Scratch Foundation<br />
     API and data from
-    <a class="footer-link" href="https://scratchdb.lefty.one/">@DatOneLefty</a>
+    <a class="footer-link" href="https://scrabase.weredime.dev/">Scrabase</a>
+    (formerly <a class="footer-link" href="https://scratchdb.lefty.one/">ScratchDB</a> by @DatOneLefty)
     | authentication api from
     <a class="footer-link" href="https://auth.itinerary.eu.org/">@Looky1173</a>
     <br /><br />this forum viewer tool falls under Creative Commons

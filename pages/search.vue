@@ -135,13 +135,11 @@
        -->
       <div v-show="splash">
         <h2>ocular search</h2>
-        <p>⚠️ expect to see some broken-ness!</p>
         <p>
-          this is a simplified version of ocular search to replace the old
-          broken one that depended on scratchdb v3. it is missing features (and
-          has an incomplete database), but at least it works.
+          search every scratch forum post. results come from
+          <a href="https://scrabase.weredime.dev">scrabase</a>, which took over
+          from scratchdb. typos are forgiven, and "quoted phrases" match exactly.
         </p>
-        <p>watch this space for improvements!</p>
       </div>
       <div v-show="!splash">
         <Error v-if="error" :error="error.title" :details="error.details" />
@@ -256,7 +254,7 @@ export default {
       this.page++;
 
       var res = await fetch(
-        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${
+        `https://scrabase.weredime.dev/scratchdb/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${
           this.search
         }&page=${this.page + 1}${this.sort}${this.filter}`,
         {
@@ -268,7 +266,7 @@ export default {
       ).catch((err) => {
         this.error = {
           title: "Network Error",
-          details: "Failed to connect to ScratchDB.",
+          details: "Failed to connect to Scrabase.",
         };
       });
 
@@ -288,7 +286,7 @@ export default {
     if (this.search) {
       let that = this;
       this.data = await fetch(
-        `https://scratchdb.lefty.one/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}${this.filter}`,
+        `https://scrabase.weredime.dev/scratchdb/search/indexes/forum_posts/search?attributesToSearchOn=content&hitsPerPage=50&q=${this.search}${this.sort}${this.filter}`,
         {
           headers: {
             authorization:
@@ -300,7 +298,7 @@ export default {
         .catch((err) => {
           this.error = {
             title: "Network Error",
-            details: "Failed to connect to ScratchDB.",
+            details: "Failed to connect to Scrabase.",
           };
           return { posts: [] };
         });
